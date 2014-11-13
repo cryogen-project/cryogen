@@ -1,0 +1,9 @@
+{:site-title "My Awesome Blog"
+ :author "Bob Bobbert"
+ :description "This blog is awesome"
+ :site-url "http://blogawesome.com/"
+ :post-root "posts"
+ :tag-root "tags"
+ :page-root "pages"
+ :tags? true
+ :blog-prefix "blog"}

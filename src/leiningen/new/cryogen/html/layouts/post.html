@@ -1,0 +1,32 @@
+{% extends "templates/html/layouts/base.html" %}
+{% block content %}
+<div id="post">
+    <div id="post-header">
+        <h2>{{post.title}}</h2>
+        <p class="date">{{post.date|date:longDate}}</p>
+    </div>
+    <div>
+    {{post.content|safe}}
+    </div>
+    {% if post.tags %}
+    <div id="tags">
+        <b>Tags: </b>
+        {% for tag in post.tags %}
+            <a href="{{tag.uri}}">{{tag.name}}</a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div id="prev-next">
+        {% if post.prev %}
+            <a href="{{post.prev.uri}}">&laquo; {{post.prev.title}}</a>
+        {% endif %}
+        {% if all post.prev post.next %}
+            ||
+        {% endif %}
+        {% if post.next %}
+            <a href="{{post.next.uri}}">{{post.next.title}} &raquo;</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

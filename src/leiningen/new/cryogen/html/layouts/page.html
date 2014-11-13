@@ -1,0 +1,21 @@
+{% extends "templates/html/layouts/base.html" %}
+{% block content %}
+<div id="custom-page">
+    <div id="page-header">
+        <h2>{{page.title}}</h2>
+    </div>
+    {{page.content|safe}}
+
+    <div id="prev-next">
+        {% if page.prev %}
+        <a href="{{page.prev.uri}}">&laquo; {{page.prev.title}}</a>
+        {% endif %}
+        {% if all page.prev page.next %}
+        ||
+        {% endif %}
+        {% if page.next %}
+        <a href="{{page.next.uri}}">{{page.next.title}} &raquo;</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

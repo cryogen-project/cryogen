@@ -1,0 +1,15 @@
+{% extends "templates/html/layouts/base.html" %}
+{% block content %}
+<div id="posts-by-tag">
+    <div id="page-header">
+        <h2>Posts Tagged "{{name}}"</h2>
+    </div>
+    <ul>
+    {% for post in posts %}
+        <li>
+            <a href="{{post.uri}}">{{post.title}}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}
