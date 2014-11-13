@@ -37,6 +37,7 @@
                ["resources/templates/md/pages/another-page.md" (render "md/pages/another-page.md")]
                ["resources/templates/md/posts/10-03-2014-first-post.md" (render "md/posts/10-03-2014-first-post.md")]
                ["resources/templates/md/posts/11-04-2014-second-post.md" (render "md/posts/11-04-2014-second-post.md")]
+               ["resources/templates/md/posts/13-11-2014-docs.md" (render "md/posts/13-11-2014-docs.md")]
                ;;config
                ["resources/config.edn" (render "config.edn")]
                ;;namespaces
