@@ -21,7 +21,6 @@
       (->files options
                [".gitignore"  (render "gitignore")]
                ["project.clj" (render "project.clj")]
-               ["README.md" (render "README.md")]
                ;;static resources
                ["resources/templates/css/screen.css" (render "css/screen.css")]
                ["resources/templates/js/highlight.pack.js" (render "js/highlight.pack.js")]
@@ -39,11 +38,12 @@
                ["resources/templates/md/posts/11-04-2014-second-post.md" (render "md/posts/11-04-2014-second-post.md")]
                ["resources/templates/md/posts/13-11-2014-docs.md" (render "md/posts/13-11-2014-docs.md")]
                ;;config
-               ["resources/config.edn" (render "config.edn")]
+               ["resources/templates/config.edn" (render "config.edn")]
                ;;namespaces
                ["src/cryogen/compiler.clj" (render "src/cryogen/compiler.clj")]
                ["src/cryogen/io.clj" (render "src/cryogen/io.clj")]
                ["src/cryogen/rss.clj" (render "src/cryogen/rss.clj")]
                ["src/cryogen/server.clj" (render "src/cryogen/server.clj")]
                ["src/cryogen/sitemap.clj" (render "src/cryogen/sitemap.clj")]
-               ["src/cryogen/watcher.clj" (render "src/cryogen/watcher.clj")]))))
+               ["src/cryogen/watcher.clj" (render "src/cryogen/watcher.clj")]
+               ["src/cryogen/github.clj" (render "src/cryogen/github.clj")]))))

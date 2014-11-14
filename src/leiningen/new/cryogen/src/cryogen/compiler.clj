@@ -1,6 +1,7 @@
 (ns cryogen.compiler
   (:require [selmer.parser :refer [cache-off! render-file]]
-            [cryogen.io :refer [get-resource find-assets create-folder copy-resources]]
+            [cryogen.io :refer
+             [get-resource find-assets create-folder copy-resources wipe-public-folder]]
             [cryogen.sitemap :as sitemap]
             [cryogen.rss :as rss]
             [io.aviso.exception :refer [write-exception]]
@@ -11,7 +12,7 @@
 
 (cache-off!)
 
-(def config (-> "config.edn" get-resource slurp read-string))
+(def config (-> "templates/config.edn" get-resource slurp read-string))
 
 (defn blog-prefix []
   (if-let [prefix (:blog-prefix config)]
@@ -176,6 +177,7 @@
         [navbar-pages sidebar-pages] (group-pages pages)
         posts-by-tag (group-by-tags posts)
         posts (tag-posts posts)
+        rss-name (if-let [rssn (:rss-name config)] rssn "rss.xml")
         default-params {:title         (:site-title config)
                         :tags          (map tag-info (keys posts-by-tag))
                         :latest-posts  (->> posts (take 2) vec)
@@ -183,7 +185,8 @@
                         :sidebar-pages sidebar-pages
                         :archives-uri  (str (blog-prefix) "/archives.html")
                         :index-uri     (str (blog-prefix) "/index.html")
-                        :rss-uri       (str (blog-prefix) "/rss.xml")}]
+                        :rss-uri       (str (blog-prefix) "/" rss-name)}]
+    (wipe-public-folder)
     (println (blue "copying resources"))
     (copy-resources (blog-prefix))
     (compile-pages default-params pages)
@@ -194,7 +197,7 @@
     (println (blue "generating site map"))
     (spit (str public (blog-prefix) "/sitemap.xml") (sitemap/generate (:site-url config)))
     (println (blue "generating rss"))
-    (spit (str public (blog-prefix) "/rss.xml") (rss/make-channel config posts))))
+    (spit (str public (blog-prefix) "/" rss-name) (rss/make-channel config posts))))
 
 (defn compile-assets-timed []
   (time
