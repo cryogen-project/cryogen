@@ -63,7 +63,8 @@ The site configuration file is found at `resources/config.edn`, this file looks 
  :tag-root "tags"
  :page-root "pages"
  :tags? true
- :blog-prefix nil}
+ :blog-prefix nil
+ :rss-name "feed.xml"} ; if you omit :rss-name, it will default to rss.xml
 ```
 
 ### Creating Posts
