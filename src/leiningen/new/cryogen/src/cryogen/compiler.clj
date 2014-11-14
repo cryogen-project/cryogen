@@ -1,6 +1,7 @@
 (ns cryogen.compiler
   (:require [selmer.parser :refer [cache-off! render-file]]
-            [cryogen.io :refer [get-resource find-assets create-folder copy-resources]]
+            [cryogen.io :refer
+             [get-resource find-assets create-folder copy-resources wipe-public-folder]]
             [cryogen.sitemap :as sitemap]
             [cryogen.rss :as rss]
             [io.aviso.exception :refer [write-exception]]
@@ -11,7 +12,7 @@
 
 (cache-off!)
 
-(def config (-> "config.edn" get-resource slurp read-string))
+(def config (-> "templates/config.edn" get-resource slurp read-string))
 
 (defn blog-prefix []
   (if-let [prefix (:blog-prefix config)]
@@ -185,6 +186,7 @@
                         :archives-uri  (str (blog-prefix) "/archives.html")
                         :index-uri     (str (blog-prefix) "/index.html")
                         :rss-uri       (str (blog-prefix) "/" rss-name)}]
+    (wipe-public-folder)
     (println (blue "copying resources"))
     (copy-resources (blog-prefix))
     (compile-pages default-params pages)
