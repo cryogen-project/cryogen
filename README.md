@@ -1,18 +1,6 @@
-# Cryogen
-
-<table style="border: none;">
-<tbody>
-<tr>
-<td>
 <img src="https://raw.githubusercontent.com/lacarmen/cryogen/master/cryogen.png"
- hspace="20" align="left" width="200" height="200"/>
- </td>
- <td>
-A simple static site generator written in Clojure.
-</td>
-</tr>
-</tbody>
-</table>
+ hspace="20" align="left"height="200"/>
+
 
 ## Features
 
