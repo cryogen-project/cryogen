@@ -75,13 +75,7 @@
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         {% script "js/highlight.pack.js" %}
-        <script>
-            $(document).ready(function() {
-                $('pre').each(function(i, block) {
-                    hljs.highlightBlock(block);
-                });
-            });
-        </script>
+        <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>
 

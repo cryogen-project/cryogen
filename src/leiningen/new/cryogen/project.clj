@@ -7,7 +7,7 @@
                  [compojure "1.1.6"]
                  [hiccup "1.0.5"]
                  [selmer "0.7.2"]
-                 [markdown-clj "0.9.55"
+                 [markdown-clj "0.9.57"
                   :exclusions [com.keminglabs/cljx]]
                  [ring/ring-devel "1.1.0"]
                  [compojure "1.2.1"]
