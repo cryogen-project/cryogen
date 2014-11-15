@@ -1,0 +1,13 @@
+{% block content %}
+<div id="git">
+    <div id="git-header">
+        <a class="git-uri" 
+	   href="{{uri}}"
+	   title="{{name}}">
+	  <h2>{{name}}</h2></a>
+    </div>
+    <pre id="git-content">
+      {{content}}
+    </pre>
+</div>
+{% endblock %}
