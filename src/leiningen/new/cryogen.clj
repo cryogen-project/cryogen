@@ -41,6 +41,7 @@
                ["resources/templates/config.edn" (render "config.edn")]
                ;;namespaces
                ["src/cryogen/compiler.clj" (render "src/cryogen/compiler.clj")]
+               ["src/cryogen/toc.clj" (render "src/cryogen/toc.clj")]
                ["src/cryogen/io.clj" (render "src/cryogen/io.clj")]
                ["src/cryogen/rss.clj" (render "src/cryogen/rss.clj")]
                ["src/cryogen/server.clj" (render "src/cryogen/server.clj")]

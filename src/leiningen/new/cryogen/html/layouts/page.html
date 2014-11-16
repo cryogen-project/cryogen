@@ -4,6 +4,7 @@
     <div id="page-header">
         <h2>{{page.title}}</h2>
     </div>
+    {% if page.toc %}{{page.toc|safe}}{% endif %}
     {{page.content|safe}}
 
     <div id="prev-next">

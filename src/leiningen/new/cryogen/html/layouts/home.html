@@ -6,6 +6,7 @@
         <p class="date">{{post.date|date:longDate}}</p>
     </div>
     <div>
+        {% if post.toc %}{{post.toc|safe}}{% endif %}
         {{post.content|safe}}
     </div>
     {% if post.tags %}

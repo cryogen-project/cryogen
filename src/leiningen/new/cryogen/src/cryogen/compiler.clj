@@ -8,7 +8,8 @@
             [clojure.java.io :refer [copy file reader writer]]
             [clojure.string :as s]
             [text-decoration.core :refer :all]
-            [markdown.core :refer [md-to-html-string]]))
+            [markdown.core :refer [md-to-html-string]]
+            [cryogen.toc :refer [generate-toc]]))
 
 (cache-off!)
 
@@ -43,25 +44,31 @@
     (catch Exception _
       (throw (IllegalArgumentException. (str "Malformed metadata on page: " page))))))
 
+(defn parse-content [rdr]
+  (md-to-html-string
+    (->> (java.io.BufferedReader. rdr)
+         (line-seq)
+         (s/join "\n"))
+    :heading-anchors true))
+
 (defn parse-page [is-post? page config]
   (with-open [rdr (java.io.PushbackReader. (reader page))]
     (let [page-name (.getName page)
           file-name (s/replace page-name #".md" ".html")
-          r (read-page-meta page-name rdr)]
+          page-meta (read-page-meta page-name rdr)
+          content (parse-content rdr)]
       (merge
-        (update-in r [:layout] #(str (name %) ".html"))
+        (update-in page-meta [:layout] #(str (name %) ".html"))
         {:file-name file-name
-         :content   (->> (java.io.BufferedReader. rdr)
-                         (line-seq)
-                         (s/join "\n")
-                         md-to-html-string)}
+         :content content
+         :toc (if (:toc page-meta) (generate-toc content))}
         (if is-post?
           {:date          (parse-post-date file-name)
            :archive-group (.format (java.text.SimpleDateFormat. "yyyy MMMM") (parse-post-date file-name))
            :uri           (post-uri file-name config)
-           :tags          (set (:tags r))}
+           :tags          (set (:tags page-meta))}
           {:uri        (page-uri file-name config)
-           :page-index (:page-index r)})))))
+           :page-index (:page-index page-meta)})))))
 
 (defn read-posts [config]
   (->> (find-posts config)
