@@ -5,6 +5,7 @@
 ## Features
 
 * blog posts and pages with Markdown
+* table of contents generation
 * Theming support with Twitter Bootstrap
 * plain HTML page templates
 * code syntax highlighting
