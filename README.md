@@ -118,6 +118,7 @@ The pages contain the following metadata:
 * `:layout` - the layout template for the page
 * `:page-index` - a number representing the order of the page in the navbar/sidebar
 * `:navbar?` - determines whether the page should be shown in the navbar, `false` by default
+* `:toc` - boolean indicating whether table of contents should be generated, defaults to false
 
 ### Customizing Layouts
 
