@@ -50,7 +50,6 @@ The site configuration file is found at `resources/config.edn`, this file looks 
  :post-root "posts"
  :tag-root "tags"
  :page-root "pages"
- :tags? true
  :blog-prefix "/blog"
  :rss-name "feed.xml"
  :resources ["css" "js" "img"]}
@@ -59,7 +58,6 @@ The site configuration file is found at `resources/config.edn`, this file looks 
   * `post-root` - value prepended to all post uri's
   * `tag-root` - value prepended to all tag uri's
   * `page-root` - value prepended to all page uri's
-  * `tags?` - set to true if tags enabled in posts
   * `blog-prefix` - prepended to all uri's (must start with slash), nil by default
   * `rss-name` - name of the rss file generated, nil defaults to `rss.xml`
   * `resources` - list of folders to be copied over from `templates` to `public`
