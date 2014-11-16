@@ -85,6 +85,7 @@ The metadata contains the following keys:
 * `:title` - the title of the post
 * `:layout` - the layout template to use for the post
 * `:tags` - the tags associated with this post
+* `:toc` - boolean indicating whether table of contents should be generated, defaults to false
 
 The rest of the post should consist of valid Markdown content, eg:
 
