@@ -9,7 +9,8 @@
             [clojure.string :as s]
             [text-decoration.core :refer :all]
             [markdown.core :refer [md-to-html-string]]
-            [cryogen.toc :refer [generate-toc]]))
+            [cryogen.toc :refer [generate-toc]]
+            [cryogen.sass :as sass]))
 
 (cache-off!)
 
@@ -173,7 +174,9 @@
                    slurp
                    read-string
                    (update-in [:blog-prefix] (fnil str ""))
-                   (update-in [:rss-name] (fnil str "rss.xml")))]
+                   (update-in [:rss-name] (fnil str "rss.xml"))
+                   (update-in [:sass-src] (fnil str "css"))
+                   (update-in [:sass-dest] (fnil str "css")))]
     (merge
       config
       {:page-root (root-path :page-root config)
@@ -182,7 +185,7 @@
 
 (defn compile-assets []
   (println (green "compiling assets..."))
-  (let [{:keys [site-url blog-prefix rss-name] :as config} (read-config)
+  (let [{:keys [site-url blog-prefix rss-name sass-src sass-dest] :as config} (read-config)
         posts (add-prev-next (read-posts config))
         pages (add-prev-next (read-pages config))
         [navbar-pages sidebar-pages] (group-pages pages)
@@ -208,7 +211,9 @@
     (println (blue "generating site map"))
     (spit (str public blog-prefix "/sitemap.xml") (sitemap/generate site-url))
     (println (blue "generating rss"))
-    (spit (str public blog-prefix "/" rss-name) (rss/make-channel config posts))))
+    (spit (str public blog-prefix "/" rss-name) (rss/make-channel config posts))
+    (println (blue "compiling sass"))
+    (sass/compile-sass->css! sass-src sass-dest)))
 
 (defn compile-assets-timed []
   (time

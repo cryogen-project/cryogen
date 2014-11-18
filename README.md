@@ -11,6 +11,7 @@
 * code syntax highlighting
 * tags
 * sitemap
+* sass/scss compilation
 * RSS
 
 ## Prerequisites
@@ -53,6 +54,8 @@ The site configuration file is found at `resources/config.edn`, this file looks 
  :page-root "pages"
  :blog-prefix "/blog"
  :rss-name "feed.xml"
+ :sass-src "css"
+ :sass-dest "css"
  :resources ["css" "js" "img"]}
 ```
 
@@ -61,6 +64,12 @@ The site configuration file is found at `resources/config.edn`, this file looks 
   * `page-root` - value prepended to all page uri's
   * `blog-prefix` - prepended to all uri's (must start with slash), nil by default
   * `rss-name` - name of the rss file generated, nil defaults to `rss.xml`
+  * `sass-src` - directory containing sources of sass files to be
+  compiled - defaults to "css" - be sure to include this directory in
+  your `resources` section
+  * `sass-dest` - directory where the compiled output CSS would be put
+    into. defaults to "css" - be sure to include this directory in
+    your `resources` section
   * `resources` - list of folders to be copied over from `templates` to `public`
 
 ### Creating Posts
