@@ -41,7 +41,7 @@ The server will watch for changes in the `resources/templates` folder and recomp
 
 ### Site Configuration
 
-The site configuration file is found at `resources/config.edn`, this file looks as follows:
+The site configuration file is found at `resources/templates/config.edn`, this file looks as follows:
 
 ```clojure
 {:site-title "My Awesome Blog"
