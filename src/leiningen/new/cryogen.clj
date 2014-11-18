@@ -47,4 +47,5 @@
                ["src/cryogen/server.clj" (render "src/cryogen/server.clj")]
                ["src/cryogen/sitemap.clj" (render "src/cryogen/sitemap.clj")]
                ["src/cryogen/watcher.clj" (render "src/cryogen/watcher.clj")]
-               ["src/cryogen/github.clj" (render "src/cryogen/github.clj")]))))
+               ["src/cryogen/github.clj" (render "src/cryogen/github.clj")]
+               ["src/cryogen/sass.clj" (render "src/cryogen/sass.clj")]))))
