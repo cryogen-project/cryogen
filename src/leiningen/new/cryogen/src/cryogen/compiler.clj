@@ -65,7 +65,7 @@
          :toc (if (:toc page-meta) (generate-toc content))}
         (if is-post?
           {:date          (parse-post-date file-name)
-           :archive-group (.format (java.text.SimpleDateFormat. "yyyy MMMM" (java.util.Locale "en")) (parse-post-date file-name))
+           :archive-group (.format (java.text.SimpleDateFormat. "yyyy MMMM" (java.util.Locale. "en")) (parse-post-date file-name))
            :uri           (post-uri file-name config)
            :tags          (set (:tags page-meta))}
           {:uri        (page-uri file-name config)
