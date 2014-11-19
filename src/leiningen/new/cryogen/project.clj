@@ -8,7 +8,7 @@
                  [selmer "0.7.3"]
                  [markdown-clj "0.9.57"
                   :exclusions [com.keminglabs/cljx]]
-                 [ring/ring-devel "1.1.0"]
+                 [ring/ring-devel "1.3.1"]
                  [compojure "1.2.1"]
                  [clj-text-decoration "0.0.2"]
                  [io.aviso/pretty "0.1.12"]
