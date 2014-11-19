@@ -5,7 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [hiccup "1.0.5"]
-                 [selmer "0.7.2"]
+                 [selmer "0.7.3"]
                  [markdown-clj "0.9.57"
                   :exclusions [com.keminglabs/cljx]]
                  [ring/ring-devel "1.1.0"]
