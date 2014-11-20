@@ -6,7 +6,7 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [hiccup "1.0.5"]
                  [selmer "0.7.3"]
-                 [markdown-clj "0.9.57"
+                 [markdown-clj "0.9.58"
                   :exclusions [com.keminglabs/cljx]]
                  [ring/ring-devel "1.3.1"]
                  [compojure "1.2.1"]
