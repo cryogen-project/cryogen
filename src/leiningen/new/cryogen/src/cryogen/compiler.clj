@@ -234,3 +234,6 @@
               (instance? clojure.lang.ExceptionInfo e))
           (println (red "Error:") (yellow (.getMessage e)))
           (write-exception e))))))
+
+(defn -main []
+  (compile-assets-timed))
