@@ -61,13 +61,17 @@
       (merge
         (update-in page-meta [:layout] #(str (name %) ".html"))
         {:file-name file-name
-         :content content
-         :toc (if (:toc page-meta) (generate-toc content))}
+         :content   content
+         :toc       (if (:toc page-meta) (generate-toc content))}
         (if is-post?
-          {:date          (parse-post-date file-name)
-           :archive-group (.format (java.text.SimpleDateFormat. "yyyy MMMM" (java.util.Locale. "en")) (parse-post-date file-name))
-           :uri           (post-uri file-name config)
-           :tags          (set (:tags page-meta))}
+          (let [date (parse-post-date file-name)
+                archive-fmt (java.text.SimpleDateFormat. "yyyy MMMM" (java.util.Locale. "en"))
+                formatted-group (.format archive-fmt date)]
+            {:date                    date
+             :formatted-archive-group formatted-group
+             :parsed-archive-group    (.parse archive-fmt formatted-group)
+             :uri                     (post-uri file-name config)
+             :tags                    (set (:tags page-meta))})
           {:uri        (page-uri file-name config)
            :page-index (:page-index page-meta)})))))
 
@@ -92,9 +96,14 @@
 
 (defn group-for-archive [posts]
   (->> posts
-       (map #(select-keys % [:archive-group :title :uri :date]))
-       (group-by :archive-group)
-       (map (fn [[group posts]] {:group group :posts posts}))))
+       (map #(select-keys % [:title :uri :date :formatted-archive-group :parsed-archive-group]))
+       (group-by :formatted-archive-group)
+       (map (fn [[group posts]]
+              {:group         group
+               :parsed-group (:parsed-archive-group (get posts 0))
+               :posts         (map #(select-keys % [:title :uri :date]) posts)}))
+       (sort-by :parsed-group)
+       reverse))
 
 (defn tag-info [{:keys [blog-prefix tag-root]} tag]
   {:name (name tag)
@@ -181,7 +190,7 @@
       config
       {:page-root (root-path :page-root config)
        :post-root (root-path :post-root config)
-       :tag-root (root-path :tag-root config)})))
+       :tag-root  (root-path :tag-root config)})))
 
 (defn compile-assets []
   (println (green "compiling assets..."))
