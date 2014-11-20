@@ -18,5 +18,6 @@
                  [crouton "0.1.2"]
                  [cheshire "5.3.1"]]
   :plugins [[lein-ring "0.8.13"]]
+  :main cryogen.compiler
   :ring {:init cryogen.server/init
          :handler cryogen.server/handler})
