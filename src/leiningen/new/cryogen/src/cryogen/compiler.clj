@@ -99,9 +99,9 @@
        (map #(select-keys % [:title :uri :date :formatted-archive-group :parsed-archive-group]))
        (group-by :formatted-archive-group)
        (map (fn [[group posts]]
-              {:group         group
+              {:group        group
                :parsed-group (:parsed-archive-group (get posts 0))
-               :posts         (map #(select-keys % [:title :uri :date]) posts)}))
+               :posts        (map #(select-keys % [:title :uri :date]) posts)}))
        (sort-by :parsed-group)
        reverse))
 
@@ -133,7 +133,7 @@
                                 {:servlet-context "../"
                                  :page            page}))))))
 
-(defn compile-posts [default-params posts {:keys [blog-prefix post-root]}]
+(defn compile-posts [default-params posts {:keys [blog-prefix post-root disqus-shortname]}]
   (when-not (empty? posts)
     (println (blue "compiling posts"))
     (create-folder (str blog-prefix post-root))
@@ -142,8 +142,9 @@
       (spit (str public (:uri post))
             (render-file (str "templates/html/layouts/" (:layout post))
                          (merge default-params
-                                {:servlet-context "../"
-                                 :post            post}))))))
+                                {:servlet-context  "../"
+                                 :post             post
+                                 :disqus-shortname disqus-shortname}))))))
 
 (defn compile-tags [default-params posts-by-tag {:keys [blog-prefix tag-root] :as config}]
   (when-not (empty? posts-by-tag)
@@ -158,12 +159,13 @@
                                                   :name            name
                                                   :posts           posts})))))))
 
-(defn compile-index [default-params {:keys [blog-prefix]}]
+(defn compile-index [default-params {:keys [blog-prefix disqus?]}]
   (println (blue "compiling index"))
   (spit (str public blog-prefix "/index.html")
         (render-file "templates/html/layouts/home.html"
                      (merge default-params
                             {:servlet-context ""
+                             :disqus?         disqus?
                              :post            (get-in default-params [:latest-posts 0])}))))
 
 (defn compile-archives [default-params posts {:keys [blog-prefix]}]
@@ -185,7 +187,8 @@
                    (update-in [:blog-prefix] (fnil str ""))
                    (update-in [:rss-name] (fnil str "rss.xml"))
                    (update-in [:sass-src] (fnil str "css"))
-                   (update-in [:sass-dest] (fnil str "css")))]
+                   (update-in [:sass-dest] (fnil str "css"))
+                   (update-in [:disqus-shortname] (fnil str nil)))]
     (merge
       config
       {:page-root (root-path :page-root config)
@@ -194,7 +197,7 @@
 
 (defn compile-assets []
   (println (green "compiling assets..."))
-  (let [{:keys [site-url blog-prefix rss-name sass-src sass-dest] :as config} (read-config)
+  (let [{:keys [site-url blog-prefix rss-name sass-src sass-dest disqus?] :as config} (read-config)
         posts (add-prev-next (read-posts config))
         pages (add-prev-next (read-pages config))
         [navbar-pages sidebar-pages] (group-pages pages)

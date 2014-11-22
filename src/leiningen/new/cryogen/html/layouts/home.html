@@ -17,6 +17,11 @@
         {% endfor %}
     </div>
     {% endif %}
+    {% if disqus? %}
+    <div id="comments">
+        <a href="{{post.uri}}#disqus_thread">View Comments</a>
+    </div>
+    {% endif %}
 
     <div id="prev-next">
         {% if post.prev %}

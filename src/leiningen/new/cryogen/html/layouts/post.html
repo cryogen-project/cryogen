@@ -6,28 +6,41 @@
         <p class="date">{{post.date|date:longDate}}</p>
     </div>
     <div>
-    {% if post.toc %}{{post.toc|safe}}{% endif %}
-    {{post.content|safe}}
+        {% if post.toc %}{{post.toc|safe}}{% endif %}
+        {{post.content|safe}}
     </div>
     {% if post.tags %}
     <div id="tags">
         <b>Tags: </b>
         {% for tag in post.tags %}
-            <a href="{{tag.uri}}">{{tag.name}}</a>
+        <a href="{{tag.uri}}">{{tag.name}}</a>
         {% endfor %}
     </div>
     {% endif %}
 
     <div id="prev-next">
         {% if post.prev %}
-            <a href="{{post.prev.uri}}">&laquo; {{post.prev.title}}</a>
+        <a href="{{post.prev.uri}}">&laquo; {{post.prev.title}}</a>
         {% endif %}
         {% if all post.prev post.next %}
-            ||
+        ||
         {% endif %}
         {% if post.next %}
-            <a href="{{post.next.uri}}">{{post.next.title}} &raquo;</a>
+        <a href="{{post.next.uri}}">{{post.next.title}} &raquo;</a>
         {% endif %}
     </div>
+
+    {% if disqus-shortname %}
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//{{disqus-shortname}}.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    {% endif %}
+
+
 </div>
 {% endblock %}

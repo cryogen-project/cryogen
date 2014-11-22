@@ -45,18 +45,20 @@ The server will watch for changes in the `resources/templates` folder and recomp
 The site configuration file is found at `templates/config.edn`, this file looks as follows:
 
 ```clojure
-{:site-title "My Awesome Blog"
- :author "Bob Bobbert"
- :description "This blog is awesome"
- :site-url "http://blogawesome.com/"
- :post-root "posts"
- :tag-root "tags"
- :page-root "pages"
- :blog-prefix "/blog"
- :rss-name "feed.xml"
- :sass-src "css"
- :sass-dest "css"
- :resources ["css" "js" "img"]}
+{:site-title       "My Awesome Blog"
+ :author           "Bob Bobbert"
+ :description      "This blog is awesome"
+ :site-url         "http://blogawesome.com/"
+ :post-root        "posts"
+ :tag-root         "tags"
+ :page-root        "pages"
+ :blog-prefix      "/blog"
+ :rss-name         "feed.xml"
+ :sass-src         nil
+ :sass-dest        nil
+ :resources        ["css" "js" "img"]
+ :disqus?          false
+ :disqus-shortname ""}
 ```
 
   * `post-root` - value prepended to all post uri's
@@ -71,6 +73,8 @@ The site configuration file is found at `templates/config.edn`, this file looks 
     into. defaults to "css" - be sure to include this directory in
     your `resources` section
   * `resources` - list of folders to be copied over from `templates` to `public`
+  * `disqus?` - set to true if you want disqus enabled on your site
+  * `disqus-shortname` - your disqus shortname
 
 ### Creating Posts
 
@@ -117,6 +121,8 @@ tristique quam sagittis, volutpat auctor mi. Aliquam luctus,
 nulla et vestibulum finibus, nibh justo semper tortor, nec
 vestibulum tortor est nec nisi.
 ```
+
+If you wish to enable comments on your posts, create a [disqus](https://disqus.com/) account and [register](https://disqus.com/admin/create/) your blog. `disqus?` should be set to `true` in the config and you must add your `disqus-shortname`. 
 
 ### Creating Pages
 
