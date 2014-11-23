@@ -53,6 +53,7 @@ The site configuration file is found at `templates/config.edn`, this file looks 
  :tag-root         "tags"
  :page-root        "pages"
  :blog-prefix      "/blog"
+ :recent-posts     5
  :rss-name         "feed.xml"
  :sass-src         nil
  :sass-dest        nil
@@ -65,6 +66,7 @@ The site configuration file is found at `templates/config.edn`, this file looks 
   * `tag-root` - value prepended to all tag uri's
   * `page-root` - value prepended to all page uri's
   * `blog-prefix` - prepended to all uri's (must start with slash), nil by default
+  * `recent-posts` - number of recent posts to display in the sidebar
   * `rss-name` - name of the rss file generated, nil defaults to `rss.xml`
   * `sass-src` - directory containing sources of sass files to be
   compiled - defaults to "css" - be sure to include this directory in
