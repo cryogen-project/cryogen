@@ -197,7 +197,7 @@
 
 (defn compile-assets []
   (println (green "compiling assets..."))
-  (let [{:keys [site-url blog-prefix rss-name sass-src sass-dest disqus?] :as config} (read-config)
+  (let [{:keys [site-url blog-prefix rss-name recent-posts sass-src sass-dest disqus?] :as config} (read-config)
         posts (add-prev-next (read-posts config))
         pages (add-prev-next (read-pages config))
         [navbar-pages sidebar-pages] (group-pages pages)
@@ -205,7 +205,7 @@
         posts (tag-posts posts config)
         default-params {:title         (:site-title config)
                         :tags          (map (partial tag-info config) (keys posts-by-tag))
-                        :latest-posts  (->> posts (take 2) vec)
+                        :latest-posts  (->> posts (take recent-posts) vec)
                         :navbar-pages  navbar-pages
                         :sidebar-pages sidebar-pages
                         :archives-uri  (str blog-prefix "/archives.html")

@@ -10,6 +10,6 @@
   (start-watcher! "resources/templates" compile-assets-timed))
 
 (defroutes handler
-           (GET "/" [] (redirect (str (:blog-prefix (read-config)) "/index.html")))
-           (route/resources "/")
-           (route/not-found "Page not found"))
+  (GET "/" [] (redirect (str (:blog-prefix (read-config)) "/index.html")))
+  (route/resources "/")
+  (route/not-found "Page not found"))
