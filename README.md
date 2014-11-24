@@ -182,6 +182,7 @@ folder for a server sugh as Nginx or Apache and your site is now ready for servi
 ## Sites Made With Cryogen
 
 * [My personal blog](http://carmenla.me/blog/index.html)
+* [Yogthos blog](http://yogthos.net/)
 * [Clojure :in Tunisia](http://www.clojure.tn)
 
 ## License
