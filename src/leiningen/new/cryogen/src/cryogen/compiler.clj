@@ -125,9 +125,9 @@
   (when-not (empty? pages)
     (println (blue "compiling pages"))
     (create-folder (str blog-prefix page-root))
-    (doseq [page pages]
-      (println "\t-->" (cyan (:uri page)))
-      (spit (str public (:uri page))
+    (doseq [{:keys [uri] :as page} pages]
+      (println "\t-->" (cyan uri))
+      (spit (str public uri)
             (render-file "templates/html/layouts/page.html"
                          (merge default-params
                                 {:servlet-context "../"
@@ -164,8 +164,7 @@
   (spit (str public blog-prefix "/index.html")
         (render-file "templates/html/layouts/home.html"
                      (merge default-params
-                            {:servlet-context ""
-                             :disqus?         disqus?
+                            {:disqus?         disqus?
                              :post            (get-in default-params [:latest-posts 0])}))))
 
 (defn compile-archives [default-params posts {:keys [blog-prefix]}]
@@ -173,8 +172,7 @@
   (spit (str public blog-prefix "/archives.html")
         (render-file "templates/html/layouts/archives.html"
                      (merge default-params
-                            {:servlet-context ""
-                             :groups          (group-for-archive posts)}))))
+                            {:groups          (group-for-archive posts)}))))
 
 (defn tag-posts [posts config]
   (map #(update-in % [:tags] (partial map (partial tag-info config))) posts))
