@@ -29,8 +29,8 @@
 (defn find-pages [{:keys [page-root]}]
   (find-assets (str "templates/md" page-root) ".md"))
 
-(defn parse-post-date [file-name]
-  (let [fmt (java.text.SimpleDateFormat. "dd-MM-yyyy")]
+(defn parse-post-date [file-name date-fmt]
+  (let [fmt (java.text.SimpleDateFormat. date-fmt)]
     (.parse fmt (.substring file-name 0 10))))
 
 (defn post-uri [file-name {:keys [blog-prefix post-root]}]
@@ -64,7 +64,7 @@
          :content   content
          :toc       (if (:toc page-meta) (generate-toc content))}
         (if is-post?
-          (let [date (parse-post-date file-name)
+          (let [date (parse-post-date file-name (:post-date-format config))
                 archive-fmt (java.text.SimpleDateFormat. "yyyy MMMM" (java.util.Locale. "en"))
                 formatted-group (.format archive-fmt date)]
             {:date                    date
@@ -188,7 +188,7 @@
                    (update-in [:rss-name] (fnil str "rss.xml"))
                    (update-in [:sass-src] (fnil str "css"))
                    (update-in [:sass-dest] (fnil str "css"))
-                   (update-in [:disqus-shortname] (fnil str nil)))]
+                   (update-in [:post-date-format] (fnil str "yyyy-MM-dd")))]
     (merge
       config
       {:page-root (root-path :page-root config)
@@ -197,7 +197,7 @@
 
 (defn compile-assets []
   (println (green "compiling assets..."))
-  (let [{:keys [site-url blog-prefix rss-name recent-posts sass-src sass-dest disqus?] :as config} (read-config)
+  (let [{:keys [site-url blog-prefix rss-name recent-posts sass-src sass-dest] :as config} (read-config)
         posts (add-prev-next (read-posts config))
         pages (add-prev-next (read-pages config))
         [navbar-pages sidebar-pages] (group-pages pages)
