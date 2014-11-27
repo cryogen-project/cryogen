@@ -20,12 +20,14 @@
                 <h1><a class="navbar-brand" href="{{index-uri}}">{{title}}</a></h1>
             </div>
             <!-- nav links -->
-            <div id="navbar" class="navbar-collapse collapse">
+            <div id="navbar" class="navbar-collapse collapse">            
                 <ul class="nav navbar-nav">
-                    <li><a href="{{index-uri}}">Home</a></li>
-                    <li><a href="{{archives-uri}}">Archives</a></li>
-                    {% for page in navbar-pages %}
-                    <li><a href="{{page.uri}}">{{page.title}}</a></li>
+                    <li {% if home %} class="active" {% endif %}><a href="{{index-uri}}">Home</a></li>
+                    <li {% if archives %} class="active" {% endif %}><a href="{{archives-uri}}">Archives</a></li>
+                    {% for nav-page in navbar-pages %}
+                    <li {%ifequal page.uri nav-page.uri %} class="active" {% endifequal %}>
+                        <a href="{{nav-page.uri}}">{{nav-page.title}}</a>
+                    </li>
                     {% endfor %}
                     <li><a href="{{rss-uri}}">RSS</a></li>
                 </ul>
