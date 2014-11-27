@@ -164,7 +164,8 @@
   (spit (str public blog-prefix "/index.html")
         (render-file "templates/html/layouts/home.html"
                      (merge default-params
-                            {:disqus?         disqus?
+                            {:home true
+                             :disqus?         disqus?
                              :post            (get-in default-params [:latest-posts 0])}))))
 
 (defn compile-archives [default-params posts {:keys [blog-prefix]}]
@@ -172,7 +173,8 @@
   (spit (str public blog-prefix "/archives.html")
         (render-file "templates/html/layouts/archives.html"
                      (merge default-params
-                            {:groups          (group-for-archive posts)}))))
+                            {:archives true
+                             :groups          (group-for-archive posts)}))))
 
 (defn tag-posts [posts config]
   (map #(update-in % [:tags] (partial map (partial tag-info config))) posts))
