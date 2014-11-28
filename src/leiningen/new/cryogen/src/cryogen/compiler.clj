@@ -188,7 +188,8 @@
                    (update-in [:rss-name] (fnil str "rss.xml"))
                    (update-in [:sass-src] (fnil str "css"))
                    (update-in [:sass-dest] (fnil str "css"))
-                   (update-in [:post-date-format] (fnil str "yyyy-MM-dd")))]
+                   (update-in [:post-date-format] (fnil str "yyyy-MM-dd"))
+                   (update-in [:keep-files] (fnil seq [])))]
     (merge
       config
       {:page-root (root-path :page-root config)
@@ -197,7 +198,7 @@
 
 (defn compile-assets []
   (println (green "compiling assets..."))
-  (let [{:keys [site-url blog-prefix rss-name recent-posts sass-src sass-dest] :as config} (read-config)
+  (let [{:keys [site-url blog-prefix rss-name recent-posts sass-src sass-dest keep-files] :as config} (read-config)
         posts (add-prev-next (read-posts config))
         pages (add-prev-next (read-pages config))
         [navbar-pages sidebar-pages] (group-pages pages)
@@ -212,7 +213,7 @@
                         :index-uri     (str blog-prefix "/index.html")
                         :rss-uri       (str blog-prefix "/" rss-name)}]
 
-    (wipe-public-folder)
+    (wipe-public-folder keep-files)
     (println (blue "copying resources"))
     (copy-resources config)
     (compile-pages default-params pages config)

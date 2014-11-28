@@ -59,6 +59,7 @@ The site configuration file is found at `templates/config.edn`, this file looks 
  :sass-src         nil
  :sass-dest        nil
  :resources        ["css" "js" "img"]
+ :keep-files       [".git"] 
  :disqus?          false
  :disqus-shortname ""}
 ```
@@ -78,6 +79,7 @@ The site configuration file is found at `templates/config.edn`, this file looks 
     into. defaults to "css" - be sure to include this directory in
     your `resources` section
   * `resources` - list of folders to be copied over from `templates` to `public`
+  * `keep-files` - list of folders or files that are not wiped in the `public` directory. For example, this allows to keep a `.git` directory there across recompiles of the site to versionize the generated files
   * `disqus?` - set to true if you want disqus enabled on your site
   * `disqus-shortname` - your disqus shortname
 
@@ -187,6 +189,7 @@ folder for a server sugh as Nginx or Apache and your site is now ready for servi
 * [My personal blog](http://carmenla.me/blog/index.html)
 * [Yogthos blog](http://yogthos.net/)
 * [Clojure :in Tunisia](http://www.clojure.tn)
+* [dl1ely.github.io](http://dl1ely.github.io)
 
 ## License
 
