@@ -21,9 +21,10 @@
     (when-not (.exists loc)
       (.mkdirs loc))))
 
-(defn wipe-public-folder []
-  (doseq [path (.listFiles (file public))]
-    (fs/delete-dir path)))
+(defn wipe-public-folder [keep-files]
+  (let [filenamefilter (reify java.io.FilenameFilter (accept [this _ filename] (not (some #{filename} keep-files))))]
+    (doseq [path (.listFiles (file public) filenamefilter)]
+      (fs/delete-dir path))))
 
 (defn copy-resources [{:keys [blog-prefix resources]}]  
   (doseq [resource resources]
