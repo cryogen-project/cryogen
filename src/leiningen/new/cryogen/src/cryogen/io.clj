@@ -25,8 +25,14 @@
   (doseq [path (.listFiles (file public))]
     (fs/delete-dir path)))
 
-(defn copy-resources [{:keys [blog-prefix resources]}]
+(defn copy-resources [{:keys [blog-prefix resources]}]  
   (doseq [resource resources]
-    (fs/copy-dir
-      (str "resources/templates/" resource)
-      (str public blog-prefix "/" resource))))
+    (let [src (str "resources/templates/" resource)
+          target (str public blog-prefix "/" resource)]      
+      (cond
+        (not (.exists (file src)))
+        (throw (IllegalArgumentException. (str "resource " src " not found")))
+        (.isDirectory (file src))
+        (fs/copy-dir src target)
+        :else
+        (fs/copy src target)))))
