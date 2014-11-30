@@ -5,12 +5,13 @@
 ## Features
 
 * blog posts and pages with Markdown
+* tags
 * table of contents generation
 * Default Twitter Bootstrap theme
 * plain HTML page templates
 * code syntax highlighting
 * Disqus support
-* tags
+* GitHub Gist integration
 * sitemap
 * sass/scss compilation
 * RSS
