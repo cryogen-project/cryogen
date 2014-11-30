@@ -31,6 +31,7 @@
                ["resources/templates/html/layouts/page.html" (render "html/layouts/page.html")]
                ["resources/templates/html/layouts/post.html" (render "html/layouts/post.html")]
                ["resources/templates/html/layouts/tag.html" (render "html/layouts/tag.html")]
+               ["resources/templates/404.html" (render "html/404.html")]
                ;;Markdown templates
                ["resources/templates/md/pages/about.md" (render "md/pages/about.md")]
                ["resources/templates/md/pages/another-page.md" (render "md/pages/another-page.md")]
