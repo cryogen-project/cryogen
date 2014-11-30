@@ -6,7 +6,7 @@
 
 * blog posts and pages with Markdown
 * table of contents generation
-* Theming support with Twitter Bootstrap
+* Default Twitter Bootstrap theme
 * plain HTML page templates
 * code syntax highlighting
 * tags
