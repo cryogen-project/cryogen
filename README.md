@@ -9,6 +9,7 @@
 * Default Twitter Bootstrap theme
 * plain HTML page templates
 * code syntax highlighting
+* Disqus support
 * tags
 * sitemap
 * sass/scss compilation
