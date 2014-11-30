@@ -185,12 +185,35 @@ The ` initHighlightingOnLoad` function is called in `templates/html/layouts/base
 The generated static content will be found under the `resources/public` folder. Simply copy the content to a static
 folder for a server sugh as Nginx or Apache and your site is now ready for service.
 
-## Sites Made With Cryogen
+A sample Nginx configuration that's placed in `/etc/nginx/sites-available/default` can be seen below:
+
+```javascript
+server{
+  listen 80 default_server;
+  listen [::]:80 default_server ipv6only=on;
+  server_name localhost <yoursite.com> <www.yoursite.com>;
+
+  access_log /var/log/blog_access.log;
+  error_log /var/log/blog_error.log;
+
+  location / {
+    alias /var/blog/;
+    error_page    404 = /404.html;
+  }
+}
+```
+
+Simply set `yoursite.com` to the domain of your site in the above configuration and
+ensure the static content is available at `/var/blog/`. Finally, place your custom error page
+in the `/var/blog/404.html` file.
+
+## Some Sites Made With Cryogen
 
 * [My personal blog](http://carmenla.me/blog/index.html)
 * [Yogthos blog](http://yogthos.net/)
 * [Clojure :in Tunisia](http://www.clojure.tn)
 * [dl1ely.github.io](http://dl1ely.github.io)
+* [nil/recur](http://jonase.github.io/nil-recur)
 
 ## License
 
