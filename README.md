@@ -106,6 +106,7 @@ The post content must start with a map containing the post metadata:
 The metadata contains the following keys:
 
 * `:title` - the title of the post
+* `:author` - optional key to display the name of the author for the post
 * `:layout` - the layout template to use for the post
 * `:tags` - the tags associated with this post
 * `:toc` - boolean indicating whether table of contents should be generated, defaults to false
