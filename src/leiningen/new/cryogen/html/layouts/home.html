@@ -1,22 +1,7 @@
 {% extends "templates/html/layouts/base.html" %}
 {% block content %}
 <div id="post">
-    <div id="post-header">
-        <h2>{{post.title}}</h2>
-        <p class="date">{{post.date|date:longDate}}</p>
-    </div>
-    <div>
-        {% if post.toc %}{{post.toc|safe}}{% endif %}
-        {{post.content|safe}}
-    </div>
-    {% if post.tags %}
-    <div id="tags">
-        <b>Tags: </b>
-        {% for tag in post.tags %}
-        <a href="{{tag.uri}}">{{tag.name}}</a>
-        {% endfor %}
-    </div>
-    {% endif %}
+    {% include "templates/html/layouts/post-content.html" %}
     {% if disqus? %}
     <div id="comments">
         <a href="{{post.uri}}#disqus_thread">View Comments</a>

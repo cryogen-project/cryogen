@@ -30,6 +30,7 @@
                ["resources/templates/html/layouts/home.html" (render "html/layouts/home.html")]
                ["resources/templates/html/layouts/page.html" (render "html/layouts/page.html")]
                ["resources/templates/html/layouts/post.html" (render "html/layouts/post.html")]
+               ["resources/templates/html/layouts/post-content.html" (render "html/layouts/post-content.html")]
                ["resources/templates/html/layouts/tag.html" (render "html/layouts/tag.html")]
                ["resources/templates/404.html" (render "html/404.html")]
                ;;Markdown templates

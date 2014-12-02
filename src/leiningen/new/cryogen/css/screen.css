@@ -55,11 +55,9 @@ nav h1 {
     font-size: 32px;
     margin-bottom: -15px;
 }
-#post-header p.date {
+#post-header #post-meta {
     float: right;
-    display: inline;
 }
-
 #page-header {
     margin-bottom: 30px;
 }
