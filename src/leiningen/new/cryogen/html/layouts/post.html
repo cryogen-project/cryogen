@@ -1,4 +1,5 @@
 {% extends "templates/html/layouts/base.html" %}
+{%block subtitle %}: {{post.title}}{% endblock %}
 {% block content %}
 <div id="post">
     {% include "templates/html/layouts/post-content.html" %}

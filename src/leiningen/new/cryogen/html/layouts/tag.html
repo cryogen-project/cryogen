@@ -1,8 +1,9 @@
 {% extends "templates/html/layouts/base.html" %}
+{%block subtitle %}: Posts Tagged &quot;{{name}}&quot;{% endblock %}
 {% block content %}
 <div id="posts-by-tag">
     <div id="page-header">
-        <h2>Posts Tagged "{{name}}"</h2>
+        <h2>Posts Tagged &quot;{{name}}&quot;</h2>
     </div>
     <ul>
     {% for post in posts %}
