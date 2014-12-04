@@ -16,7 +16,8 @@
                            [clj-rss "0.1.9"]
                            [me.raynes/fs "1.4.4"]
                            [crouton "0.1.2"]
-                           [cheshire "5.3.1"]]
+                           [cheshire "5.3.1"]
+                           [cryogen-core "0.1.0"]]
             :plugins [[lein-ring "0.8.13"]]
             :main cryogen.compiler
             :ring {:init cryogen.server/init
