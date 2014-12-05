@@ -2,8 +2,8 @@
   (:require [compojure.core :refer [GET defroutes]]
             [compojure.route :as route]
             [ring.util.response :refer [redirect]]
-            [cryogen.watcher :refer [start-watcher!]]
-            [cryogen.compiler :refer [compile-assets-timed read-config]]))
+            [cryogen-core.watcher :refer [start-watcher!]]
+            [cryogen-core.compiler :refer [compile-assets-timed read-config]]))
 
 (defn init []
   (compile-assets-timed)
