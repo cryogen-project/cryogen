@@ -16,7 +16,7 @@
         {{post.content|safe}}
     </div>
     {% if post.tags %}
-    <div id="tags">
+    <div id="post-tags">
         <b>Tags: </b>
         {% for tag in post.tags %}
         <a href="{{tag.uri}}">{{tag.name}}</a>
