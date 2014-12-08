@@ -14,7 +14,7 @@
 * Disqus support
 * GitHub Gist integration
 * sitemap
-* sass/scss compilation
+* Sass/SCSS compilation
 * RSS
 
 ## Prerequisites
