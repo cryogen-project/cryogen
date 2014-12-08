@@ -2,7 +2,28 @@
 {%block subtitle %}: {{post.title}}{% endblock %}
 {% block content %}
 <div id="post">
-    {% include "templates/html/layouts/post-content.html" %}
+    <div id="post-header">
+        <h2>{{post.title}}</h2>
+        <div id="post-meta">
+            {% if post.author %}
+            <div class="author">{{post.author}}</div>
+            {% endif %}
+            <div class="date">{{post.date|date:longDate}}</div>
+        </div>
+    </div>
+    <div>
+        {% if post.toc %}{{post.toc|safe}}{% endif %}
+        {{post.content|safe}}
+    </div>
+    {% if post.tags %}
+    <div id="tags">
+        <b>Tags: </b>
+        {% for tag in post.tags %}
+        <a href="{{tag.uri}}">{{tag.name}}</a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <div id="prev-next">
         {% if post.prev %}
         <a href="{{post.prev.uri}}">&laquo; {{post.prev.title}}</a>
