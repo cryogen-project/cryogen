@@ -8,7 +8,7 @@
             [clojure.java.io :refer [copy file reader writer]]
             [clojure.string :as s]
             [text-decoration.core :refer :all]
-            [markdown.core :refer [md-to-html-string]]
+            [cryogen.markup :as m]
             [cryogen.toc :refer [generate-toc]]
             [cryogen.sass :as sass]))
 
@@ -20,24 +20,21 @@
 
 (def public "resources/public")
 
-(defn find-md-assets []
-  (find-assets "templates" ".md"))
+(defn find-posts [{:keys [post-root]} markup]
+  (find-assets (str "templates/" (m/dir markup) post-root) (m/ext markup)))
 
-(defn find-posts [{:keys [post-root]}]
-  (find-assets (str "templates/md" post-root) ".md"))
-
-(defn find-pages [{:keys [page-root]}]
-  (find-assets (str "templates/md" page-root) ".md"))
+(defn find-pages [{:keys [page-root]} markup]
+  (find-assets (str "templates/" (m/dir markup) page-root) (m/ext markup)))
 
 (defn parse-post-date [file-name]
   (let [fmt (java.text.SimpleDateFormat. "dd-MM-yyyy")]
     (.parse fmt (.substring file-name 0 10))))
 
-(defn post-uri [file-name {:keys [blog-prefix post-root]}]
-  (str blog-prefix post-root (s/replace file-name #".md" ".html")))
+(defn post-uri [file-name {:keys [blog-prefix post-root]} markup]
+  (str blog-prefix post-root (s/replace file-name (re-pattern (m/ext markup)) ".html")))
 
-(defn page-uri [page-name {:keys [blog-prefix page-root]}]
-  (str blog-prefix page-root (s/replace page-name #".md" ".html")))
+(defn page-uri [page-name {:keys [blog-prefix page-root]} markup]
+  (str blog-prefix page-root (s/replace page-name (re-pattern (m/ext markup)) ".html")))
 
 (defn read-page-meta [page rdr]
   (try
@@ -45,45 +42,61 @@
     (catch Exception _
       (throw (IllegalArgumentException. (str "Malformed metadata on page: " page))))))
 
-(defn parse-content [rdr]
-  (md-to-html-string
-    (->> (java.io.BufferedReader. rdr)
-         (line-seq)
-         (s/join "\n"))
-    :heading-anchors true))
+(defn parse [file-name page-meta content]
+  (merge
+    (update-in page-meta [:layout] #(str (name %) ".html"))
+    {:file-name file-name
+     :content   content
+     :toc       (if (:toc page-meta) (generate-toc content))}))
 
-(defn parse-page [is-post? page config]
-  (with-open [rdr (java.io.PushbackReader. (reader page))]
-    (let [page-name (.getName page)
-          file-name (s/replace page-name #".md" ".html")
-          page-meta (read-page-meta page-name rdr)
-          content (parse-content rdr)]
-      (merge
-        (update-in page-meta [:layout] #(str (name %) ".html"))
-        {:file-name file-name
-         :content   content
-         :toc       (if (:toc page-meta) (generate-toc content))}
-        (if is-post?
-          (let [date (parse-post-date file-name)
-                archive-fmt (java.text.SimpleDateFormat. "yyyy MMMM" (java.util.Locale. "en"))
-                formatted-group (.format archive-fmt date)]
-            {:date                    date
-             :formatted-archive-group formatted-group
-             :parsed-archive-group    (.parse archive-fmt formatted-group)
-             :uri                     (post-uri file-name config)
-             :tags                    (set (:tags page-meta))})
-          {:uri        (page-uri file-name config)
-           :page-index (:page-index page-meta)})))))
+(defn content-from-page [page markup]
+ (with-open [rdr (java.io.PushbackReader. (reader page))]
+   (let [page-name (.getName page)
+         file-name (s/replace page-name (re-pattern (m/ext markup)) ".html")
+         page-meta (read-page-meta page-name rdr)
+         content ((m/render-fn markup) rdr)]
+     {:file-name file-name
+      :page-meta page-meta
+      :content content})))
+
+(defn parse-post [page config markup]
+  (let [{:keys [file-name page-meta content]} (content-from-page page markup)]
+    (merge
+     (parse file-name page-meta content)
+     (let [date (parse-post-date file-name)
+           archive-fmt (java.text.SimpleDateFormat. "yyyy MMMM" (java.util.Locale. "en"))
+           formatted-group (.format archive-fmt date)]
+       {:date                    date
+        :formatted-archive-group formatted-group
+        :parsed-archive-group    (.parse archive-fmt formatted-group)
+        :uri                     (post-uri file-name config markup)
+        :tags                    (set (:tags page-meta))})
+     )))
+
+(defn parse-page [page config markup]
+  (let [{:keys [file-name page-meta content]} (content-from-page page markup)]
+    (merge
+     (parse file-name page-meta content)
+     {:uri (page-uri file-name config markup)
+      :page-index (:page-index page-meta)})))
 
 (defn read-posts [config]
-  (->> (find-posts config)
-       (map #(parse-page true % config))
+  (->> (mapcat
+        (fn [mu]
+          (->>
+           (find-posts config mu)
+           (map #(parse-post % config mu))))
+        (m/markups))
        (sort-by :date)
        reverse))
 
 (defn read-pages [config]
-  (->> (find-pages config)
-       (map #(parse-page false % config))
+  (->> (mapcat
+        (fn [mu]
+          (->>
+           (find-pages config mu)
+           (map #(parse-page % config mu))))
+        (m/markups))
        (sort-by :page-index)))
 
 (defn tag-post [tags post]
