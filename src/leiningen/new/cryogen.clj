@@ -37,10 +37,14 @@
                ["resources/templates/md/posts/10-03-2014-first-post.md" (render "md/posts/10-03-2014-first-post.md")]
                ["resources/templates/md/posts/11-04-2014-second-post.md" (render "md/posts/11-04-2014-second-post.md")]
                ["resources/templates/md/posts/13-11-2014-docs.md" (render "md/posts/13-11-2014-docs.md")]
+               ;;Asciidoc templates
+               ["resources/templates/asc/pages/adoc-page.asc" (render "asc/pages/adoc-page.asc")]
+               ["resources/templates/asc/posts/10-12-2014-adoc-post.asc" (render "asc/posts/10-12-2014-adoc-post.asc")]
                ;;config
                ["resources/templates/config.edn" (render "config.edn")]
                ;;namespaces
                ["src/cryogen/compiler.clj" (render "src/cryogen/compiler.clj")]
+               ["src/cryogen/markup.clj" (render "src/cryogen/markup.clj")]
                ["src/cryogen/toc.clj" (render "src/cryogen/toc.clj")]
                ["src/cryogen/io.clj" (render "src/cryogen/io.clj")]
                ["src/cryogen/rss.clj" (render "src/cryogen/rss.clj")]
