@@ -217,6 +217,7 @@ in the `/var/blog/404.html` file.
 * [Clojure :in Tunisia](http://www.clojure.tn)
 * [dl1ely.github.io](http://dl1ely.github.io)
 * [nil/recur](http://jonase.github.io/nil-recur)
+* [on the clojure move](http://tangrammer.github.io/)
 
 ## License
 
