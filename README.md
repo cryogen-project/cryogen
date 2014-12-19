@@ -149,6 +149,9 @@ The pages contain the following metadata:
 
 ### Customizing Layouts
 
+Cryogen uses [Selmer](https://github.com/yogthos/Selmer) templating engine for layouts. Please refer to its documentation
+to see the supported tags and filters for the layouts.
+
 The layouts are contained in the `resources/templates/html/layouts` folder of the project. By default, the `base.html`
 layout is used to provide the general layout for the site. This is where you would add static resources such as CSS and Js
 assets as well as define headers and footers for your site.
