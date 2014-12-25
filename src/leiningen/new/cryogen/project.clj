@@ -9,6 +9,6 @@
                            [ring-server "0.3.1"]
                            [cryogen-core "0.1.5"]]
             :plugins [[lein-ring "0.8.13"]]
-            :main cryogen.compiler
+            :main cryogen-core.compiler
             :ring {:init cryogen.server/init
                    :handler cryogen.server/handler})
