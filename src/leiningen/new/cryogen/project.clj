@@ -7,7 +7,7 @@
                            [ring/ring-devel "1.3.2"]
                            [compojure "1.3.1"]
                            [ring-server "0.3.1"]
-                           [cryogen-core "0.1.5"]]
+                           [cryogen-core "0.1.6"]]
             :plugins [[lein-ring "0.8.13"]]
             :main cryogen-core.compiler
             :ring {:init cryogen.server/init
