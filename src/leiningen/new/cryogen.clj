@@ -42,4 +42,5 @@
                ;;config
                ["resources/templates/config.edn" (render "config.edn")]
                ;;namespaces
+               ["src/cryogen/core.clj" (render "src/cryogen/core.clj")]
                ["src/cryogen/server.clj" (render "src/cryogen/server.clj")]))))
