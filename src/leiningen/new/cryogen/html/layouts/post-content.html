@@ -11,7 +11,7 @@
     {% if post.toc %}{{post.toc|safe}}{% endif %}
     {{post.content|safe}}
 </div>
-{% if not post.tags|count-is:0 %}
+{% if post.tags|not-empty %}
 <div id="post-tags">
     <b>Tags: </b>
     {% for tag in post.tags %}
