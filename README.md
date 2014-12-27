@@ -64,7 +64,8 @@ The site configuration file is found at `templates/config.edn`, this file looks 
  :resources        ["css" "js" "img"]
  :keep-files       [".git"] 
  :disqus?          false
- :disqus-shortname ""}
+ :disqus-shortname ""
+ :ignored-files    [#"^\.#.*" #".*\.swp$"]}
 ```
 
   * `post-root` - value prepended to all post uri's
@@ -85,6 +86,7 @@ The site configuration file is found at `templates/config.edn`, this file looks 
   * `keep-files` - list of folders or files that are not wiped in the `public` directory. For example, this allows to keep a `.git` directory there across recompiles of the site to versionize the generated files
   * `disqus?` - set to true if you want disqus enabled on your site
   * `disqus-shortname` - your disqus shortname
+  * `ignored-files` - list of regexps matching files the compiler should ignore
 
 ### Creating Posts
 

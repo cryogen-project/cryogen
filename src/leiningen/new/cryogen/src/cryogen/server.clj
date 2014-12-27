@@ -7,7 +7,8 @@
 
 (defn init []
   (compile-assets-timed)
-  (start-watcher! "resources/templates" compile-assets-timed))
+  (let [ignored-files (-> (read-config) :ignored-files)]
+    (start-watcher! "resources/templates" ignored-files compile-assets-timed)))
 
 (defroutes handler
   (GET "/" [] (redirect (str (:blog-prefix (read-config)) "/index.html")))
