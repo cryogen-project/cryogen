@@ -14,4 +14,5 @@
  :resources        ["css" "js" "404.html"]
  :keep-files       [".git"]
  :disqus?          false
- :disqus-shortname ""}
+ :disqus-shortname ""
+ :ignored-files    [#"\.#.*" #".*\.swp$"]}
