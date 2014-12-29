@@ -30,7 +30,9 @@
                ["resources/templates/html/layouts/home.html" (render "html/layouts/home.html")]
                ["resources/templates/html/layouts/page.html" (render "html/layouts/page.html")]
                ["resources/templates/html/layouts/post.html" (render "html/layouts/post.html")]
+               ["resources/templates/html/layouts/post-content.html" (render "html/layouts/post-content.html")]
                ["resources/templates/html/layouts/tag.html" (render "html/layouts/tag.html")]
+               ["resources/templates/404.html" (render "html/404.html")]
                ;;Markdown templates
                ["resources/templates/md/pages/about.md" (render "md/pages/about.md")]
                ["resources/templates/md/pages/another-page.md" (render "md/pages/another-page.md")]
@@ -43,13 +45,6 @@
                ;;config
                ["resources/templates/config.edn" (render "config.edn")]
                ;;namespaces
-               ["src/cryogen/compiler.clj" (render "src/cryogen/compiler.clj")]
-               ["src/cryogen/markup.clj" (render "src/cryogen/markup.clj")]
-               ["src/cryogen/toc.clj" (render "src/cryogen/toc.clj")]
-               ["src/cryogen/io.clj" (render "src/cryogen/io.clj")]
-               ["src/cryogen/rss.clj" (render "src/cryogen/rss.clj")]
-               ["src/cryogen/server.clj" (render "src/cryogen/server.clj")]
-               ["src/cryogen/sitemap.clj" (render "src/cryogen/sitemap.clj")]
-               ["src/cryogen/watcher.clj" (render "src/cryogen/watcher.clj")]
-               ["src/cryogen/github.clj" (render "src/cryogen/github.clj")]
-               ["src/cryogen/sass.clj" (render "src/cryogen/sass.clj")]))))
+               
+               ["src/cryogen/core.clj" (render "src/cryogen/core.clj")]
+               ["src/cryogen/server.clj" (render "src/cryogen/server.clj")]))))

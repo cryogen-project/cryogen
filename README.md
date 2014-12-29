@@ -1,17 +1,20 @@
 <img src="https://raw.githubusercontent.com/lacarmen/cryogen/master/cryogen.png"
  hspace="20" align="left"height="200"/>
 
+[![Dependency Status](https://www.versioneye.com/user/projects/547671eedeae900d12000056/badge.svg?style=flat)](https://www.versioneye.com/user/projects/547671eedeae900d12000056)
 
 ## Features
 
 * blog posts and pages with Markdown
+* tags
 * table of contents generation
-* Theming support with Twitter Bootstrap
+* Default Twitter Bootstrap theme
 * plain HTML page templates
 * code syntax highlighting
-* tags
+* Disqus support
+* GitHub Gist integration
 * sitemap
-* sass/scss compilation
+* Sass/SCSS compilation
 * RSS
 
 ## Prerequisites
@@ -45,25 +48,34 @@ The server will watch for changes in the `resources/templates` folder and recomp
 The site configuration file is found at `templates/config.edn`, this file looks as follows:
 
 ```clojure
-{:site-title "My Awesome Blog"
- :author "Bob Bobbert"
- :description "This blog is awesome"
- :site-url "http://blogawesome.com/"
- :post-root "posts"
- :tag-root "tags"
- :page-root "pages"
- :blog-prefix "/blog"
- :rss-name "feed.xml"
- :sass-src "css"
- :sass-dest "css"
- :resources ["css" "js" "img"]}
+{:site-title       "My Awesome Blog"
+ :author           "Bob Bobbert"
+ :description      "This blog is awesome"
+ :site-url         "http://blogawesome.com/"
+ :post-root        "posts"
+ :tag-root         "tags"
+ :page-root        "pages"
+ :blog-prefix      "/blog"
+ :post-date-format "dd-MM-yyyy"
+ :recent-posts     5
+ :rss-name         "feed.xml"
+ :sass-src         nil
+ :sass-dest        nil
+ :resources        ["css" "js" "img"]
+ :keep-files       [".git"] 
+ :disqus?          false
+ :disqus-shortname ""
+ :ignored-files    [#"^\.#.*" #".*\.swp$"]}
 ```
 
   * `post-root` - value prepended to all post uri's
   * `tag-root` - value prepended to all tag uri's
   * `page-root` - value prepended to all page uri's
   * `blog-prefix` - prepended to all uri's (must start with slash), nil by default
+  * `recent-posts` - number of recent posts to display in the sidebar
   * `rss-name` - name of the rss file generated, nil defaults to `rss.xml`
+  * `recent-posts` - the number of recent posts to show in the sidebar
+  * `post-date-format` - date format for your .md files, yyyy-MM-dd by default
   * `sass-src` - directory containing sources of sass files to be
   compiled - defaults to "css" - be sure to include this directory in
   your `resources` section
@@ -71,6 +83,10 @@ The site configuration file is found at `templates/config.edn`, this file looks 
     into. defaults to "css" - be sure to include this directory in
     your `resources` section
   * `resources` - list of folders to be copied over from `templates` to `public`
+  * `keep-files` - list of folders or files that are not wiped in the `public` directory. For example, this allows to keep a `.git` directory there across recompiles of the site to versionize the generated files
+  * `disqus?` - set to true if you want disqus enabled on your site
+  * `disqus-shortname` - your disqus shortname
+  * `ignored-files` - list of regexps matching files the compiler should ignore
 
 ### Creating Posts
 
@@ -93,6 +109,7 @@ The post content must start with a map containing the post metadata:
 The metadata contains the following keys:
 
 * `:title` - the title of the post
+* `:author` - optional key to display the name of the author for the post
 * `:layout` - the layout template to use for the post
 * `:tags` - the tags associated with this post
 * `:toc` - boolean indicating whether table of contents should be generated, defaults to false
@@ -118,6 +135,8 @@ nulla et vestibulum finibus, nibh justo semper tortor, nec
 vestibulum tortor est nec nisi.
 ```
 
+If you wish to enable comments on your posts, create a [disqus](https://disqus.com/) account and [register](https://disqus.com/admin/create/) your blog. `disqus?` should be set to `true` in the config and you must add your `disqus-shortname`. 
+
 ### Creating Pages
 
 Pages work similarly to posts, but aren't grouped by date. An example page might be an about page.
@@ -131,6 +150,9 @@ The pages contain the following metadata:
 * `:toc` - boolean indicating whether table of contents should be generated, defaults to false
 
 ### Customizing Layouts
+
+Cryogen uses [Selmer](https://github.com/yogthos/Selmer) templating engine for layouts. Please refer to its documentation
+to see the supported tags and filters for the layouts.
 
 The layouts are contained in the `resources/templates/html/layouts` folder of the project. By default, the `base.html`
 layout is used to provide the general layout for the site. This is where you would add static resources such as CSS and Js
@@ -171,10 +193,36 @@ The ` initHighlightingOnLoad` function is called in `templates/html/layouts/base
 The generated static content will be found under the `resources/public` folder. Simply copy the content to a static
 folder for a server sugh as Nginx or Apache and your site is now ready for service.
 
-## Sites Made With Cryogen
+A sample Nginx configuration that's placed in `/etc/nginx/sites-available/default` can be seen below:
+
+```javascript
+server{
+  listen 80 default_server;
+  listen [::]:80 default_server ipv6only=on;
+  server_name localhost <yoursite.com> <www.yoursite.com>;
+
+  access_log /var/log/blog_access.log;
+  error_log /var/log/blog_error.log;
+
+  location / {
+    alias /var/blog/;
+    error_page    404 = /404.html;
+  }
+}
+```
+
+Simply set `yoursite.com` to the domain of your site in the above configuration and
+ensure the static content is available at `/var/blog/`. Finally, place your custom error page
+in the `/var/blog/404.html` file.
+
+## Some Sites Made With Cryogen
 
 * [My personal blog](http://carmenla.me/blog/index.html)
+* [Yogthos blog](http://yogthos.net/)
 * [Clojure :in Tunisia](http://www.clojure.tn)
+* [dl1ely.github.io](http://dl1ely.github.io)
+* [nil/recur](http://jonase.github.io/nil-recur)
+* [on the clojure move](http://tangrammer.github.io/)
 
 ## License
 

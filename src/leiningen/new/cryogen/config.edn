@@ -1,11 +1,18 @@
-{:site-title "My Awesome Blog"
- :author "Bob Bobbert"
- :description "This blog is awesome"
- :site-url "http://blogawesome.com/"
- :post-root "posts"
- :tag-root "tags"
- :page-root "pages"
- :tags? true
- :blog-prefix "/blog"
- :rss-name "feed.xml"
- :resources ["css" "js" "img"]}
+{:site-title       "My Awesome Blog"
+ :author           "Bob Bobbert"
+ :description      "This blog is awesome"
+ :site-url         "http://blogawesome.com/"
+ :post-root        "posts"
+ :tag-root         "tags"
+ :page-root        "pages"
+ :blog-prefix      "/blog"
+ :rss-name         "feed.xml"
+ :recent-posts     3
+ :post-date-format "dd-MM-yyyy"
+ :sass-src         nil
+ :sass-dest        nil
+ :resources        ["css" "js" "404.html"]
+ :keep-files       [".git"]
+ :disqus?          false
+ :disqus-shortname ""
+ :ignored-files    [#"\.#.*" #".*\.swp$"]}
