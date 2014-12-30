@@ -23,6 +23,7 @@
                ["project.clj" (render "project.clj")]
                ;;static resources
                ["resources/templates/css/screen.css" (render "css/screen.css")]
+               ["resources/templates/css/asciidoc.css" (render "css/asciidoc.css")]
                ["resources/templates/js/highlight.pack.js" (render "js/highlight.pack.js")]
                ;;HTML templates
                ["resources/templates/html/layouts/archives.html" (render "html/layouts/archives.html")]
@@ -45,6 +46,5 @@
                ;;config
                ["resources/templates/config.edn" (render "config.edn")]
                ;;namespaces
-               
                ["src/cryogen/core.clj" (render "src/cryogen/core.clj")]
                ["src/cryogen/server.clj" (render "src/cryogen/server.clj")]))))
