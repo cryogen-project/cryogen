@@ -7,6 +7,7 @@
  :page-root        "pages"
  :blog-prefix      "/blog"
  :rss-name         "feed.xml"
+ :rss-filters      ["cryogen"]
  :recent-posts     3
  :post-date-format "dd-MM-yyyy"
  :sass-src         nil
