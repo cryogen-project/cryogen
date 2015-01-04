@@ -3,6 +3,8 @@
 
 [![Dependency Status](https://www.versioneye.com/user/projects/547671eedeae900d12000056/badge.svg?style=flat)](https://www.versioneye.com/user/projects/547671eedeae900d12000056)
 
+For additional documentation please see the [cryogen site](http://cryogenweb.org)
+
 ## Features
 
 * blog posts and pages with Markdown
@@ -220,6 +222,7 @@ in the `/var/blog/404.html` file.
 ## Some Sites Made With Cryogen
 
 * [My personal blog](http://carmenla.me/blog/index.html)
+* [Cryogen Documentation Site](http://cryogenweb.org)
 * [Yogthos blog](http://yogthos.net/)
 * [Clojure :in Tunisia](http://www.clojure.tn)
 * [dl1ely.github.io](http://dl1ely.github.io)
