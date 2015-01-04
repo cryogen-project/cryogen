@@ -59,6 +59,7 @@ The site configuration file is found at `templates/config.edn`, this file looks 
  :post-date-format "dd-MM-yyyy"
  :recent-posts     5
  :rss-name         "feed.xml"
+ :rss-filters      ["clojure" "cryogen"]
  :sass-src         nil
  :sass-dest        nil
  :resources        ["css" "js" "img"]
@@ -74,6 +75,7 @@ The site configuration file is found at `templates/config.edn`, this file looks 
   * `blog-prefix` - prepended to all uri's (must start with slash), nil by default
   * `recent-posts` - number of recent posts to display in the sidebar
   * `rss-name` - name of the rss file generated, nil defaults to `rss.xml`
+  * `rss-filters` - used to generate tag-based rss feeds for topic-specific rss aggregators. Tags listed here should match tags being used in your posts.
   * `recent-posts` - the number of recent posts to show in the sidebar
   * `post-date-format` - date format for your .md files, yyyy-MM-dd by default
   * `sass-src` - directory containing sources of sass files to be
