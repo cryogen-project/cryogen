@@ -23,6 +23,7 @@
                ["project.clj" (render "project.clj")]
                ;;static resources
                ["resources/templates/css/screen.css" (render "css/screen.css")]
+               ["resources/templates/css/asciidoc.css" (render "css/asciidoc.css")]
                ["resources/templates/js/highlight.pack.js" (render "js/highlight.pack.js")]
                ;;HTML templates
                ["resources/templates/html/layouts/archives.html" (render "html/layouts/archives.html")]
@@ -39,6 +40,9 @@
                ["resources/templates/md/posts/10-03-2014-first-post.md" (render "md/posts/10-03-2014-first-post.md")]
                ["resources/templates/md/posts/11-04-2014-second-post.md" (render "md/posts/11-04-2014-second-post.md")]
                ["resources/templates/md/posts/13-11-2014-docs.md" (render "md/posts/13-11-2014-docs.md")]
+               ;;Asciidoc templates
+               ["resources/templates/asc/pages/adoc-page.asc" (render "asc/pages/adoc-page.asc")]
+               ["resources/templates/asc/posts/10-12-2014-adoc-post.asc" (render "asc/posts/10-12-2014-adoc-post.asc")]
                ;;config
                ["resources/templates/config.edn" (render "config.edn")]
                ;;namespaces
