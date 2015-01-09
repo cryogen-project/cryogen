@@ -5,9 +5,10 @@
     <title>{{title}}{% block subtitle %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" >
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css">
-        {% style "css/screen.css" %}
+    {% style "css/screen.css" %}
+    {% style "css/asciidoc.css" %}
     </head>
     <body>
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -22,7 +23,7 @@
                 <h1><a class="navbar-brand" href="{{index-uri}}">{{title}}</a></h1>
             </div>
             <!-- nav links -->
-            <div id="navbar" class="navbar-collapse collapse">            
+            <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li {% if home %} class="active" {% endif %}><a href="{{index-uri}}">Home</a></li>
                     <li {% if archives %} class="active" {% endif %}><a href="{{archives-uri}}">Archives</a></li>
@@ -83,4 +84,3 @@
         <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>
-
