@@ -9,7 +9,7 @@
  :rss-name         "feed.xml"
  :rss-filters      ["cryogen"]
  :recent-posts     3
- :post-date-format "dd-MM-yyyy"
+ :post-date-format "yyyy-MM-dd"
  :sass-src         nil
  :sass-dest        nil
  :resources        ["css" "js" "404.html"]
