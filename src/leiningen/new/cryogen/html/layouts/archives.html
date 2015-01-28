@@ -10,7 +10,7 @@
         <ul>
         {% for post in group.posts %}
         <li>
-            {{post.date|date:longDate}} - <a href="{{post.uri}}">{{post.title}}</a>
+            {{post.date|date:"MMM dd"}} - <a href="{{post.uri}}">{{post.title}}</a>
         </li>
         {% endfor %}
         </ul>

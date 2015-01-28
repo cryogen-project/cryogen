@@ -12,11 +12,8 @@
         {% if post.prev %}
         <a href="{{post.prev.uri}}">&laquo; {{post.prev.title}}</a>
         {% endif %}
-        {% if all post.prev post.next %}
-        ||
-        {% endif %}
         {% if post.next %}
-        <a href="{{post.next.uri}}">{{post.next.title}} &raquo;</a>
+        <a class="right" href="{{post.next.uri}}">{{post.next.title}} &raquo;</a>
         {% endif %}
     </div>
 </div>
