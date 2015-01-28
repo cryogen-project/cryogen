@@ -37,7 +37,7 @@ lein new cryogen my-blog
 
 ### Running the Server
 
-The web server can be started using the `lein-ring` plugin:
+The web server can be started from the `my-blog` directory using the `lein-ring` plugin:
 
 ```
 lein ring server
