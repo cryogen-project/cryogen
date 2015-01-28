@@ -42,7 +42,7 @@
                ["resources/templates/md/posts/13-11-2014-docs.md" (render "md/posts/2014-12-11-docs.md")]
                ;;Asciidoc templates
                ["resources/templates/asc/pages/adoc-page.asc" (render "asc/pages/adoc-page.asc")]
-               ["resources/templates/asc/posts/10-10-2014-adoc-post.asc" (render "asc/posts/10-10-2014-adoc-post.asc")]
+               ["resources/templates/asc/posts/2014-10-10-adoc-post.asc" (render "asc/posts/2014-10-10-adoc-post.asc")]
                ;;config
                ["resources/templates/config.edn" (render "config.edn")]
                ;;namespaces
