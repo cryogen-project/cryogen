@@ -37,9 +37,9 @@
                ;;Markdown templates
                ["resources/templates/md/pages/about.md" (render "md/pages/about.md")]
                ["resources/templates/md/pages/another-page.md" (render "md/pages/another-page.md")]
-               ["resources/templates/md/posts/10-03-2014-first-post.md" (render "md/posts/2014-03-10-first-post.md")]
-               ["resources/templates/md/posts/11-04-2014-second-post.md" (render "md/posts/2014-11-04-second-post.md")]
-               ["resources/templates/md/posts/13-11-2014-docs.md" (render "md/posts/2014-12-11-docs.md")]
+               ["resources/templates/md/posts/2014-03-10-first-post.md" (render "md/posts/2014-03-10-first-post.md")]
+               ["resources/templates/md/posts/2014-11-04-second-post.md" (render "md/posts/2014-11-04-second-post.md")]
+               ["resources/templates/md/posts/2014-12-11-docs.md" (render "md/posts/2014-12-11-docs.md")]
                ;;Asciidoc templates
                ["resources/templates/asc/pages/adoc-page.asc" (render "asc/pages/adoc-page.asc")]
                ["resources/templates/asc/posts/2014-10-10-adoc-post.asc" (render "asc/posts/2014-10-10-adoc-post.asc")]
