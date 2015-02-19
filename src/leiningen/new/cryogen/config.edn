@@ -12,7 +12,7 @@
  :post-date-format "yyyy-MM-dd"
  :sass-src         nil
  :sass-dest        nil
- :resources        ["css" "js" "404.html"]
+ :resources        ["css" "js" "img" "404.html"]
  :keep-files       [".git"]
  :disqus?          false
  :disqus-shortname ""
