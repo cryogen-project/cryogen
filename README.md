@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/lacarmen/cryogen/master/cryogen.png"
+<img src="https://raw.githubusercontent.com/lacarmen/cryogen/master/cryogen.svg"
  hspace="20" align="left"height="200"/>
 
 [![Dependency Status](https://www.versioneye.com/user/projects/547671eedeae900d12000056/badge.svg?style=flat)](https://www.versioneye.com/user/projects/547671eedeae900d12000056)
