@@ -5,5 +5,5 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :scm {:name "git"
         :url "https://github.com/lacarmen/cryogen.git"}
-  :dependencies [[leinjacker "0.2.0"]]
+  :dependencies [[leinjacker "0.4.2"]]
   :eval-in-leiningen true)
