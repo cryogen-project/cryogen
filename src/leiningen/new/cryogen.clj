@@ -25,6 +25,7 @@
                ["resources/templates/css/screen.css" (render "css/screen.css")]
                ["resources/templates/css/asciidoc.css" (render "css/asciidoc.css")]
                ["resources/templates/js/highlight.pack.js" (render "js/highlight.pack.js")]
+               "resources/templates/img"
                ;;HTML templates
                ["resources/templates/html/layouts/archives.html" (render "html/layouts/archives.html")]
                ["resources/templates/html/layouts/base.html" (render "html/layouts/base.html")]
