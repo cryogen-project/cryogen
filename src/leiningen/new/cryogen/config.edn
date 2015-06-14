@@ -12,7 +12,8 @@
  :post-date-format "yyyy-MM-dd"
  :sass-src         nil
  :sass-dest        nil
- :resources        ["css" "js" "img" "404.html"]
+ :theme            "blue"
+ :resources        ["img"]
  :keep-files       [".git"]
  :disqus?          false
  :disqus-shortname ""

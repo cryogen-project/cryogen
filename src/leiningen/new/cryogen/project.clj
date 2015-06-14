@@ -8,7 +8,7 @@
                            [compojure "1.3.4"]
                            [ring-server "0.4.0"]
                            [cryogen-markdown "0.1.1"]
-                           [cryogen-core "0.1.21"]]
+                           [cryogen-core "0.1.22"]]
             :plugins [[lein-ring "0.8.13"]]
             :main cryogen.core
             :ring {:init cryogen.server/init

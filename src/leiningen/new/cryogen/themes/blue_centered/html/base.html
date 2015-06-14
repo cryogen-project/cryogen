@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>{{title}}{% block subtitle %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700' rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css">
+    {% style "css/screen.css" %}
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{index-uri}}">{{title}}</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li {% if home %} class="active" {% endif %}><a href="{{index-uri}}">Home</a></li>
+                <li
+                {% if archives %} class="active" {% endif %}><a href="{{archives-uri}}">Archives</a></li>
+                {% for nav-page in navbar-pages %}
+                <li
+                {%ifequal page.uri nav-page.uri %} class="active" {% endifequal %}>
+                <a href="{{nav-page.uri}}">{{nav-page.title}}</a>
+                </li>
+                {% endfor %}
+                <li><a href="{{rss-uri}}">RSS</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        More <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="dropdown-header">Links</li>
+                        <li><a href="http://cryogenweb.org/docs/home.html">Cryogen Docs</a></li>
+                        <li><a href="http://carmenla.me/blog/index.html">Carmen's Blog</a></li>
+                        {% for page in sidebar-pages %}
+                        <li><a href="{{page.uri}}">{{page.title}}</a></li>
+                        {% endfor %}
+
+                        {% if latest-posts|not-empty %}
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Recent Posts</li>
+                        {% for post in latest-posts %}
+                        <li><a href="{{post.uri}}">{{post.title}}</a></li>
+                        {% endfor %}
+                        {% endif %}
+
+                        {% if tags|not-empty %}
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Tags</li>
+                        {% for tag in tags %}
+                        <li><a href="{{tag.uri}}">{{tag.name}}</a></li>
+                        {% endfor %}
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2014 BLOGAWESOME
+        <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+{% script "js/highlight.pack.js" %}
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+

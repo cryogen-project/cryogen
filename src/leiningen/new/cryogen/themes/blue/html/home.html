@@ -1,7 +1,7 @@
-{% extends "templates/html/layouts/base.html" %}
+{% extends "/html/base.html" %}
 {% block content %}
 <div id="post">
-    {% include "templates/html/layouts/post-content.html" %}
+    {% include "/html/post-content.html" %}
     {% if disqus? %}
     <div id="comments">
         <a href="{{post.uri}}#disqus_thread">View Comments</a>
