@@ -102,10 +102,10 @@ footer {
     padding: 15px 0;
 }
 
-#post-header {
+.post-header {
     margin-bottom: 20px;
 }
-#post-header h2 {
+.post-header h2 {
     font-size: 32px;
 }
 
