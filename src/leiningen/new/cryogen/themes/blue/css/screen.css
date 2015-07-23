@@ -128,9 +128,6 @@ pre, code, .hljs {
     .navbar-nav>li>a {
         padding: 30px 20px;
     }
-}
-
-@media (min-width: 400px) {
     .navbar-default .navbar-brand {
         font-size: 36px;
         padding: 25px 15px;
@@ -141,8 +138,7 @@ pre, code, .hljs {
     }
 }
 
-
-@media (max-width: 399px) {
+@media (max-width: 767px) {
     body{
         font-size: 14px;
     }

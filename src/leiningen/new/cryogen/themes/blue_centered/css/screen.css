@@ -148,9 +148,6 @@ pre, code, .hljs {
     .navbar-nav>li>a {
         padding: 30px 20px;
     }
-}
-
-@media (min-width: 400px) {
     .navbar-default .navbar-brand {
         font-size: 36px;
         padding: 25px 15px;
@@ -162,12 +159,6 @@ pre, code, .hljs {
 }
 
 @media (max-width: 767px) {
-    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-        color: #fff;
-    }
-}
-
-@media (max-width: 399px) {
     body{
         font-size: 14px;
     }
