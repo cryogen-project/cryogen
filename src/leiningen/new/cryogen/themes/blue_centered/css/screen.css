@@ -159,9 +159,6 @@ pre, code, .hljs {
 }
 
 @media (max-width: 767px) {
-    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-        color: #fff;
-    }
     body{
         font-size: 14px;
     }
