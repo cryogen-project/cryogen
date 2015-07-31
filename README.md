@@ -233,6 +233,7 @@ in the `/var/blog/404.html` file.
 * [nil/recur](http://jonase.github.io/nil-recur)
 * [on the clojure move](http://tangrammer.github.io/)
 * [cognizance](http://blog.jethrokuan.com/)
+* [AGYNAMIX Site & Blog](http://www.agynamix.de)
 
 ## License
 
