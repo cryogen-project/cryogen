@@ -237,6 +237,6 @@ in the `/var/blog/404.html` file.
 
 ## License
 
-Copyright © 2014 Carmen La
+Copyright © 2014-2015 Carmen La
 
 Distributed under the Eclipse Public License, the same as Clojure.
