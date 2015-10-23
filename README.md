@@ -118,6 +118,7 @@ The metadata contains the following keys:
 
 * `:title` - the title of the post
 * `:author` - optional key to display the name of the author for the post
+* `:date` - optional key to set the date of the post without needing to define it in the post's file name. *this must match the date format in your config.edn file.*
 * `:layout` - the layout template to use for the post
 * `:tags` - the tags associated with this post
 * `:toc` - boolean indicating whether table of contents should be generated, defaults to false
