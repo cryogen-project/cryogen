@@ -235,6 +235,7 @@ in the `/var/blog/404.html` file.
 * [on the clojure move](http://tangrammer.github.io/)
 * [cognizance](http://blog.jethrokuan.com/)
 * [AGYNAMIX Site & Blog](http://www.agynamix.de)
+* [e-Resident Me](http://eresident.me)
 
 ## License
 
