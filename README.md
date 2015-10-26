@@ -121,7 +121,10 @@ The metadata contains the following keys:
 * `:date` - optional key to set the date of the post without needing to define it in the post's file name. *this must match the date format in your config.edn file.*
 * `:layout` - the layout template to use for the post
 * `:tags` - the tags associated with this post
-* `:toc` - boolean indicating whether table of contents should be generated, defaults to false
+* `:toc` - truthy value indicating whether table of contents should be generated (defaults to false)
+      * `true` and `:ol` result in a list labeled by section number
+      * `:ul` results in a bulleted list
+      * `false` indicates that no table of contents should be generated
 
 The rest of the post should consist of valid Markdown content, eg:
 
@@ -156,7 +159,7 @@ The pages contain the following metadata:
 * `:layout` - the layout template for the page
 * `:page-index` - a number representing the order of the page in the navbar/sidebar
 * `:navbar?` - determines whether the page should be shown in the navbar, `false` by default
-* `:toc` - boolean indicating whether table of contents should be generated, defaults to false
+* `:toc` - flag indicating whether table of contents should be generated, defaults to false
 
 ### Customizing Layouts
 
