@@ -239,6 +239,7 @@ in the `/var/blog/404.html` file.
 * [cognizance](http://blog.jethrokuan.com/)
 * [AGYNAMIX Site & Blog](http://www.agynamix.de)
 * [e-Resident Me](http://eresident.me)
+* [Chad Stovern's blog](http://www.chadstovern.com)
 
 ## License
 
