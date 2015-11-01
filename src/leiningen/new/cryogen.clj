@@ -22,7 +22,7 @@
                [".gitignore"  (render "gitignore")]
                ["project.clj" (render "project.clj")]
                ;;static resources
-               "resources/templates/img"
+               ["resources/templates/img/cryogen.png" (render "img/cryogen.png")]
                ;;themes
                ["resources/templates/themes/blue/html/archives.html" (render "themes/blue/html/archives.html")]
                ["resources/templates/themes/blue/html/base.html" (render "themes/blue/html/base.html")]
