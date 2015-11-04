@@ -6,8 +6,8 @@
             [clojure.java.io :refer [file] :as io]))
 
 (defn binary-renderer
-  "Create a binary renderer function that looks for mustache templates in the
-  right place given the name of your template."
+  "Create a binary renderer function that looks for binary files in the
+  right place given the name of your file."
   [name]
   (fn [file]
     (let [path (string/join "/" ["leiningen" "new" (sanitize name) file])]
