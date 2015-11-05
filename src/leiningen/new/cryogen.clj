@@ -2,18 +2,12 @@
   (:require [leiningen.new.templates :refer [renderer sanitize year ->files]]
             [leinjacker.utils :refer [lein-generation]]
             [leiningen.core.main :as main]
-            [clojure.string :as string]
-            [clojure.java.io :refer [file] :as io]))
+            [clojure.java.io :refer [file]]))
 
-(defn binary-renderer
-  "Create a binary renderer function that looks for binary files in the
-  right place given the name of your file."
-  [name]
-  (fn [file]
-    (let [path (string/join "/" ["leiningen" "new" (sanitize name) file])]
-      (if-let [resource (io/resource path)]
-        (io/input-stream resource)
-        (main/abort (format "Template resource '%s' not found." path))))))
+(defn resource [resource]
+  (-> (Thread/currentThread)
+      (.getContextClassLoader)
+      (.getResource (str "leiningen/new/cryogen/" resource))))
 
 (defn check-lein-version []
   (if (< (lein-generation) 2)
@@ -26,15 +20,14 @@
   (let [options {:name name
                  :sanitized (sanitize name)
                  :year (year)}
-        render (renderer "cryogen")
-        binary (binary-renderer "cryogen")]
+        render (renderer "cryogen")]
     (main/info "Generating fresh 'lein new' Cryogen project.")
     (with-redefs [leiningen.new.templates/render-text (fn [text _] text)]
       (->files options
                [".gitignore"  (render "gitignore")]
                ["project.clj" (render "project.clj")]
                ;;static resources
-               ["resources/templates/img/cryogen.png" (binary "img/cryogen.png")]
+               ["resources/templates/img/cryogen.png" (file (resource "img/cryogen.png"))]
                ;;themes
                ["resources/templates/themes/blue/html/archives.html" (render "themes/blue/html/archives.html")]
                ["resources/templates/themes/blue/html/base.html" (render "themes/blue/html/base.html")]
