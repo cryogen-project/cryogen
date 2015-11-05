@@ -2,12 +2,10 @@
   (:require [leiningen.new.templates :refer [renderer sanitize year ->files]]
             [leinjacker.utils :refer [lein-generation]]
             [leiningen.core.main :as main]
-            [clojure.java.io :refer [file]]))
+            [clojure.java.io :as io]))
 
-(defn resource [resource]
-  (-> (Thread/currentThread)
-      (.getContextClassLoader)
-      (.getResource (str "leiningen/new/cryogen/" resource))))
+(defn resource [r]
+(->> r (str "leiningen/new/cryogen/") (io/resource) (io/input-stream)))
 
 (defn check-lein-version []
   (if (< (lein-generation) 2)
@@ -27,7 +25,7 @@
                [".gitignore"  (render "gitignore")]
                ["project.clj" (render "project.clj")]
                ;;static resources
-               ["resources/templates/img/cryogen.png" (file (resource "img/cryogen.png"))]
+               ["resources/templates/img/cryogen.png" (resource "img/cryogen.png")]
                ;;themes
                ["resources/templates/themes/blue/html/archives.html" (render "themes/blue/html/archives.html")]
                ["resources/templates/themes/blue/html/base.html" (render "themes/blue/html/base.html")]
