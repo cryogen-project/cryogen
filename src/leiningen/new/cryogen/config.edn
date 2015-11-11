@@ -5,7 +5,10 @@
  :post-root          "posts"
  :tag-root           "tags"
  :page-root          "pages"
- :blog-prefix        "/blog"
+ :post-root-uri      "posts"
+ :tag-root-uri       "tags"
+ :page-root-uri      "pages"
+ :blog-prefix        "blog"
  :rss-name           "feed.xml"
  :rss-filters        ["cryogen"]
  :recent-posts       3

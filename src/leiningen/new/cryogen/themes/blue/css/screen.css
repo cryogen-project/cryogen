@@ -121,6 +121,8 @@ pre, code, .hljs {
     background-color: #f7f9fd;
 }
 
+img[alt=cryogen] { width: 200px; }
+
 @media (min-width: 768px) {
     .navbar {
         min-height: 70px;
