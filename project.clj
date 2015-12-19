@@ -1,4 +1,4 @@
-(defproject cryogen/lein-template "0.2.26"
+(defproject cryogen/lein-template "0.2.27"
   :description "A Leiningen template for the Cryogen static site generator"
   :url "https://github.com/cryogen-project/cryogen"
   :license {:name "Eclipse Public License"
