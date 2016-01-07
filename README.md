@@ -3,21 +3,19 @@
 
 [![Dependency Status](https://www.versioneye.com/user/projects/54cb00e9fb6eba185d0000c2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/54cb00e9fb6eba185d0000c2)
 
-For additional documentation please see the [cryogen site](http://cryogenweb.org)
+This ReadMe only documents a subset of Cryogen's features. For additional documentation please see the [cryogen site](http://cryogenweb.org).
 
 ## Features
 
-* blog posts and pages with Markdown (default) or AsciiDoc
-* tags
-* table of contents generation
-* Default Twitter Bootstrap theme
-* plain HTML page templates
-* code syntax highlighting
+* Blog posts and pages with Markdown (default) or AsciiDoc
+* Tags
+* Table of contents generation
+* Plain HTML page templates
+* Code syntax highlighting
 * Disqus support
-* GitHub Gist integration
-* sitemap
+* Sitemap generation
+* RSS feed generation
 * Sass/SCSS compilation
-* RSS
 
 ## Prerequisites
 
@@ -50,128 +48,46 @@ The server will watch for changes in the `resources/templates` folder and recomp
 The site configuration file is found at `templates/config.edn`, this file looks as follows:
 
 ```clojure
-{:site-title       "My Awesome Blog"
- :author           "Bob Bobbert"
- :description      "This blog is awesome"
- :site-url         "http://blogawesome.com/"
- :post-root        "posts"
- :tag-root         "tags"
- :page-root        "pages"
- :blog-prefix      "/blog"
- :rss-name         "feed.xml"
- :rss-filters      ["cryogen"]
- :recent-posts     3
- :post-date-format "yyyy-MM-dd"
- :sass-src         nil
- :sass-dest        nil
- :resources        ["css" "js" "404.html"]
- :keep-files       [".git"]
- :disqus?          false
- :disqus-shortname ""
- :ignored-files    [#"\.#.*" #".*\.swp$"]}
+{:site-title         "My Awesome Blog"
+ :author             "Bob Bobbert"
+ :description        "This blog is awesome"
+ :site-url           "http://blogawesome.com/"
+ :post-root          "posts"
+ :tag-root           "tags"
+ :page-root          "pages"
+ :blog-prefix        "/blog"
+ :rss-name           "feed.xml"
+ :rss-filters        ["cryogen"]
+ :recent-posts       3
+ :post-date-format   "yyyy-MM-dd"
+ :sass-src           nil
+ :sass-dest          nil
+ :resources          ["css" "js" "404.html"]
+ :keep-files         [".git"]
+ :disqus?            false
+ :disqus-shortname   ""
+ :ignored-files      [#"\.#.*" #".*\.swp$"]
+ :posts-per-page     5
+ :blocks-per-preview 2
+ :previews?          false}
 ```
 
-  * `post-root` - value prepended to all post uri's
-  * `tag-root` - value prepended to all tag uri's
-  * `page-root` - value prepended to all page uri's
-  * `blog-prefix` - prepended to all uri's (must start with slash), nil by default
-  * `rss-name` - name of the rss file generated, nil defaults to `rss.xml`
-  * `rss-filters` - used to generate tag-based rss feeds for topic-specific rss aggregators. Tags listed here should match tags being used in your posts.
-  * `recent-posts` - number of recent posts to display in the sidebar
-  * `post-date-format` - date format for your .md or .asc files, yyyy-MM-dd by default
-  * `sass-src` - directory containing sources of sass files to be
-  compiled - defaults to "css" - be sure to include this directory in
-  your `resources` section
-  * `sass-dest` - directory where the compiled output CSS would be put
-    into. defaults to "css" - be sure to include this directory in
-    your `resources` section
-  * `resources` - list of folders or files to be copied over from `templates` to `public`
-  * `keep-files` - list of folders or files that are not wiped in the `public` directory. For example, this allows to keep a `.git` directory there across recompiles of the site to versionize the generated files
-  * `disqus?` - set to true if you want disqus enabled on your site
-  * `disqus-shortname` - your disqus shortname
-  * `ignored-files` - list of regexps matching files the compiler should ignore
+For information about each key please see the ["Configuration"](http://cryogenweb.org/docs/configuration.html) portion of the Cryogen documentation site.
 
 ### Switching between Markdown and AsciiDoc
 
 Cryogen comes with Markdown support as default. If you want to use AsciiDoc instead, open the `project.clj` in your created blog (e.g. `my-blog`), and change the line in `:dependencies` that says `cryogen-markdown` to `cryogen-asciidoc`.
 Instead of looking for files ending in `.md` in the `md` directory, the compiler will now look for files ending in `.asc` in the `asc` directory.
 
-### Creating Posts
-
-The posts are located in the `resources/templates/md/posts` for Markdown files or `resources/templates/asc/posts` for AsciiDoc files. Posts are written using Markdown or AsciiDoc and each post file
-should start with the date in the format of `yyyy-dd-MM` or what is defined in the `:post-date-format` key of `config.edn`. The files have to have the extension `.md` or `.asc` respectively. The compiler will link the posts in order for you using
-the dates. A valid post file written in Markdown might look as follows:
-
-```
-2014-19-12-post1.md
-```
-
-The post content must start with a map containing the post metadata:
-
-```clojure
-{:title "First Post!"
- :layout :post
- :tags  ["tag1" "tag3"]}
-```
-
-The metadata contains the following keys:
-
-* `:title` - the title of the post
-* `:author` - optional key to display the name of the author for the post
-* `:date` - optional key to set the date of the post without needing to define it in the post's file name. *this must match the date format in your config.edn file.*
-* `:layout` - the layout template to use for the post
-* `:tags` - the tags associated with this post
-* `:toc` - truthy value indicating whether table of contents should be generated (defaults to false)
-      * `true` and `:ol` result in a list labeled by section number
-      * `:ul` results in a bulleted list
-      * `false` indicates that no table of contents should be generated
-
-The rest of the post should consist of valid Markdown content, eg:
-
-```
-## Hello World
-
-This is my first post!
-
-check out this sweet code
-
-    (defn foo [bar]
-      (bar))
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Nunc sodales pharetra massa, eget fringilla ex ornare et.
-Nunc mattis diam ac urna finibus sodales. Etiam sed ipsum
-et purus commodo bibendum. Cras libero magna, fringilla
-tristique quam sagittis, volutpat auctor mi. Aliquam luctus,
-nulla et vestibulum finibus, nibh justo semper tortor, nec
-vestibulum tortor est nec nisi.
-```
-
-If you wish to enable comments on your posts, create a [disqus](https://disqus.com/) account and [register](https://disqus.com/admin/create/) your blog. `disqus?` should be set to `true` in the config and you must add your `disqus-shortname`. 
-
-### Creating Pages
-
-Pages work similarly to posts, but aren't grouped by date. An example page might be an about page.
-
-The pages contain the following metadata:
-
-* `:title` - the title of the page
-* `:layout` - the layout template for the page
-* `:page-index` - a number representing the order of the page in the navbar/sidebar
-* `:navbar?` - determines whether the page should be shown in the navbar, `false` by default
-* `:toc` - flag indicating whether table of contents should be generated, defaults to false
-
 ### Customizing Layouts
 
 Cryogen uses [Selmer](https://github.com/yogthos/Selmer) templating engine for layouts. Please refer to its documentation
 to see the supported tags and filters for the layouts.
 
-The layouts are contained in the `resources/templates/html/layouts` folder of the project. By default, the `base.html`
-layout is used to provide the general layout for the site. This is where you would add static resources such as CSS and Js
+The layouts are contained in the `resources/templates/themes/{theme}/html` folder of the project. By default, the `base.html` layout is used to provide the general layout for the site. This is where you would add static resources such as CSS and JavaScript
 assets as well as define headers and footers for your site.
 
-Each page layout should have a name that matches the `:layout` key in the page metadata and end with `.html`. Page layouts
-extend the base layout and should only contain the content relaveant to the page inside the `content` block.
+Each page layout should have a name that matches the `:layout` key in the page metadata and end with `.html`. Page layouts extend the base layout and should only contain the content relaveant to the page inside the `content` block.
 For example, the `tag` layout is located in `tag.html` and looks as follows:
 
 ```xml
@@ -194,7 +110,7 @@ For example, the `tag` layout is located in `tag.html` and looks as follows:
 
 Cryogen uses [Highlight.js](https://highlightjs.org/) for code syntax highlighting. You can add more languages by replacing `templates/js/highlight.pack.js` with a customized package from [here](https://highlightjs.org/download/).
 
-The ` initHighlightingOnLoad` function is called in `templates/html/layouts/base.html`.
+The ` initHighlightingOnLoad` function is called in `{theme}/html/base.html`.
 
 ```xml
 <script>hljs.initHighlightingOnLoad();</script>
@@ -227,11 +143,13 @@ Simply set `yoursite.com` to the domain of your site in the above configuration 
 ensure the static content is available at `/var/blog/`. Finally, place your custom error page
 in the `/var/blog/404.html` file.
 
+More information on deployment can be found [here](http://cryogenweb.org/docs/deploying-to-github-pages.html).
+
 ## Some Sites Made With Cryogen
 
 * [My personal blog](http://carmenla.me/blog/index.html)
 * [Cryogen Documentation Site](http://cryogenweb.org)
-* [Yogthos blog](http://yogthos.net/)
+* [Yogthos' blog](http://yogthos.net/)
 * [Clojure :in Tunisia](http://www.clojure.tn)
 * [dl1ely.github.io](http://dl1ely.github.io)
 * [nil/recur](http://jonase.github.io/nil-recur)
@@ -244,6 +162,6 @@ in the `/var/blog/404.html` file.
 
 ## License
 
-Copyright © 2014-2015 Carmen La
+Copyright © 2014-2016 Carmen La
 
 Distributed under the Eclipse Public License, the same as Clojure.
