@@ -5,6 +5,9 @@
  :post-root          "posts"
  :tag-root           "tags"
  :page-root          "pages"
+ :post-root-uri      "posts-output"
+ :tag-root-uri       "tags-output"
+ :page-root-uri      "pages-output"
  :blog-prefix        "/blog"
  :rss-name           "feed.xml"
  :rss-filters        ["cryogen"]
