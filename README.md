@@ -55,6 +55,9 @@ The site configuration file is found at `templates/config.edn`, this file looks 
  :post-root          "posts"
  :tag-root           "tags"
  :page-root          "pages"
+ :post-root-uri      "posts-output"
+ :tag-root-uri       "tags-output"
+ :page-root-uri      "pages-output"
  :blog-prefix        "/blog"
  :rss-name           "feed.xml"
  :rss-filters        ["cryogen"]
@@ -62,7 +65,8 @@ The site configuration file is found at `templates/config.edn`, this file looks 
  :post-date-format   "yyyy-MM-dd"
  :sass-src           nil
  :sass-dest          nil
- :resources          ["css" "js" "404.html"]
+ :theme              "blue"
+ :resources          ["img"]
  :keep-files         [".git"]
  :disqus?            false
  :disqus-shortname   ""
