@@ -53,11 +53,10 @@ The site configuration file is found at `templates/config.edn`, this file looks 
  :description        "This blog is awesome"
  :site-url           "http://blogawesome.com/"
  :post-root          "posts"
- :tag-root           "tags"
  :page-root          "pages"
  :post-root-uri      "posts-output"
- :tag-root-uri       "tags-output"
  :page-root-uri      "pages-output"
+ :tag-root-uri       "tags-output"
  :blog-prefix        "/blog"
  :rss-name           "feed.xml"
  :rss-filters        ["cryogen"]
