@@ -28,6 +28,7 @@
                ["resources/templates/img/cryogen.png" (resource "img/cryogen.png")]
                ;;themes
                ["resources/templates/themes/blue/html/archives.html" (render "themes/blue/html/archives.html")]
+               ["resources/templates/themes/blue/html/author.html" (render "themes/blue/html/author.html")]
                ["resources/templates/themes/blue/html/base.html" (render "themes/blue/html/base.html")]
                ["resources/templates/themes/blue/html/home.html" (render "themes/blue/html/home.html")]
                ["resources/templates/themes/blue/html/page.html" (render "themes/blue/html/page.html")]
@@ -41,6 +42,7 @@
                ["resources/templates/themes/blue/js/highlight.pack.js" (render "themes/blue/js/highlight.pack.js")]
 
                ["resources/templates/themes/blue_centered/html/archives.html" (render "themes/blue_centered/html/archives.html")]
+               ["resources/templates/themes/blue_centered/html/author.html" (render "themes/blue_centered/html/author.html")]
                ["resources/templates/themes/blue_centered/html/base.html" (render "themes/blue_centered/html/base.html")]
                ["resources/templates/themes/blue_centered/html/home.html" (render "themes/blue_centered/html/home.html")]
                ["resources/templates/themes/blue_centered/html/page.html" (render "themes/blue_centered/html/page.html")]
