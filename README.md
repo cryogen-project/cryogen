@@ -60,6 +60,7 @@ The site configuration file is found at `templates/config.edn`, this file looks 
  :post-root-uri      "posts-output"
  :page-root-uri      "pages-output"
  :tag-root-uri       "tags-output"
+ :author-root-uri    "authors-output"
  :blog-prefix        "/blog"
  :rss-name           "feed.xml"
  :rss-filters        ["cryogen"]
