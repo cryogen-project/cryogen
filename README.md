@@ -170,6 +170,7 @@ More information on deployment can be found [here](http://cryogenweb.org/docs/de
 * [e-Resident Me](http://eresident.me)
 * [Chad Stovern's blog](http://www.chadstovern.com)
 * [Greative](https://greative.jp/)
+* [LambdaX](http://lambdax.io/blog/)
 
 ## License
 
