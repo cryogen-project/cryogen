@@ -22,11 +22,11 @@
       (or (resource-response res-path {:root "public"})
           (handler request)))))
 
-(defroutes handler
+(defroutes routes
   (GET "/" [] (redirect (let [config (read-config)]
-                          (path (:blog-prefix (read-config)) "/"
+                          (path (:blog-prefix config) "/"
                                 (when-not (:clean-urls? config) "index.html")))))
   (route/resources "/")
   (route/not-found "Page not found"))
 
-(def app (wrap-subdirectories handler))
+(def handler (wrap-subdirectories routes))
