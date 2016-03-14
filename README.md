@@ -76,7 +76,8 @@ The site configuration file is found at `templates/config.edn`, this file looks 
  :ignored-files      [#"\.#.*" #".*\.swp$"]
  :posts-per-page     5
  :blocks-per-preview 2
- :previews?          false}
+ :previews?          false
+ :clean-urls?        true}
 ```
 
 For information about each key please see the ["Configuration"](http://cryogenweb.org/docs/configuration.html) portion of the Cryogen documentation site.
