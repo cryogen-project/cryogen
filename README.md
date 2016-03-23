@@ -1,12 +1,14 @@
 <img src="https://raw.githubusercontent.com/lacarmen/cryogen/master/cryogen.png"
- hspace="20" align="left"height="200"/>
+ hspace="20" align="left" height="200"/>
+
+<!-- Non-breaking space -->
+&nbsp;
 
 This ReadMe only documents a subset of Cryogen's features. For additional documentation please see the [cryogen site](http://cryogenweb.org).
 
-```
+<!-- Non-breaking space -->
+&nbsp;
 
-
-```
 
 ## Features
 
