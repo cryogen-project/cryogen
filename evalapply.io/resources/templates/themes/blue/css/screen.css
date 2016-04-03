@@ -1,0 +1,160 @@
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Alegreya';
+}
+
+body {
+    color: #333;
+    background-color: #f2f2f2;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+.container {
+    max-width: 1000px;
+}
+
+.right {
+    float: right;
+    text-align: right;
+}
+
+.navbar {
+    border-radius: 0;
+    box-shadow: 0 0 0 0,0 6px 12px rgba(34,34,34,0.3);
+}
+
+.navbar-default {
+    background-color: #428bca;
+    border: none;
+}
+
+.navbar-default .navbar-brand {
+    color: #fff;
+    font-family: 'Alegreya';
+}
+
+.navbar-default .navbar-brand:hover {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav li a {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav li a:hover {
+    color: #fff;
+    background-color: #3d80ba;
+}
+
+.navbar-default .navbar-nav .active a {
+    color: #fff;
+    background-color: #3d80ba;
+}
+
+.navbar-default .navbar-toggle:hover{
+    background-color: #3d80ba;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+#sidebar {
+    margin-left: 15px;
+    margin-top: 50px;
+}
+
+#content {
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 0 0 0,0 6px 12px rgba(34,34,34,0.1);
+}
+
+#content img {
+    max-width: 100%;
+    height: auto;
+}
+
+footer {
+    font-size: 14px;
+    text-align: center;
+    padding-top: 75px;
+    padding-bottom: 30px;
+}
+
+#post-tags {
+    margin-top: 30px;
+}
+
+#prev-next {
+    padding: 15px 0;
+}
+
+.post-header {
+    margin-bottom: 20px;
+}
+.post-header h2 {
+    font-size: 32px;
+}
+
+#post-meta {
+    font-size: 14px;
+    color: rgba(0,0,0,0.4)
+}
+
+#page-header {
+    border-bottom: 1px solid #dbdbdb;
+    margin-bottom: 20px;
+}
+#page-header h2 {
+    font-size: 32px;
+}
+
+pre {
+    overflow-x: auto;
+}
+pre code {
+    overflow-wrap: normal;
+    white-space: pre;
+}
+
+code {
+    color: #428bca;
+}
+
+pre, code, .hljs {
+    background-color: #f7f9fd;
+}
+
+@media (min-width: 768px) {
+    .navbar {
+        min-height: 70px;
+    }
+    .navbar-nav>li>a {
+        padding: 30px 20px;
+    }
+    .navbar-default .navbar-brand {
+        font-size: 36px;
+        padding: 25px 15px;
+    }
+    #content{
+        margin-top: 30px;
+        padding: 30px 40px;
+    }
+}
+
+@media (max-width: 767px) {
+    body{
+        font-size: 14px;
+    }
+    .navbar-default .navbar-brand {
+        font-size: 30px;
+    }
+    #content{
+        padding: 15px;
+    }
+    #post-meta .right {
+        float:left;
+        text-align: left;
+    }
+}
