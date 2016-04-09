@@ -3,9 +3,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 body {
-    color: #333;
-    background-color: #f2f2f2;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #111;
+    background-color: #fff;
+    font-family: 'Open Sans', sans-serif;
     font-size: 16px;
 }
 
@@ -20,11 +20,10 @@ body {
 
 .navbar {
     border-radius: 0;
-    box-shadow: 0 0 0 0,0 6px 12px rgba(34,34,34,0.3);
 }
 
 .navbar-default {
-    background-color: #428bca;
+    background-color: #111;
     border: none;
 }
 
@@ -37,22 +36,24 @@ body {
     color: #fff;
 }
 
-.navbar-default .navbar-nav li a {
+.navbar-default .navbar-nav li a:hover {
     color: #fff;
 }
 
-.navbar-default .navbar-nav li a:hover {
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+    background-color: #333;
     color: #fff;
-    background-color: #3d80ba;
 }
 
 .navbar-default .navbar-nav .active a {
     color: #fff;
-    background-color: #3d80ba;
+    background-color: #333;
 }
 
 .navbar-default .navbar-toggle:hover{
-    background-color: #3d80ba;
+    background-color: #333;
 }
 
 .navbar-default .navbar-toggle .icon-bar {
@@ -67,7 +68,6 @@ body {
 #content {
     background-color: #fff;
     border-radius: 3px;
-    box-shadow: 0 0 0 0,0 6px 12px rgba(34,34,34,0.1);
 }
 
 #content img {
@@ -123,7 +123,7 @@ code {
 }
 
 pre, code, .hljs {
-    background-color: #f7f9fd;
+    background-color: #fff;
 }
 
 @media (min-width: 768px) {

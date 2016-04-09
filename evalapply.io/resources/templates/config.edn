@@ -1,6 +1,6 @@
 {:site-title         "(eval apply)"
  :author             "Erwin Rooijakkers"
- :description        "A blog about Clojure, life and sometimes Scala"
+ :description        "Clojure, life and sometimes Scala"
  :site-url           "http://evalapply.io"
  :post-root          "posts"
  :page-root          "pages"

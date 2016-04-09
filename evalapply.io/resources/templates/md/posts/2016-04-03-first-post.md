@@ -2,7 +2,7 @@
  :layout :post
  :tags  ["Life"]}
 
-This is a blog about Lisps, life and sometimes Scala.
+This is a blog about Clojure, life and sometimes Scala.
 
 One of the things that was difficult not to take away from John Sonmez' book [Soft Skills - The software developer's life manual](http://www.amazon.com/Soft-Skills-software-developers-manual/dp/1617292397) is that I had to start a blog. Starting a blog is a good idea because, among [other things](http://howtostartablogonline.net/why-blog/), I will learn from the topics I write about (you sharpen your thinking), I learn to write better, and it helps my visibility. With this blog I hope to improve myself as a programmer and writer and to start conversations with other people.
 
