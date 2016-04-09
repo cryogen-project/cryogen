@@ -22,6 +22,20 @@ body {
     border-radius: 0;
 }
 
+.navbar-brand > a {
+    display: block; 
+    text-decoration: none; 
+    color: #fff; 
+    line-height: 12px; 
+    padding-bottom:15px;
+}
+
+.navbar-brand > .navbar-description {
+    font-size: 12px; 
+    color: #fff; 
+    display: block;
+}
+
 .navbar-default {
     background-color: #111;
     border: none;
@@ -149,6 +163,9 @@ pre, code, .hljs {
     }
     .navbar-default .navbar-brand {
         font-size: 30px;
+    }
+    .navbar-default .navbar-brand > a {
+        display: inline;
     }
     #content{
         padding: 15px;
