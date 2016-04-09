@@ -1,15 +1,15 @@
-{:site-title         "eval-apply"
+{:site-title         "(eval apply)"
  :author             "Erwin Rooijakkers"
- :description        "A blog about Lisps, life and sometimes Scala"
+ :description        "A blog about Clojure, life and sometimes Scala"
  :site-url           "http://evalapply.io"
  :post-root          "posts"
  :page-root          "pages"
- :post-root-uri      "posts-output"
- :page-root-uri      "pages-output"
- :tag-root-uri       "tags-output"
- :author-root-uri    "authors-output"
+ :post-root-uri      "posts"
+ :page-root-uri      "pages"
+ :tag-root-uri       "tags"
+ :author-root-uri    "authors"
  :blog-prefix        ""
- :rss-name           "feed.xml"
+ :rss-name           "evalapplyfeed.xml"
  :rss-filters        ["cryogen"]
  :recent-posts       3
  :post-date-format   "yyyy-MM-dd"
@@ -19,9 +19,9 @@
  :resources          ["img"]
  :keep-files         [".git"]
  :disqus?            false
- :disqus-shortname   ""
+ :disqus-shortname   "evalapply"
  :ignored-files      [#"\.#.*" #".*\.swp$"]
  :posts-per-page     5
- :blocks-per-preview 2
- :previews?          false
+ :blocks-per-preview 200 ;; Display full post for now this way (better to improve posts-per-page variable)
+ :previews?          true
  :clean-urls?        true}

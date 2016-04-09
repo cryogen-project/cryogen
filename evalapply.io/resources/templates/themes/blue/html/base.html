@@ -46,14 +46,7 @@
 
 <div class="container">
 
-
     <div class="row">
-        <div class="col-lg-9">
-            <div id="content">
-                {% block content %}
-                {% endblock %}
-            </div>
-        </div>
 
         <div class="col-md-3">
             <div id="sidebar">
@@ -86,6 +79,14 @@
                 {% endif %}
             </div>
         </div>
+
+        <div class="col-lg-9">
+            <div id="content">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+
     </div>
     <footer>Copyright &copy; {{today|date:yyyy}} {{author}}
         <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>

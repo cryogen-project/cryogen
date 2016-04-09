@@ -1,6 +1,6 @@
 (defproject cryogen "0.1.0"
-  :description "A blog about Lisps, life and sometimes Scala"
-  :url "https://www.evalapply.io"
+  :description "A blog about Lisp, life and sometimes Scala"
+  :url "http://www.evalapply.io"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]

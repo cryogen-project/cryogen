@@ -11,6 +11,6 @@ In the book John Sonmez explains that when you want to do something it is a good
 I really wanted to add the following quote to this first post:
 > Wishful thinking is essential to good engineering. ([Source](https://www.youtube.com/watch?v=erHp3r6PbJk&t=50m35s))
 
-I feel that it somehow related to what I am doing here, but I cannot exactly pinpoint it. Maybe I can explain it after the blog has sharpened my thinking.
+I feel that it is somehow related to what I am doing here, but I cannot exactly pinpoint it. Maybe I can explain it after the blog has sharpened my thinking.
 
 The blog is created with [Cryogen](http://cryogenweb.org/) -- a static site content generator built in Clojure. At the moment I am writing this I am using the default template and features of Cryogen. If I can hold on to my commitment and also blog about improving the site itself I hope it will look like something in a year or two. Stay tuned. :)
