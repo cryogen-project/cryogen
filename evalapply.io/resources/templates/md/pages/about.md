@@ -9,10 +9,10 @@
 I am Erwin Rooijakkers. I live in Amsterdam. After my studies of Liberal Arts and Sciences (major in Physics and Astronomy) and [Transpersonal Psychology](https://en.wikipedia.org/wiki/Transpersonal_psychology) I considered myself very lucky that I was accepted in a software engineering traineeship at a Dutch company called [Sogyo](http://www.sogyo.nl/). Here I learned about the software world and programmed mainly in Java, .NET and tried various other languages (e.g., Erlang). In my free time I coded in Ruby (on Rails) and on Mono. Currently I work in Scala at ING. I love Lisps and I hope to use it professionally one day.
 
 ### Why?
-One of the things that was difficult not to take away from [Soft Skills - The software developer's life manual](http://www.amazon.com/Soft-Skills-software-developers-manual/dp/1617292397) is that you have to start a blog. Starting a blog is a good idea because you learn from the topics you write about, you will learn to write better, and it helps your visibility. My goal with the blog are exactly those things: to improve myself as a programmer and writer and to start conversations with other ~~software developers~~people.
+One of the things that was difficult not to take away from [Soft Skills - The software developer's life manual](http://www.amazon.com/Soft-Skills-software-developers-manual/dp/1617292397) is that you have to start a blog. Starting a blog is a good idea because you learn from the topics you write about, you will learn to write better, and it helps your visibility. My goal with the blog are exactly those things: to improve myself as a programmer and writer and to start conversations with others.
 
 ### What?
-I'll try to write two blog posts a week about things that interest me.
+I'll try to write one long (> 1.000 words) blog post a week about things that interest me.
 
 ### How?
 The blog is built using [Cryogen](http://cryogenweb.org/). This is a basic static site generator built in Clojure that uses Markdown or AsciiDoc pages and compiles them to HTML. I want to add the following functionality to Cryogen myself:
@@ -40,4 +40,4 @@ For more information on Metacircular Evaluator see for example:
 * [Paul Graham - Roots of Lisp](http://www.paulgraham.com/rootsoflisp.html)
 
 ### How can I contact you?
-Soon on erwinrooijakkers@evalapply.io
+On erwinrooijakkers at gmail dot com
