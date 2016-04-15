@@ -168,7 +168,6 @@ More information on deployment can be found [here](http://cryogenweb.org/docs/de
 * [dl1ely.github.io](http://dl1ely.github.io)
 * [nil/recur](http://jonase.github.io/nil-recur)
 * [on the clojure move](http://tangrammer.github.io/)
-* [cognizance](http://blog.jethrokuan.com/)
 * [AGYNAMIX Site & Blog](http://www.agynamix.de)
 * [e-Resident Me](http://eresident.me)
 * [Chad Stovern's blog](http://www.chadstovern.com)
