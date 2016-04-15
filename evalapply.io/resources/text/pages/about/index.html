@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>(eval apply): About</title>
+    <link rel="canonical" href="http://evalapply.io/pages/about/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" rel="stylesheet" 
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+                <a href="/">(eval apply)</a>
+                <p class="navbar-description hidden-xs">Clojure, life and sometimes Scala</p>
+            </div>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                 class="active" >
+                <a href="/pages/about/">About</a>
+                </li>
+                
+                <li><a href="/evalapplyfeed.xml">RSS</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-3 col-sm-3 hidden-xs">
+            <div id="sidebar">
+                <h3>Resources</h3>
+                <ul id="links">
+                    
+                    <li><a href="/pages/about/">About</a></li>
+                    
+                    <li><a href="https://www.github.com/erooijak">Author's Code</a></li>
+                    <li><a href="http://stackoverflow.com/users/2609980/erwin-rooijakkers">Author's Questions</a></li>
+                </ul>
+                
+                <div id="recent">
+                    <h3>Recent Posts</h3>
+                    <ul>
+                        
+                        <li><a href="/posts/2016-04-11-metacircular-evaluator/">The meta-circular evaluator</a></li>
+                        
+                    </ul>
+                </div>
+                
+                
+                <div id="tags">
+                    <h3>Tags</h3>
+                    <ul>
+                        
+                        <li><a href="/tags/Lisp/">Lisp</a></li>
+                        
+                        <li><a href="/tags/Scala/">Scala</a></li>
+                        
+                        <li><a href="/tags/Clojure/">Clojure</a></li>
+                        
+                        <li><a href="/tags/Life/">Life</a></li>
+                        
+                        <li><a href="/tags/SICP/">SICP</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="col-md-9 col-sm-9 col-xs-12">
+            <div id="content">
+                
+<div id="custom-page">
+    <div id="page-header">
+        <h2>About</h2>
+    </div>
+    
+    <h2><a name="this&#95;is&#95;a&#95;blog&#95;about&#95;clojure,&#95;life&#95;and&#95;sometimes&#95;scala"></a>This is a blog about Clojure, life and sometimes Scala</h2><h3><a name="who?"></a>Who?</h3>I am Erwin Rooijakkers. I live in Amsterdam. After my studies of Liberal Arts and Sciences (major in Physics and Astronomy) and <a href='https://en.wikipedia.org/wiki/Transpersonal_psychology'>Transpersonal Psychology</a> I considered myself very lucky that I was accepted in a software engineering traineeship at a Dutch company called <a href='http://www.sogyo.nl/'>Sogyo</a>. Here I learned about the software world and programmed mainly in Java, .NET and tried various other languages (e.g., Erlang). In my free time I coded in Ruby (on Rails) and on Mono. Currently I work in Scala at ING. I love Lisps and I hope to use it professionally one day.<h3><a name="why?"></a>Why?</h3>One of the things that was difficult not to take away from <a href='http://www.amazon.com/Soft-Skills-software-developers-manual/dp/1617292397'>Soft Skills - The software developer's life manual</a> is that you have to start a blog. Starting a blog is a good idea because you learn from the topics you write about, you will learn to write better, and it helps your visibility. My goal with the blog are exactly those things: to improve myself as a programmer and writer and to start conversations with others.<h3><a name="what?"></a>What?</h3>I'll try to write one long (> 1.000 words) blog post a week about things that interest me.<h3><a name="how?"></a>How?</h3>The blog is built using <a href='http://cryogenweb.org/'>Cryogen</a>. This is a basic static site generator built in Clojure that uses Markdown or AsciiDoc pages and compiles them to HTML. I want to add the following functionality to Cryogen myself:<ul><li>Search functionality (search posts including content)</li><li>Built my own comment system (not using the default Disqus)</li><li>Own theme</li></ul><p>Expect some posts to be about the work I had to do to setup this blog</p><h3><a name="eval-apply?"></a>eval-apply?</h3>Besides the fact that evaluating and applying is something I do in daily life, I called the blog eval-apply as a reference to the Metacircular Evaluator. As Paul Graham writes in the <a href='http://www.paulgraham.com/rootsoflisp.html'>Roots of Lisp</a>:<blockquote><p> The unusual thing about Lisp&ndash; in fact, the defining quality of Lisp&ndash; is that it can be written in itself. </p></blockquote><p>And a metacircular evaluator is such a program written in a Lisp that can evaluate Lisp programs.</p><p>In Lecture 7A of <a href='http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005/video-lectures/'>Structure and Interpretation of Computer Programs</a> Gerald Jay Sussman explains it beautifully:</p><p><sup>(note: if you do not know what CAR, CDR and QUOTE are I would advice to read the <a href='http://www.paulgraham.com/rootsoflisp.html'>article</a> of Paul Graham first)<sup></p><p><iframe src="https://www.youtube.com/embed/0m6hoOelZH8" allowfullscreen="" frameborder="0" height="315" width="420"></iframe></p><p>For more information on Metacircular Evaluator see for example:</p><ul><li><a href='https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-26.html'>SICP Metacircular Evaluator</a></li><li><a href='http://www.paulgraham.com/rootsoflisp.html'>Paul Graham - Roots of Lisp</a></li></ul><h3><a name="how&#95;can&#95;i&#95;contact&#95;you?"></a>How can I contact you?</h3>On erwinrooijakkers at gmail dot com
+
+    <div id="prev-next">
+        
+        
+        
+    </div>
+</div>
+
+            </div>
+        </div>
+
+    </div>
+    <footer>Copyright &copy;  Erwin Rooijakkers
+        <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="text/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

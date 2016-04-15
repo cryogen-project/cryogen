@@ -197,3 +197,59 @@ I asked a question about it on Stack Overflow and I mailed the author's of other
 I am honored that you have read this post. Thank you for that. If you happen to know what is wrong with the environment structure please let me know! Other remarks are welcome as well.
 
 
+# .setCar .setCdr...
+I have never been so angry with myself and yet so relieved as when I had to implement this. 
+The idea of only changing stuff at the edges. (art of unux programming) The interface.
+
+[Data Structures in Clojure: Singly-Linked List](http://macromancy.com/2014/01/16/data-structures-clojure-singly-linked-list.html)
+
+
+Even more respect for this piece of absolute ingenuity that was designed by Gerald Jay Sussman and Guy Steele: SCHEME!
+
+Clojure is not an atomic programming language. I'm too tired/old/lazy
+to program with atoms. Clojure provides production implementations of
+generic dispatch, associative maps, metadata, concurrency
+infrastructure, persistent data structures, lazy seqs, polymorphic
+libraries etc etc. Much better implementations of some of the things
+you would be building by following along with SICP are in Clojure
+already. 
+
+
+So the value in SICP would be in helping you understand programming
+concepts. If you already understand the concepts, Clojure lets you get
+on with writing interesting and robust programs much more quickly,
+IMO. And I don't think the core of Clojure is appreciably bigger than
+Scheme's. What do Schemers think?
+
+I think the Lisps prior to Clojure lead you towards a good path with
+functional programming and lists, only to leave you high and dry when
+it comes to the suite of data structures you need to write real
+programs, such data structures, when provided, being mutable and
+imperative. Prior Lisps were also designed before pervasive in-process
+concurrency, and before the value of high-performance polymorphic
+dispatch (e.g. virtual functions) as library infrastructure was well
+understood. Their libraries have decidedly limited polymorphism.
+
+Alas, there is no book on Clojure yet. But, to the extent Schemes go
+beyond the standard to provide more complete functionality (as most
+do), there are no books on that either. Just docs in both cases. 
+https://groups.google.com/forum/#!topic/clojure/jyOuJFukpmE
+
+
+In the video, Mr. Hickey says:
+
+    The biggest problem we have is we've conflated two things. We've
+              said the idea that I attach to this thing that lasts over time
+              is the thing that lasts over time.
+
+
+YOU CANNOT CALL IT CLOJURE IT HAS MUTABLE DATA STRUCTURES
+
+
+I gave up.
+
+What I tried:
+1. Build with Clojure data structures and have mutable state.
+2. Use dynamic environment
+3. Create new data structures as per other blog posts. A Mutable Clojure if you will.
+
