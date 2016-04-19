@@ -161,7 +161,7 @@ More information on deployment can be found [here](http://cryogenweb.org/docs/de
 
 ## Some Sites Made With Cryogen
 
-* [My personal blog](http://carmenla.me/blog/index.html)
+* [My personal blog](http://carmenla.me/blog/archives)
 * [Cryogen Documentation Site](http://cryogenweb.org)
 * [Yogthos' blog](http://yogthos.net/)
 * [Clojure :in Tunisia](http://www.clojure.tn)
