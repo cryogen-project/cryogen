@@ -4,9 +4,25 @@
 
 ## Introduction
 
+Let me be absolutely clear, I am not an expert. Just a beginner that has read an introductory text book
+and has copy pasted code together from others and tried to understood how it works or why it doesn't.
+
+This post has been a minor journey for me 
+
+It is a bit of a long post being 4000 words (including code), but I decided not to split it since it is all on the same subject.
+
+Having said that, 
+
 THIS FIRST POST IS A WORK IN PROGRESS :)
 
 TODO: why is it called meta-circular
+    The difference between self-interpreters and meta-circular interpreters is that the latter restate language features in terms of the features themselves, instead of actually implementing them. (Circular definitions, in other words; hence the name). They depend on their host environment to give the features meaning.
+    — Reginald Braithwaite, "The significance of the meta-circular interpreter". 2006-11-22. Retrieved 2011-01-22.
+
+Meta-circular evaluation is discussed at length in section 4.1, titled The Metacircular Evaluator, of the MIT university textbook Structure and Interpretation of Computer Programs (SICP). The core idea they present is two functions:
+
+SICP based on Lambda papers:
+http://library.readscheme.org/page1.html
 
 Circulair omdat het circualr is http://www.c2.com/cgi/wiki?MetaCircularEvaluator
 
@@ -26,20 +42,20 @@ As Paul Graham writes:
 
 Paul Graham also remarks that it is interesting to learn about this concept not just to learn about the past, but also learn about where languages are heading.
 
-Alan Kay (famous computer scientist and creator of the language Smalltalk) describes his excitement when he realized what these meant:
+Alan Kay (famous computer scientist and creator of the language Smalltalk) [describes his excitement]((http://queue.acm.org/detail.cfm?id=1039523) when he realized what these meant as follows:
 
->I finally understood that the half page of code on the bottom of page 13 of the Lisp 1.5 manual was Lisp in itself. These were "Maxwells Equations of Software!" This is the whole world of programming in a few lines that I can put my hand over. ([Source](http://queue.acm.org/detail.cfm?id=1039523))
+>I finally understood that the half page of code on the bottom of page 13 of the Lisp 1.5 manual was Lisp in itself. These were "Maxwells Equations of Software!" This is the whole world of programming in a few lines that I can put my hand over.
 
 <sup>Note: the [Maxwell equations](https://www.youtube.com/watch?v=DSRLvkP0vmg) are four extremely elegant equations from which everything there is to know about the electro-magnetic field can be derived.</sup>
 
-In SICP it is stated: 
+In [SICP it is stated that](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-25.html): 
 
 >It is no exaggeration to regard this as the most fundamental idea in programming:<br><br>
-The evaluator, which determines the meaning of expressions in a programming language, is just another program. ([Source](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-25.html))
+The evaluator, which determines the meaning of expressions in a programming language, is just another program.
 
 In this post I have translated the code from meta-circular evaluator from SICP (you can find the original code [here](https://mitpress.mit.edu/sicp/code/ch4-mceval.scm)) to Clojure. 
-Unfortunately I did not really succeed. The three attempts I undertook are detailed below, after we first look at some syntactical prerequisites..
 
+SOURCE:
 Art of the Interpreter. Lambda papers.
 http://www.c2.com/cgi/wiki?TheArtOfTheInterpreter
 
@@ -129,6 +145,7 @@ This helps for readability, but the real reason is that parenthetical forms are 
 It is interesting to note that the implementations of this data structures all are immutable and have very good performance characteristics. 
 This is a topic for another post.
 
+On final note:
 To define functions and evaluate it often recursion is used. 
 For example to define a procedure defined that is called `map`. 
 `map` applies a given function *f* to every argument in the list and returns a list with the results:
@@ -146,6 +163,28 @@ This is done by `cdr`ing ("resting" in the case of Clojure) down a list and `con
 It applies f to the first element of the list, and combines the result with f mapped to the rest of the list. 
 The recursion breaks if the collection is empty.
 Try to wrap your head around it if you didn't yet. I find these recursive definitions really beautiful. The evaluator has a lot of them as well.
+
+These seven forms above (`map` is not a primitive) are all the primities you need to create a meta-circular evaluator. 
+Now, in an actual implementation there are a lot more primitives.
+In the code below I use some more forms. Most of them can be implemented in the code below, but others can't.
+That is because sometimes the evaluation order matters.
+Take for example the form let, which is of the form 
+```
+(let ((var1 val1) (var1 val*n*)) <body>)
+```
+Let can be used to bind variables (var) to value (val) (to declare variables basically). 
+These are in scope in the body.
+This let can roughly be written as
+```
+((fn [var1 var*n*] <body>) val1 val*n*)
+```
+Where you create a lambda where the variables are bound to the last ones.
+In a real Lisp, let is different. The variables are only evaluated when they are actually used.
+This is impossible to implement in an fn, since the variables are *always* evaluated.
+When evaluation order needs to be controlled, a so-called macro can be created.
+A macro hooks directly into the abstract syntax tree and changes it at compile time (before the code runs).
+
+Let's look at the meta-circular evaluator.
 
 # The meta-circular evaluator
 
@@ -386,7 +425,7 @@ So what exactly is this extending of an environment, and in what way are symbols
 ## The environment
 
 An environment consists of frames stacked together in a list. A frame is empty or consists of two lists, one lists with variable values, and one list of variable values.
-When a definition is looked up we look at one frame to see if the variable is defined there. If it is not, we look one frame further to see if it is defined there.
+When a definition is looked up we look at one frame to see if the variable is defined there. If it is not, we look one frame further to see if it is defined there. Until we finally get to the global environment. If it is not found there we have an error.
 
 In an image this looks like this:
 
@@ -394,76 +433,195 @@ In an image this looks like this:
 
 Each time a function is applied, a new frame is created.
 
-It turns out that how to implement the environment made the implementation in Clojure very difficult.
+The environment is crucial to the evaluation process, because it determines the context in which an expression will be evaluated.
+
+It turns out that the immutability of Clojure made the implementation quite difficult (for me).
 Clojure has, unlike Scheme (the language where this evaluator was translated from), no mutable (changeable) values. 
 Where in Scheme you can change the first element or last-element of a list respectively with the routines `set-car!` and `set-cdr!`,
-this is not possible in Clojure. In Clojure there is however something like an atom.
+this is not possible in Clojure. 
 
-My first attempt at implementing the environment uses the implementation of Greg Sexton ([source](https://github.com/gregsexton/SICP-Clojure/blob/master/src/sicp/ch4.clj)).
-This environment structure:
+The algorithm used in the Scheme version checks the first frame, loops over it (with a method called scan) and if it finds the variable, it returns the value associated with it. If it does not find anything it will loop over the enclosing environment and scans there.
+
+When re-defining a variable in the  environment, a similar proces is used. When the variable is found however, set-car! is used to overwrite the environment.
+
+My first attempt at implementing the environment used the implementation of Greg Sexton ([source](https://github.com/gregsexton/SICP-Clojure/blob/master/src/sicp/ch4.clj)). The problem I had with it was that there was only one environment atom. So when evaluating a sub expression, updates this sub-expression made to the environment, where visible everywhere. This meant that when you evaluated a recursive definition, the environment that was stored in the definition also contained itself. This lead to an infinite loop and eventually a StackOverflow error.
+
+Luckily I found a better environment definition later in the [SICP answers of Jake McCrary](https://github.com/jakemcc/sicp-study/blob/master/clojure/section4.2/src/environment.clj). The implementation has the same behaviour as that of the original of the SICP.
+
+## Lexical versus dynamic scope
+Good idea or not?
+
+## A lexically scoped environment
+We now go step by step through the environment:
 
 ```
 (def the-empty-environment '())
-(def first-frame first)
+```
+The empty environment is an empty list.
 
+```
+(defn enclosing-environment [env] (rest env))
+(defn first-frame [env] (first env))
+```
+To get an enclosing environment of the current environment, we look at the rest from the frame we are in now.
+
+```
 (defn make-frame [variables values]
   (atom (zipmap variables values)))
+(defn frame-variables [frame] (keys @frame))
+(defn frame-values [frame] (vals @frame))
+```
+To make a frame, we use a function [`zipmap`](https://clojuredocs.org/clojure.core/zipmap) to add two lists of variables together which
+"returns a map with the keys mapped to the corresponding vals." (ClojureDocs) A map is a list of key-value pairs. The behaviour is as follows:
 
-(def frame-variables keys)
-(def frame-values vals)
+```
+;; A list of variables to be added to the environment.
+(def variables (list '+
+                     'rest
+                     'add1))
 
+;; A list of corresponding values (the primitive + and rest operator, and a lambda expression and a created procedure to be added to the environment.
+(def values (list +
+                  rest
+                  '(fn (x) (+ x 1))
+                  '(procedure (x) (fn (x) (+ x 1)) {:+ + :x 2 (...) (...)})))
+
+;; When we zipmap them:
+(zipmap variables values)
+```
+This leads to the following output:
+>{+ #object[clojure.core$_PLUS_ 0x35198e00 clojure.core$_PLUS_@35198e00],<br>
+ rest #object[clojure.core$rest__4114 0x236beed clojure.core$rest__4114@236beed],<br>
+ add1 (procedure (x) (fn (x) (+ x 1)) {:+ +, :x 2, (...) (...)})}
+
+So thereby a frame is a map with variables bound to values.
+
+Next we get methods to add bindings to frames
+
+```
 (defn add-binding-to-frame! [var val frame]
   (swap! frame assoc var val))
+```
+`add-binding-to-frame!` uses [`swap!`](https://clojuredocs.org/clojure.core/swap!) in combination with [`assoc`](https://clojuredocs.org/clojure.core/assoc) to add a variable and value to a frame.
 
+Next we need a way to extend our environment (this is the method used in eval to add variables and values to a frame, for example when storing the variables of a procedure in the environment where it will be evaluated in, or when new definitions are added.):
+```
 (defn extend-environment [vars vals base-env]
-  (when (= (count vars) (count vals))
-    (cons (make-frame vars vals)
-          base-env)))
+  (if (= (count vars) (count vals))
+    (cons (make-frame vars vals) base-env)
+    (if (< (count vars) (count vals))
+      (error "Too many arguments supplied " vars)
+      (error "Too few arguments supplied " vars))))
+```
+`extend-environment` takes variables and values and a base environment. It then makes a frame of the variables and values and conses that up to the base environment. The rest is error handling for if the amount of variables and values applied are not the same (e.g., when evaluating `((fn (x) (+ x 1)) 2 3)` it will returns "Too many arguments supplied").
 
-(defn lookup-variable-value [var env]
-  (some (comp #(get % var) deref) env))
+Next, we have a method to lookup a variable in an environment. This one looks a bit more complicated because of the inner methods. Know that [`letfn`](https://clojuredocs.org/clojure.core/letfn) is just like [`let`](https://clojuredocs.org/clojure.core/let), only now we define functions and bind them to a name only available in the scope. What happens below is that we start an `env-loop`. `env-loop` defines a method `scan` to look for a variable in a frame. If the frame contains the variable we [`get`](https://clojuredocs.org/clojure.core/get) the value belonging to the variable from the frame. Otherwise, we start a new env-loop over the ecnlosing environment. 
 
-(defn find-first-frame-containing [var env]
-  (some #(when (contains? (deref %) var) %) env))
+So `scan` is defined. When the `env-loop` is started we first check if we are dealing with the empty environment. If that is the case we break the recursion: we have scanned all frames in scope and we are therefore dealing with an unbound variable. If we are not dealing with the empty environmeent, we are getting the first frame from the environment (which is a list of frames), get the value from the atom by using [`@`](), and scan that.
 
-(defn set-variable-value! [var val env]
-  (when-let [frame (find-first-frame-containing var env)]
-    (add-binding-to-frame! var val frame)))
+We start the recursive loop on the whole environment (`(env-loop env)`):
 
-(defn define-variable! [var val env]
-  (add-binding-to-frame! var val
-                         (or (find-first-frame-containing var env)
-                             (first-frame env))))
+```
+(defn lookup-variable-value [variable env]
+  (letfn [(env-loop [env]
+            (letfn [(scan [frame]
+                      (if (contains? frame variable)
+                        (let [value (get frame variable)]
+                          value)
+                        (env-loop (enclosing-environment env))))]
+              (if (= env the-empty-environment)
+                (error "Unbound variable -- LOOKUP" variable)
+                (let [frame (first-frame env)]
+                  (scan @frame)))))]
+    (env-loop env)))
 ```
 
+So now we understand the way to lookup a variable. We also need a way to define a variable value in the environment.
+To accomplish this we have a similar procedure, which uses a similar scanning method as above. Only now we are trying to find the value, and in the first frame we find which contains the variable we change this variable's value for the current value. If the frame doesn't contain it we start the env-loop over the enclosing environment. The recursion breaks when we end up with the empty environment (unbound variable) or when we find a variable and have set it.
 
-And at the beginning we setup the environment, where we 
+```
+(defn set-variable-value! [variable value env]
+  (letfn [(env-loop [env]
+            (letfn [(scan [frame]
+                      (if (contains? @frame variable)
+                        (swap! frame assoc variable value)
+                        (env-loop (enclosing-environment env))))]
+              (if (= env the-empty-environment)
+                (error "Unbound variable -- SET!" variable)
+                (scan (first-frame env)))))]
+    (env-loop env)))
+```
+
+And to define a variable we get the first frame of the environment and add the variable as a key with the value as a value.
+
+```
+(defn define-variable! [variable value env]
+  (swap! (first-frame env) assoc variable value))
+
+```
+
+Finally, at the beginning we setup the environment, where we 
+
 ```
 (defn setup-environment []
   (let [initial-env
         (extend-environment primitive-procedure-names
                             primitive-procedure-objects
                             the-empty-environment)]
-    (define-variable! 'true true initial-env)
-    (define-variable! 'false false initial-env)
     initial-env))
 ```
 
-The behaviour of this implementation will be described here:
+We load some primitive procedures in the environment, we have `the-empty-environment` as our base environment and we define false and true in it
 
 And when we start running the meta-circular evaluator
-
 
 ## Interacting with the evaluator
 Some extra code is added to read in the input via `read`
 
+Last but not least we have a way to interact with the evaluator. When we run the code the loop asks for input, and when it has received input it will evaluate that in our environment:
 
-## Seeing the behaviour:
+```
+(def input-prompt ";;; Eval input:")
+(def output-prompt ";;; Eval value:")
 
-The reason for this all have to do with concurrent programming. Mutable values can create huge headaches if you are dealing with multiple threads that are
-accessing the same changing variables. I had three attempts to implement the environment structure of this evaluator, and unfortunately none of them have been succesful.
+(defn driver-loop []
+  (prompt-for-input input-prompt)
+  (let [input (read)]
+    (user-print input)
+    (let [output (eval input the-global-environment)]
+      (announce-output output-prompt)
+      (user-print output)))
+  (driver-loop))
 
-Here I'll show you the attempts.
+(defn prompt-for-input [string]
+  (newline) (println string) (newline))
+
+(defn announce-output [string]
+  (newline) (println string) (newline))
+
+(defn user-print [object]
+  (if (compound-procedure? object)
+    (println (list 'compound-procedure
+                   (procedure-parameters object)
+                   (procedure-body object)
+                   '<procedure-env>))
+    (println object)))
+
+'METACIRCULAR-EVALUATOR-LOADED
+
+(def the-global-environment (setup-environment))
+
+(driver-loop)
+```
+
+That's it. Works like a charm.
+
+## Dynamically scoped environment
+
+In my journey to create a working version I also stumbled upon [this implementation of Mathieu Gauthron](https://github.com/matlux/metacircular-evaluator-clj/blob/master/src/clj_eval/core.clj).
+The dynamically scoped environment is a bit simpler, what is defined latest is found first (instead of passing an environment a long with a procedure, we just update the environment). It is at runtime defined what is in scope. 
+
+Below some experiments with them.
 
 ## Lexical scoping versus dynamic scoping
 Lexical closure
@@ -496,7 +654,7 @@ While a dynamic language will return 'dynamic. It does not care about what the v
 
 (This idea was obtained from [this Stack Overflow answer](http://stackoverflow.com/questions/32344615/program-to-check-if-the-scoping-is-lexical-or-dynamic#32347224), but slightly modified since our language does not contain `let` (`let` is nothing more than a lambda, it is not a fundamental form).
 
-As expected from the above description, our dynamic evaluator has the following behaviour:
+As expected from the above description, a dynamic evaluator has the following behaviour:
 
 >;;; Eval input:<br><br>
 (defn test (fn () scope))<br><br>
@@ -519,90 +677,57 @@ dynamic
 
 ## Closing remarks
 
+Copy paste and explaining. SICP, evaluator of [Greg Sexton](https://github.com/gregsexton/SICP-Clojure), [Jake McCrary](https://github.com/jakemcc/sicp-study/) and [Mathieu Gauthron](https://github.com/matlux/metacircular-evaluator-clj/blob/master/src/clj_eval/core.clj).
+
 WHAT IS THIS MAGIC THIS SUSSMAN CHARACTER IS TELLING ME?
+Fixed point.
 
-Once you understand how the meta-circular evaluator works, it becomes easy to change the implementation and create interpreters for other languages. In SICP among other things the evaluator is extended and modified to become an evaluator for:
-- [A evaluator with lazy evaluation](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-27.html)
-- [A Logic Programming language](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-29.html#%_sec_4.4)
+As can be seen we can easily define new type of evaluators. In fact, this idea that an evaluator is just another program is really remarkable. 
+This means new languages can be defined, and evaluators can have the implementation for that.
+In SICP a beautiful example is given of a logic programming language. Here 
 
-And it is even used to create a [compiler](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-35.html#%_sec_5.5.1)!
+Once you understand how the meta-circular evaluator works, it becomes possible to change the implementation and create interpreters for other languages. In SICP among other things the evaluator is extended and modified to become an evaluator for:
+
+* [A evaluator with lazy evaluation](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-27.html)
+* [A Logic Programming language](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-29.html#%_sec_4.4)
+
+And the idea is even used to create an evaluator for machine language and to create a [compiler](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-35.html#%_sec_5.5.1) that converts Scheme to another machine language.
 
 By following with what Gerald Jay Sussman calls one powerful method of synthesis - *wishful thinking* 
 > "*Wishful thinking is essential to good engineering.*"<br>
 -- Gerald Jay Sussman ([Source](https://www.youtube.com/watch?v=erHp3r6PbJk&t=50m35s))
-
-I asked a question about it on Stack Overflow and I mailed the author's of other meta-circular evaluators, so far no response. 
-
-I am honored that you have read this post. Thank you for that. If you happen to know what is wrong with the environment structure please let me know! Other remarks are welcome as well.
+It would be possible to define a language what we would like to see. Can we come up with an evaluator which would make it possible?
 
 
-# .setCar .setCdr...
-I have never been so angry with myself and yet so relieved as when I had to implement this. 
-The idea of only changing stuff at the edges. (art of unux programming) The interface.
 
-[Data Structures in Clojure: Singly-Linked List](http://macromancy.com/2014/01/16/data-structures-clojure-singly-linked-list.html)
+The evaluators can be found at:
+* [Meta-circular evaluator](https://github.com/erooijak/clojure-experiments/blob/master/meta-circular-experiments/mc-evaluator.clj)
+* [Dynamic evaluator](https://github.com/erooijak/clojure-experiments/blob/master/meta-circular-experiments/mc-evaluator-dynamic.clj)
 
-Next is implementing Macro's.
 
-Even more respect for this piece of absolute ingenuity that was designed by Gerald Jay Sussman and Guy Steele: SCHEME!
+Rich Hickey (creator of Clojure) himself says doing SICP in Clojure would not really help. 
 
-Clojure is not an atomic programming language. I'm too tired/old/lazy
-to program with atoms. Clojure provides production implementations of
+>I think the Lisps prior to Clojure lead you towards a good path with
+functional programming and lists, only to leave you high and dry when
+it comes to the suite of data structures you need to write real
+programs, such data structures, when provided, being mutable and
+imperative. (...)<br><br>
+Clojure provides production implementations of
 generic dispatch, associative maps, metadata, concurrency
 infrastructure, persistent data structures, lazy seqs, polymorphic
 libraries etc etc. Much better implementations of some of the things
 you would be building by following along with SICP are in Clojure
-already. 
-
-
+already. (...)<br><br>
 So the value in SICP would be in helping you understand programming
 concepts. If you already understand the concepts, Clojure lets you get
 on with writing interesting and robust programs much more quickly,
-IMO. And I don't think the core of Clojure is appreciably bigger than
-Scheme's. What do Schemers think?
-
-I think the Lisps prior to Clojure lead you towards a good path with
-functional programming and lists, only to leave you high and dry when
-it comes to the suite of data structures you need to write real
-programs, such data structures, when provided, being mutable and
-imperative. Prior Lisps were also designed before pervasive in-process
+IMO. (...)<br><br>
+Prior Lisps were also designed before pervasive in-process
 concurrency, and before the value of high-performance polymorphic
 dispatch (e.g. virtual functions) as library infrastructure was well
 understood. Their libraries have decidedly limited polymorphism.
 
-Alas, there is no book on Clojure yet. But, to the extent Schemes go
-beyond the standard to provide more complete functionality (as most
-do), there are no books on that either. Just docs in both cases. 
 https://groups.google.com/forum/#!topic/clojure/jyOuJFukpmE
 
 
-In the video, Mr. Hickey says:
 
-    The biggest problem we have is we've conflated two things. We've
-              said the idea that I attach to this thing that lasts over time
-              is the thing that lasts over time.
-
-
-YOU CANNOT CALL IT CLOJURE IT HAS MUTABLE DATA STRUCTURES
-
-
-I gave up.
-
-What I tried:
-1. Build with Clojure data structures and have mutable state.
-2. Use dynamic environment
-3. Create new data structures as per other blog posts. A Mutable Clojure if you will.
-
-Sexpression
-<a data-flickr-embed="true"  href="https://www.flickr.com/photos/141920076@N05/26211413010/in/dateposted-public/" title="sexpression"><img src="https://farm2.staticflickr.com/1673/26211413010_4aa4dcef11_z.jpg" width="640" height="317" alt="sexpression"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
-Eval-apply cycle
-<a data-flickr-embed="true"  href="https://www.flickr.com/photos/141920076@N05/25881391543/in/dateposted-public/" title="evalapply cycle"><img src="https://farm2.staticflickr.com/1549/25881391543_79284b2231_m.jpg" width="240" height="196" alt="evalapply cycle"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
-
-
-    The difference between self-interpreters and meta-circular interpreters is that the latter restate language features in terms of the features themselves, instead of actually implementing them. (Circular definitions, in other words; hence the name). They depend on their host environment to give the features meaning.
-    — Reginald Braithwaite, "The significance of the meta-circular interpreter". 2006-11-22. Retrieved 2011-01-22.
-
-Meta-circular evaluation is discussed at length in section 4.1, titled The Metacircular Evaluator, of the MIT university textbook Structure and Interpretation of Computer Programs (SICP). The core idea they present is two functions:
-
-SICP based on Lambda papers:
-http://library.readscheme.org/page1.html
