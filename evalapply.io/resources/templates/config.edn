@@ -1,6 +1,6 @@
 {:site-title         "(eval apply)"
  :author             "Erwin Rooijakkers"
- :description        "Clojure, life and sometimes Scala"
+ :description        "Clojure, life and sometimes scala"
  :site-url           "http://evalapply.io"
  :post-root          "posts"
  :page-root          "pages"
@@ -22,6 +22,6 @@
  :disqus-shortname   "evalapply"
  :ignored-files      [#"\.#.*" #".*\.swp$"]
  :posts-per-page     5
- :blocks-per-preview 200 ;; Display full post for now this way (better to improve posts-per-page variable)
+ :blocks-per-preview 1000 ;; Display full post for now this way (better to improve posts-per-page variable)
  :previews?          true
  :clean-urls?        true}
