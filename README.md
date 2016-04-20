@@ -174,6 +174,7 @@ More information on deployment can be found [here](http://cryogenweb.org/docs/de
 * [Greative](https://greative.jp/)
 * [LambdaX](http://lambdax.io/blog/)
 * [szcz](http://www.szcz.org/)
+* [himmAllRight's blog](http://ryan.himmelwright.net)
 
 ## License
 
