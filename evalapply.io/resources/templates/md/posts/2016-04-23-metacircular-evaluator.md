@@ -27,7 +27,7 @@ The evaluator, which determines the meaning of expressions in a programming lang
 In this post I have translated the code from meta-circular evaluator from SICP (you can find the original code [here](https://mitpress.mit.edu/sicp/code/ch4-mceval.scm)) to Clojure. 
 Clojure is interesting because: 
 - It runs on the Java Virtual Machine (thereby having access to all Java libraries and being able to interoperate with existing enterprise programs) 
-- It has a functional core (thereby being particulraly suited for concurrent programming, AKA the future which is multi core) 
+- It has a functional core (thereby being particularly suited for concurrent programming, AKA the multi-core future) 
 - And it is a Lisp (thereby having all the properties described below).
 
 Now, before I continue, let me be clear. I am not an expert on the subject matter. 
@@ -57,13 +57,17 @@ Eval is a universal machine: if you feed it a Lisp program, eval starts behaving
 It required inventing a notation where you could represent programs as data.
 
 For McCarthy, writing this function was just a theoretical exercise. 
-It was never his idea that the language actually was implemented.
+It was never his idea that the language was actually implemented.
 What then happened was that Steve Russell, one of McCarthy's graduate students 
-(who also [invented the first computer game](https://en.wikipedia.org/wiki/Spacewar_%28video_game%29)) 
+(who also [invented one of the first computer games](https://en.wikipedia.org/wiki/Spacewar_%28video_game%29)) 
 transformed his theory into an actual programming language.
 As McCarthy stated in an interview:
 
->Steve Russell said, look, why don't I program this eval..., and I said to him, ho, ho, you're confusing theory with practice, this eval is intended for reading, not for computing. But he went ahead and did it. That is, he compiled the `eval` in my paper into IBM 704 machine code, fixing a bug, and then advertised this as a Lisp interpreter, which it certainly was. So at that point Lisp had essentially the form that it has today..." ([Source](https://books.google.nl/books?id=eH6jBQAAQBAJ&pg=PA777&lpg=PA777#v=onepage&q&f=false))
+>Steve Russell said, look, why don't I program this eval..., 
+and I said to him, ho, ho, you're confusing theory with practice, this eval is intended for reading, not for computing. 
+But he went ahead and did it. 
+That is, he compiled the `eval` in my paper into IBM 704 machine code, fixing a bug, and then advertised this as a Lisp interpreter, which it certainly was. 
+So at that point Lisp had essentially the form that it has today..." ([Source](https://books.google.nl/books?id=eH6jBQAAQBAJ&pg=PA777&lpg=PA777#v=onepage&q&f=false))
 
 Since program are also data objects it easy in Lisp to make programs that work with programs. 
 This property of Lisp makes it possible to write Lisp in itself.
@@ -85,16 +89,15 @@ So what it Lisp?
 ## Lisp
 
 The nice thing about Lisp is that is has almost no syntax.
-The rules are simple (like chess), but the possibilities within these rules are virtually endless (like chess).
+The rules are simple (like Go), but the possibilities within these rules are virtually endless (like Go).
 
 Lisp is infamous for its parentheses.
 
-Combined with prefix notation these parentheses make what it so that Lisp data structures can be evaluated as Lisp programs and vice versa.
+<imr src="https://xkcd.com/297/"
 alt="xkcd I've just received word that the Emperor has dissolved the MIT computer science program permanently." /> 
 (Source: [https://xkcd.com/297/](https://xkcd.com/297/))
 
 Combined with prefix notation these parentheses makes it so that Lisp data structures can be evaluated as Lisp programs and vice versa.
-
 The fundamental data structure in Lisp is a list (in Clojure we have some more data structures, we will not worry about that now). 
 The first part of a list is interpreted as the operator, and the rest as the operands. 
 
@@ -117,12 +120,16 @@ A Lisp is a language that is written in an AST, when the language is interpreted
 This property makes it so that it is possible to deeply influence the language. 
 Where in languages like Java you have to wait for a committee to put a new feature into a language, in Lisp you don't have to wait and can implement these features yourself.
 
-One quote (incorrectly stated according to the supposed author but nevertheless instructive) describes the difference between languages and Lisp as follows:
->APL is like a beautiful diamond - flawless, beautifully symmetrical. But you can't add anything to it. If you try to glue on another diamond, you don't get a bigger diamond. Lisp is like a ball of mud. Add more and it's still a ball of mud - it still looks like Lisp.
+One quote (incorrectly stated according to the supposed author but nevertheless instructive) describes the difference between languages without the ability to
+modify its structure (like Java or APL) and Lisp as follows:
+
+>APL is like a beautiful diamond - flawless, beautifully symmetrical. But you can't add anything to it. 
+If you try to glue on another diamond, you don't get a bigger diamond. 
+Lisp is like a ball of mud. Add more and it's still a ball of mud - it still looks like Lisp.
 
 Now, let's look at the seven or so special forms of the language.  
 The rest of Lisp can be implemented in these special forms. 
-(Note: this is not completely true, there are some other special forms used in most Lisps for for example performance reasons).
+(Note: in reality Lisp is not implemented this way, there are some more special forms used in most Lisps for for example performance reasons).
 
 My description of these special forms (from which `eval` can be created) is roughly based on the article 
 [Roots of Lisp](http://www.paulgraham.com/rootsoflisp.html) of Paul Graham where he explains what McCarthy has discovered.
@@ -469,6 +476,7 @@ The primitive procedures are defined as follows, and are later added to the envi
         (list 'rest rest)
         (list 'cons cons)
         (list 'nil? nil?)
+        (list 'empty empty)
         (list 'list list)
         (list '+ +)
         (list '- -)
@@ -535,38 +543,8 @@ This way the environment of the procedure (which was stored when it was created)
 So what exactly is this extending of an environment, and in what way are symbols added to it? 
 
 ## The environment
-
-An environment consists of frames stacked together in a list. A frame is empty or consists of two lists, one lists with variable values, and one list of variable values.
-When a definition is looked up we look at one frame to see if the variable is defined there. If it is not, we look one frame further to see if it is defined there. 
-Until we finally get to the global environment. If it is not found there we have an error.
-
-In an image this looks like this:
-
-[![environment frames](https://farm2.staticflickr.com/1622/26214944100_c18bbb5421_m.jpg)](https://www.flickr.com/photos/141920076@N05/26214944100/in/dateposted-public/)
-
-Each time a function is applied, a new frame is created.
-
-The environment is crucial to the evaluation process, because it determines the context in which an expression will be evaluated.
-
-It turns out that the immutability of Clojure made the implementation quite difficult (for me).
-Clojure has, unlike Scheme (the language where this evaluator was translated from), no mutable (changeable) values. 
-Where in Scheme you can change the first element or last-element of a list respectively with the routines `set-car!` and `set-cdr!`,
-this is not possible in Clojure. 
-
-The algorithm used in the Scheme version checks the first frame, loops over it (with a method called scan) and if it finds the variable, it returns the value associated with it. If it does not find anything it will loop over the enclosing environment and scans there.
-
-When re-defining a variable in the  environment, a similar proces is used. When the variable is found however, set-car! is used to overwrite the environment.
-
-My first attempt at implementing the environment used the implementation of Greg Sexton ([source](https://github.com/gregsexton/SICP-Clojure/blob/master/src/sicp/ch4.clj)). The problem I had with it was that there was only one environment atom. So when evaluating a sub expression, updates this sub-expression made to the environment, where visible everywhere. This meant that when you evaluated a recursive definition, the environment that was stored in the definition also contained itself. This lead to an infinite loop and eventually a StackOverflow error.
-
-Luckily I found a better environment definition later in the [SICP answers of Jake McCrary](https://github.com/jakemcc/sicp-study/blob/master/clojure/section4.2/src/environment.clj). The implementation has the same behaviour as that of the original of the SICP.
-
-## Lexical versus dynamic scope
-Good idea or not?
-
-## A lexically scoped environment
 We now go step by step through the environment:
-=======
+
 An environment consists of frames stacked together in a list. 
 A frame is empty or consists of two lists: one lists with variable values, and one list of variable values.
 When a definition is looked up we look at one frame to see if the variable is defined there. 
@@ -811,10 +789,15 @@ Works like a charm.
 The goal of this thing was to be able to feed the evaluator program a Lisp expression, and have it return the result.
 So when we feed it `(eval '(defn add (fn (x) (+ x 1))) <e>)` it should know what this means and add the symbol `add1` to the environment.
 
+Here we see some interactions with the evaluator:
+
+<img src="http://i.imgur.com/0ECuo9o.gif" alt="Interacting with the evaluator" />
+
 If you would like to see a full evaluation of an expression by hand, 
 I can recommend watching the second part of [Lecture 7A of SICP](https://www.youtube.com/watch?v=0m6hoOelZH8&t=36m40s).
 You can also run [the code](https://github.com/erooijak/clojure-experiments/blob/master/meta-circular-experiments/mc-evaluator.clj) 
 of the evaluator and put some break points or `println`s at strategic points.
+
 
 ## Dynamically scoped environment
 
@@ -846,13 +829,14 @@ You can test if a language is dynamic or static for example with the
 First you define a method as follows:
 
 ```
-(defn test (fn () scope))
+(defn test (fn [] scope))
 ```
 When you call this method:
 
 ```
 (test)
 ```
+
 this returns
 
 >Is not a valid symbol -- LOOKUP-VARIABLE-VALUE scope
@@ -860,10 +844,12 @@ this returns
 This is because scope is not available in the environment. It is not defined.
 
 Next when you introduce a new binding with the same name (`scope`) wherein you call test:
+
 ```
-(let ((scope 'dynamic)) (test))
+((fn [scope] (test)) (quote dynamic))
 ```
-a lexically scoped language will return 'Is not a valid symbol -- LOOKUP-VARIABLE-VALUE scope' as above, 
+
+A lexically scoped language will return 'Is not a valid symbol -- LOOKUP-VARIABLE-VALUE scope' as above, 
 because the environment when the definition of `test` was created does not contain this binding. 
 A dynamically scoped language will return 'dynamic. 
 It does not care about what the value of scope was *when test was defined* and just looks up the nearest definition. 
@@ -876,24 +862,7 @@ As expected from the above description,
 [the evaluator with the dynamic environment](https://github.com/erooijak/clojure-experiments/blob/master/meta-circular-experiments/mc-evaluator-dynamic.clj) 
 has the following behavior:
 
->;;; Eval input:<br><br>
-(defn test (fn () scope))<br><br>
-;;; Eval value:<br><br>
-('updated-env [Environment]<br><br>
->;;; Eval input:<br><br>
-(test)<br><br>
->;;; Eval output:<br><br>
-Is not a valid symbol -- LOOKUP-VARIABLE-VALUE scope
-
-And when we call the new binding in a new environment:
->;;; Eval input:<br><br>
-(defn test (fn () scope))<br><br>
-;;; Eval value:<br><br>
-('updated-env [Environment]<br><br>
->;;; Eval input:<br><br>
-((fn (scope) (test)) (quote dynamic))<br><br>
-;;; Eval value:<br><br>
-dynamic
+<img src="http://i.imgur.com/0u95IlY.gif" alt="Interacting with the dynamic evaluator" />
 
 ## Closing remarks
 
