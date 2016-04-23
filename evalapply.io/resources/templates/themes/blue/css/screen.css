@@ -5,8 +5,9 @@ body {
     font-size: 16px;
 }
 
-.container {
-    max-width: 1000px;
+.container-fluid {
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .right {
