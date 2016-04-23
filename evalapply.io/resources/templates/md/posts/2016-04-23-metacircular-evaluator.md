@@ -3,7 +3,7 @@
 :tags ["Clojure" "Life" "Lisp" "SICP"]}
 
 I first learned of the concept of the meta-circular evaluator in 
-[Chapter 5](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-25.html) and 
+[Chapter 4](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-25.html) and 
 [Lecture 7A](https://www.youtube.com/watch?v=0m6hoOelZH8) of 
 [The Structure and Interpretation of Computer Programs](https://mitpress.mit.edu/sicp/) (SICP). 
 The chapter and video are on the subject of "meta-linguistic abstraction" -- the establishing of new languages.
@@ -12,11 +12,11 @@ Evaluating an expression in a programming language means that the evaluator retu
 An evaluator is called meta-circular if it evaluates the same language as it is written in using the same language constructs as the language itself (circular definitions).
 
 Why would you want such a thing? 
-One of the answer is that having a meta-circular evaluator makes it very practical to implement new languages on top of your implementation language.
+One of the answers is that having a meta-circular evaluator makes it very practical to implement new languages on top of your implementation language.
 In a sense you can see every program as an evaluator for a language.
 Using a meta-circular evaluator you can, for example, create a language that is particularly suited for a problem at hand 
 ([a Domain Specific Language](https://en.wikipedia.org/wiki/Domain-specific_language)).
-For educational purposes the evaluator is also valuable, since the basic eval-apply structure below can be used to write interpreters for all kinds of languages. 
+For educational and experimental purposes the evaluator is also valuable, since the basic eval-apply structure below can be used to write interpreters for all kinds of languages. 
 It is the kernel for every computer language.
 
 In [SICP it is stated that](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-25.html): 
@@ -26,12 +26,13 @@ The evaluator, which determines the meaning of expressions in a programming lang
 
 In this post I have translated the code from meta-circular evaluator from SICP (you can find the original code [here](https://mitpress.mit.edu/sicp/code/ch4-mceval.scm)) to Clojure. 
 Clojure is interesting because: 
-- It runs on the Java Virtual Machine (thereby having access to all Java libraries and being able to interoperate with existing enterprise programs) 
-- It has a functional core (thereby being particularly suited for concurrent programming, AKA the multi-core future) 
+- It runs on the Java Virtual Machine (thereby having access to all Java libraries and being able to inter-operate with existing Java code bases).
+- It has a functional core (thereby being particularly suited for concurrent programming, AKA the multi-core future).
 - And it is a Lisp (thereby having all the properties described below).
 
-Now, before I continue, let me be clear. I am not an expert on the subject matter. 
-It is virtually impossible to improve on the [explanation in SICP](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-26.html).
+Now, before I continue, let me be clear. 
+I am not an expert on the subject matter. 
+It is impossible for me to improve on the [explanation in SICP](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-26.html).
 What I have attempted to do here is translate the Scheme code of SICP to Clojure and thereby
 deeper understand what is going on in the meta-circular evaluator and also learn something about Clojure. 
 I have tried to put into my own words what is described in SICP.
@@ -48,12 +49,12 @@ Now, let's get started.
 
 ## Background
 
-The idea of a meta-circular evaluator with control structures was first described by John McCarthy in his paper 
+The idea of a meta-circular evaluator (with control structures at least) was first described by John McCarthy in his paper 
 [Recursive Functions of Symbolic Expressions and Their Computation by Machine, Part I](http://www-formal.stanford.edu/jmc/recursive.html):
 <sup>Note: there has never been a Part 2, although [some people have some ideas what it would look like](https://www.youtube.com/watch?v=CD-Dtr9j0f4))</sup>
 The paper where McCarthy invented Lisp (acronym for LIst Processing). 
 It contained the definition for `eval`, the universal function. 
-Eval is a universal machine: if you feed it a Lisp program, eval starts behaving as that program.
+`eval` is a universal machine: if you feed it a Lisp program, `eval` starts behaving as that program.
 It required inventing a notation where you could represent programs as data.
 
 For McCarthy, writing this function was just a theoretical exercise. 
@@ -791,7 +792,9 @@ So when we feed it `(eval '(defn add (fn (x) (+ x 1))) <e>)` it should know what
 
 Here we see some interactions with the evaluator:
 
+<a href="http://i.imgur.com/0ECuo9o.gif">
 <img src="http://i.imgur.com/0ECuo9o.gif" alt="Interacting with the evaluator" />
+</a>
 
 If you would like to see a full evaluation of an expression by hand, 
 I can recommend watching the second part of [Lecture 7A of SICP](https://www.youtube.com/watch?v=0m6hoOelZH8&t=36m40s).
@@ -862,7 +865,9 @@ As expected from the above description,
 [the evaluator with the dynamic environment](https://github.com/erooijak/clojure-experiments/blob/master/meta-circular-experiments/mc-evaluator-dynamic.clj) 
 has the following behavior:
 
-<img src="http://i.imgur.com/0u95IlY.gif" alt="Interacting with the dynamic evaluator" />
+<a href="http://i.imgur.com/fExSUfz.gif">
+<img src="http://i.imgur.com/fExSUfz.gif" alt="Interacting with the dynamic evaluator" />
+</a>
 
 ## Closing remarks
 
@@ -893,7 +898,7 @@ The source code of the evaluators can be found at:
 * [Meta-circular evaluator](https://github.com/erooijak/clojure-experiments/blob/master/meta-circular-experiments/mc-evaluator.clj)
 * [Dynamic evaluator](https://github.com/erooijak/clojure-experiments/blob/master/meta-circular-experiments/mc-evaluator-dynamic.clj)
 
-Rich Hickey (creator of Clojure) himself says doing SICP in Clojure would not really help. 
+Rich Hickey (creator of Clojure) himself says doing SICP in Clojure does not really help to learn Clojure itself: 
 
 >I think the Lisps prior to Clojure lead you towards a good path with
 functional programming and lists, only to leave you high and dry when
@@ -917,7 +922,8 @@ understood. Their libraries have decidedly limited polymorphism.
 
 (Source: [https://groups.google.com/forum/#!topic/clojure/jyOuJFukpmE](https://groups.google.com/forum/#!topic/clojure/jyOuJFukpmE) 
 
-I learned a great deal from the above implementation. I hope it is useful for others as well.
+Although it might not be the best way to learn Clojure, I did learn a great deal from the above implementation. 
+I hope it is useful for others as well.
 
 Further reading:
 - [Guy Steele and Gerald Jay Sussman - Lambda papers](http://library.readscheme.org/page1.html) 
