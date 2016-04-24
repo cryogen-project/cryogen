@@ -94,8 +94,8 @@ The rules are simple (like Go), but the possibilities within these rules are vir
 
 Lisp is infamous for its parentheses.
 
-<imr src="https://xkcd.com/297/"
-alt="xkcd I've just received word that the Emperor has dissolved the MIT computer science program permanently." /> 
+<img src="https://xkcd.com/297/" alt="xkcd I've just received word that the Emperor has dissolved the MIT computer science program permanently." /> 
+
 (Source: [https://xkcd.com/297/](https://xkcd.com/297/))
 
 Combined with prefix notation these parentheses makes it so that Lisp data structures can be evaluated as Lisp programs and vice versa.
@@ -113,6 +113,7 @@ Lisp applies the operator to the operands and this leads to the result of 12 in 
 
 The [abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) (AST) looks like this:
 <img src="http://i.imgur.com/qxpVOq1.png" alt="AST for (+ 1 2 (* 3 4))"/> 
+
 (Source: [https://github.com/jiacai2050/JCScheme](https://github.com/jiacai2050/JCScheme))
 
 As can be seen the AST of Lisp is the same as Lisp itself.
