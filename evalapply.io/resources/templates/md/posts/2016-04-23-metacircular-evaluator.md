@@ -285,6 +285,14 @@ Now we have defined all the basic operators: let's look at the meta-circular eva
 
 The meta-circular evaluator consists of two methods, `eval` and `apply`. 
 
+These methods call each other recursively as follows:
+
+<a href="http://i.imgur.com/iyviGMz.png">
+<img src="http://i.imgur.com/iyviGMz.png" alt="Eval apply cycle visualized" />
+</a>
+
+(Source: [https://github.com/jiacai2050/JCScheme](https://github.com/jiacai2050/JCScheme))
+ 
 If no fancy names are used for definitions inside `eval` and `apply`, the whole evaluator fits on 
 one page, [as shown in the Lisp manual](http://www.softwarepreservation.org/projects/LISP/book/LISP%201.5%20Programmers%20Manual.pdf#21)
 or as can as demonstrated in SICP lecture 7A, 
@@ -874,11 +882,10 @@ has the following behavior:
 What we have seen above is some nice copy, paste and explaining.
 For this I was inspired by SICP, and the evaluators of [Greg Sexton](https://github.com/gregsexton/SICP-Clojure), [Jake McCrary](https://github.com/jakemcc/sicp-study/) and [Mathieu Gauthron](https://github.com/matlux/metacircular-evaluator-clj/blob/master/src/clj_eval/core.clj).
 
-What we have described is a model of computation. 
-Using just seven primitives we can define `eval` which implements our language.
-The idea that an evaluator is just another program is remarkable. 
+What we have described above is a model of computation. 
+Using just seven primitives we can define `eval` which can implement our language.
+The idea that an evaluator is just another program (and such a short one) is remarkable. 
 Once you understand how the meta-circular evaluator works, it becomes possible to change the implementation and create interpreters for other languages. 
-This means new languages can be defined, and evaluators can have the implementation for that.
 
 >Indeed, new languages are often invented by first writing an evaluator that embeds the new language within an existing high-level language.
 
@@ -889,38 +896,18 @@ In SICP among other things the evaluator is extended and modified to become an e
 * [An evaluator with lazy (call-by-name) evaluation](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-27.html)
 * [A declarative Logic Programming language](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-29.html#%_sec_4.4)
 
-And same idea is even used to create an evaluator for machine language and to create a 
+And same idea is even used to create an [evaluator for machine language](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-32.html#%_sec_5.2) and to create a 
 [compiler](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-35.html#%_sec_5.5.1) 
 that converts Scheme to a machine language. 
 There it is also explained how the mechanisms works by which procedures call other procedures and return values to their callers.
 
+What is missing in the above implementation is a way to define [macros](stackoverflow.com/questions/267862/what-makes-lisp-macros-so-special#4621882), 
+which are used for defining syntax language extensions.
+I am not so well-versed in them yet, so I will probably describe them in a later post to.
+
 The source code of the evaluators can be found at:
 * [Meta-circular evaluator](https://github.com/erooijak/clojure-experiments/blob/master/meta-circular-experiments/mc-evaluator.clj)
 * [Dynamic evaluator](https://github.com/erooijak/clojure-experiments/blob/master/meta-circular-experiments/mc-evaluator-dynamic.clj)
-
-Rich Hickey (creator of Clojure) himself says doing SICP in Clojure does not really help to learn Clojure itself: 
-
->I think the Lisps prior to Clojure lead you towards a good path with
-functional programming and lists, only to leave you high and dry when
-it comes to the suite of data structures you need to write real
-programs, such data structures, when provided, being mutable and
-imperative. (...)<br><br>
-Clojure provides production implementations of
-generic dispatch, associative maps, metadata, concurrency
-infrastructure, persistent data structures, lazy seqs, polymorphic
-libraries etc etc. Much better implementations of some of the things
-you would be building by following along with SICP are in Clojure
-already. (...)<br><br>
-So the value in SICP would be in helping you understand programming
-concepts. If you already understand the concepts, Clojure lets you get
-on with writing interesting and robust programs much more quickly,
-IMO. (...)<br><br>
-Prior Lisps were also designed before pervasive in-process
-concurrency, and before the value of high-performance polymorphic
-dispatch (e.g. virtual functions) as library infrastructure was well
-understood. Their libraries have decidedly limited polymorphism.
-
-(Source: [https://groups.google.com/forum/#!topic/clojure/jyOuJFukpmE](https://groups.google.com/forum/#!topic/clojure/jyOuJFukpmE) 
 
 Although it might not be the best way to learn Clojure, I did learn a great deal from the above implementation. 
 I hope it is useful for others as well.
