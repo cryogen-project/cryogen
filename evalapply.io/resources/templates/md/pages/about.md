@@ -7,13 +7,14 @@
 
 ### Who?
 I am Erwin Rooijakkers. 
-I live in Amsterdam Kraaiennest 1104. 
+I live in Amsterdam. 
 After my studies of Liberal Arts and Sciences (major in Physics and Astronomy) 
 and [Transpersonal Psychology](https://en.wikipedia.org/wiki/Transpersonal_psychology) 
-I considered myself very lucky that I was accepted in a software engineering traineeship at a Dutch company called [Sogyo](http://www.sogyo.nl/). 
-Here I learned about the software world and programmed mainly in Java, .NET and tried various other languages (e.g., Erlang). 
+I developed a strong interest in programming. I had however no idea how to start.
+It was my luck that I was accepted in a software engineering traineeship at a Dutch company called [Sogyo](http://www.sogyo.nl/). 
+Here I learned about software principles and got exposed to Java, .NET and various other languages (e.g., Erlang). 
 In my free time I coded in Ruby (on Rails) and on Mono. 
-Currently I work in Scala at ING. 
+Currently I play with Scala and Java at ING. 
 I love Lisp and I hope to use it professionally one day.
 
 ### Why?
@@ -23,24 +24,13 @@ Starting a blog is a good idea because you learn from the topics you write about
 My goal with the blog are exactly those things: to improve myself as a programmer and writer and to start conversations with others.
 
 ### What?
-I'll try to write one long (> 1.000 words) blog post a week about things that interest me.
+I'll try to write one long (> 1.000 words) blog post a week about a thing that caught my interest and of which I want to learn more about.
 
 ### How?
 The blog is built using [Cryogen](http://cryogenweb.org/). 
 This is a basic static site generator built in Clojure that uses Markdown or AsciiDoc pages and compiles them to HTML. 
-I want to add the following functionality to Cryogen myself:
-
-* Search functionality (search posts including content)
-* Own theme
-
-In the future I might write a post about it.
 
 ### eval-apply?
-Besides the fact that evaluating and applying is something I do in daily life, I called the blog eval-apply as a reference to the meta-circular evaluator. 
-
-In Lecture 7A of [Structure and Interpretation of Computer Programs](http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005/video-lectures/) Gerald Jay Sussman explains it beautifully:
-
-<sup>(note: if you do not know what CAR, CDR and QUOTE are I would advice to read the [article](http://www.paulgraham.com/rootsoflisp.html) of Paul Graham first)<sup>
-
-<iframe src="https://www.youtube.com/embed/0m6hoOelZH8" allowfullscreen="" frameborder="0" height="315" width="420"></iframe>
+Besides the fact that evaluating and applying is something I do in daily life, I called the blog eval-apply as a reference to the meta-circular evaluator as explained in the
+[Structure and Interpretation of Computer Programs](http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005/video-lectures/).
 

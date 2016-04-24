@@ -2,13 +2,13 @@
 :layout :post
 :tags ["Clojure" "Life" "Lisp" "SICP"]}
 
-I first learned of the concept of the meta-circular evaluator in 
+This will be a walkthrough of the meta-circular evaluator demonstrated in 
 [Chapter 4](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-25.html) and 
 [Lecture 7A](https://www.youtube.com/watch?v=0m6hoOelZH8) of 
 [The Structure and Interpretation of Computer Programs](https://mitpress.mit.edu/sicp/) (SICP). 
 The chapter and video are on the subject of "meta-linguistic abstraction" -- the establishing of new languages.
 To evaluate a computer language you need an evaluator (also called interpreter) for that language.
-Evaluating an expression in a programming language means that the evaluator returns it result.
+Evaluating an expression in a programming language means that the evaluator performs or executes the instructions described in the expression.
 An evaluator is called meta-circular if it evaluates the same language as it is written in using the same language constructs as the language itself (circular definitions).
 
 Why would you want such a thing? 
@@ -16,7 +16,8 @@ One of the answers is that having a meta-circular evaluator makes it very practi
 In a sense you can see every program as an evaluator for a language.
 Using a meta-circular evaluator you can, for example, create a language that is particularly suited for a problem at hand 
 ([a Domain Specific Language](https://en.wikipedia.org/wiki/Domain-specific_language)).
-For educational and experimental purposes the evaluator is also valuable, since the basic eval-apply structure below can be used to write interpreters for all kinds of languages. 
+For educational and experimental purposes the evaluator is also insightful, 
+since the basic eval-apply structure below can be used to write interpreters for all kinds of languages. 
 It is the kernel for every computer language.
 
 In [SICP it is stated that](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-25.html): 
@@ -24,11 +25,12 @@ In [SICP it is stated that](https://mitpress.mit.edu/sicp/full-text/book/book-Z-
 >It is no exaggeration to regard this as the most fundamental idea in programming:<br><br>
 The evaluator, which determines the meaning of expressions in a programming language, is just another program.
 
-In this post I have translated the code from meta-circular evaluator from SICP (you can find the original code [here](https://mitpress.mit.edu/sicp/code/ch4-mceval.scm)) to Clojure. 
+In this post I have translated the code from meta-circular evaluator from SICP 
+(you can find the original code [here](https://mitpress.mit.edu/sicp/code/ch4-mceval.scm)) to Clojure. 
 Clojure is interesting because: 
-- It runs on the Java Virtual Machine (thereby having access to all Java libraries and being able to inter-operate with existing Java code bases).
-- It has a functional core (thereby being particularly suited for concurrent programming, AKA the multi-core future).
-- And it is a Lisp (thereby having all the properties described below).
+- It runs on the Java Virtual Machine (therefore having access to all Java libraries and being able to interoperate with existing Java code bases).
+- It has a functional core (therefore being particularly suited for concurrent programming, necessary to utilize multiple CPUs or serve multiple users).
+- And it is a dialect of Lisp (therefore having all the interesting properties described below).
 
 Now, before I continue, let me be clear. 
 I am not an expert on the subject matter. 
@@ -40,7 +42,7 @@ If you have a background in computer science this post is probably not much new.
 After all, SICP is an introductory level book.
 I don't have such a background so for me this was all pretty mind blowing.
 I learned quite a lot from this post myself. 
-Before writing I thought I understood, but when converting the SICP code to Clojure I realized I did not understand it as thoroughly as I thought. 
+Before I started to write I thought I understood, but when converting the SICP code to Clojure I realized I did not understand it as thoroughly as I thought. 
 I needed quite a lot of help from the web and the end result is basically different sources copy-pasted together till I had a reasonably working evaluator.
 
 It is very likely that the text in this post contains mistakes and I would be happy if they will be pointed out to me as well.
@@ -49,9 +51,11 @@ Now, let's get started.
 
 ## Background
 
-The idea of a meta-circular evaluator (with control structures at least) was first described by John McCarthy in his paper 
+The idea of a meta-circular evaluator was first described by John McCarthy in his paper 
 [Recursive Functions of Symbolic Expressions and Their Computation by Machine, Part I](http://www-formal.stanford.edu/jmc/recursive.html):
+
 <sup>Note: there has never been a Part 2, although [some people have some ideas what it would look like](https://www.youtube.com/watch?v=CD-Dtr9j0f4))</sup>
+
 The paper where McCarthy invented Lisp (acronym for LIst Processing). 
 It contained the definition for `eval`, the universal function. 
 `eval` is a universal machine: if you feed it a Lisp program, `eval` starts behaving as that program.
@@ -64,12 +68,9 @@ What then happened was that Steve Russell, one of McCarthy's graduate students
 transformed his theory into an actual programming language.
 As McCarthy stated in an interview:
 
->Steve Russell said, look, why don't I program this eval..., 
-and I said to him, ho, ho, you're confusing theory with practice, this eval is intended for reading, not for computing. 
-But he went ahead and did it. 
-That is, he compiled the `eval` in my paper into IBM 704 machine code, fixing a bug, and then advertised this as a Lisp interpreter, which it certainly was. 
-So at that point Lisp had essentially the form that it has today..." ([Source](https://books.google.nl/books?id=eH6jBQAAQBAJ&pg=PA777&lpg=PA777#v=onepage&q&f=false))
+>Steve Russell said, look, why don't I program this eval..., and I said to him, ho, ho, you're confusing theory with practice, this eval is intended for reading, not for computing.  But he went ahead and did it. That is, he compiled the `eval` in my paper into IBM 704 machine code, fixing a bug, and then advertised this as a Lisp interpreter, which it certainly was.  So at that point Lisp had essentially the form that it has today..." ([Source](https://books.google.nl/books?id=eH6jBQAAQBAJ&pg=PA777&lpg=PA777#v=onepage&q&f=false))
 
+Lisp is sometimes called the programmable program language.
 Since program are also data objects it easy in Lisp to make programs that work with programs. 
 This property of Lisp makes it possible to write Lisp in itself.
 
@@ -80,12 +81,12 @@ first saw this Lisp being written in itself:
 >These were "Maxwells Equations of Software!" This is the whole world of programming in a few lines that I can put my hand over.
 
 <sup>Note: the [Maxwell equations](https://www.youtube.com/watch?v=DSRLvkP0vmg) 
-are four extremely elegant equations from which everything there is to know about the electro-magnetic field can be derived.</sup>
+are four extremely elegant equations from which everything there is to know about the electromagnetic field can be derived.</sup>
 
-Lisp has this property that Lisp code is equal to Lisp data.
+Lisp has this the elegant property that Lisp code is equal to Lisp data.
 This makes it easy to do meta-programming: writing programs that write programs or reason about programs (on a meta-level).
 
-So what it Lisp?
+So what does Lisp look like?
 
 ## Lisp
 
@@ -94,7 +95,7 @@ The rules are simple (like Go), but the possibilities within these rules are vir
 
 Lisp is infamous for its parentheses.
 
-<img src="https://xkcd.com/297/" alt="xkcd I've just received word that the Emperor has dissolved the MIT computer science program permanently." /> 
+<img src="https://imgs.xkcd.com/comics/lisp_cycles.png" alt="xkcd I've just received word that the Emperor has dissolved the MIT computer science program permanently." /> 
 
 (Source: [https://xkcd.com/297/](https://xkcd.com/297/))
 
@@ -109,7 +110,7 @@ So for example in:
 ```
 
 The operator is + and the operands are 1, 2, and (* 3 4). 
-Lisp applies the operator to the operands and this leads to the result of 12 in the case of `(* 3 4)` and 15 in the case of `(+ 1 2 (+ 3 4))`.
+Lisp applies the operator to the operands and this leads to the result of 12 in the case of `(* 3 4)` and 15 in the case of `(+ 1 2 12)`.
 
 The [abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) (AST) looks like this:
 <img src="http://i.imgur.com/qxpVOq1.png" alt="AST for (+ 1 2 (* 3 4))"/> 
@@ -125,13 +126,15 @@ Where in languages like Java you have to wait for a committee to put a new featu
 One quote (incorrectly stated according to the supposed author but nevertheless instructive) describes the difference between languages without the ability to
 modify its structure (like Java or APL) and Lisp as follows:
 
->APL is like a beautiful diamond - flawless, beautifully symmetrical. But you can't add anything to it. 
-If you try to glue on another diamond, you don't get a bigger diamond. 
-Lisp is like a ball of mud. Add more and it's still a ball of mud - it still looks like Lisp.
+>APL is like a beautiful diamond - flawless, beautifully symmetrical. But you can't add anything to it. If you try to glue on another diamond, you don't get a bigger diamond. Lisp is like a ball of mud. Add more and it's still a ball of mud - it still looks like Lisp.  
+
+Lisp is special because it does not enforce syntactic and semantic rules: it can be programmed at a higher level of abstraction than other languages.
+Lisp can be transformed in other languages. 
+Some of that we will see below.
 
 Now, let's look at the seven or so special forms of the language.  
 The rest of Lisp can be implemented in these special forms. 
-(Note: in reality Lisp is not implemented this way, there are some more special forms used in most Lisps for for example performance reasons).
+(Note: in reality Lisp is not implemented this way, there are some more special forms used in most Lisps for for example performance and usability reasons).
 
 My description of these special forms (from which `eval` can be created) is roughly based on the article 
 [Roots of Lisp](http://www.paulgraham.com/rootsoflisp.html) of Paul Graham where he explains what McCarthy has discovered.
@@ -142,7 +145,7 @@ In Lisp there are about seven fundamental forms:
 ### `atom`
 
 Everything in Lisp is either a list or an atom. 
-The property that the empty list is special will later be used to check for the end of lists.
+(In Clojure we also have some other types like vectors, but we do not worry about that.)
 Atoms are for example numbers (1), strings ("hello") or symbols (add1).
 Lists consist of parentheses surrounding atoms separated by whitespace or other lists or both.
 
@@ -150,7 +153,7 @@ Lists consist of parentheses surrounding atoms separated by whitespace or other 
 
 Quoting an expression means that the expression does not need to be evaluated. 
 This is similar to our use of quotes in natural language, where we use quotes to refer to the symbol itself instead to the meaning
-(say your name: Erwin; say "your name": your name).
+(To "say your name" I reply with "Erwin", to "say 'your name'" I reply with "your name").
 The quote operator can be used to blur the distinction between code and data. 
 By quoting code you can pass it as data to another method which can then inspect and evaluate the expression. 
 
@@ -159,12 +162,13 @@ When this expression is evaluated the result is `(+ 1 2 3)` (instead of 6, the r
 
 ### `eq? a b`
 
-`(eq? a b)` returns true if the values of *a* and *b* are the same atom or both the empty list, and false otherwise.
+`(eq? a b)` returns true if the values of *a* and *b* are the same atom or both the empty list (defined as `'()`), and false otherwise.
 
 ### `cons a l`
 
 `cons` stands for construct and is used to add one element *a* to a list *l*. 
-Lisp lists are chains of cons cells, where the second element points to the first element of the next cons cell.
+Lisp lists are chains of cons cells, where the second element points to the first element of the next cons cell 
+(a [linked list](http://macromancy.com/2014/01/16/data-structures-clojure-singly-linked-list.html)).
 The last element of a list is the empty list `'()` (or nil).
 
 ### `car l`
@@ -174,7 +178,8 @@ In Clojure this form is called [`first`](https://clojuredocs.org/clojure.core/fi
 
 ### `cdr l`
 
-`(cdr l)` returns everything but the first item in a list. In Clojure this form is called [`rest`](https://clojuredocs.org/clojure.core/rest).
+`(cdr l)` returns everything but the first item in a list. 
+In Clojure this form is called [`rest`](https://clojuredocs.org/clojure.core/rest).
 
 `car` and `cdr` refer to the way cons cells were stored in early computers. 
 This is no longer the way it is, but Lispers have decided to stay with it because you can easily combine them. 
@@ -188,7 +193,8 @@ A conditional (conditionals were among other things first introduced in the pape
 If *p<sub>n</sub>* is true *e<sub>n</sub>* is evaluated. 
 Also an :else clause can be introduced if no predicates are true.
 
-So in `(cond (p1 n1) (p2 n2) :else "Hi")` the result is *n<sub>1</sub>* if *p<sub>1</sub>* is true, *n<sub>2</sub>* if *p<sub>1</sub>* is false and *p<sub>2</sub>* is true, and `"Hi"` if both *p<sub>1</sub>** p<sub>2</sub>* are false.
+So in `(cond (p1 n1) (p2 n2) :else "Hi")` the result is *n<sub>1</sub>* if *p<sub>1</sub>* is true, *n<sub>2</sub>* if *p<sub>1</sub>* is false,
+and *p<sub>2</sub>* is true, and `"Hi"` if both *p<sub>1</sub>* and *p<sub>2</sub>* are false.
 
 Besides these fundamental forms you can create functions with `fn`. 
 In a function you have a list of arguments and a list of expressions. 
@@ -220,25 +226,25 @@ Clojure also contains [maps, vectors and sets](http://clojure.org/reference/data
 
 It is interesting to note that these other data structures are implemented in Clojure in such a way that they are immutable (unchangeable). 
 And because sharing underlying structures they have very good performance characteristics. 
-I don't know much about this (only watched [one video](https://www.youtube.com/watch?v=dGVqrGmwOAw)), and it is off topic, so this might be a topic for another post.
+To learn some more about this you can view 
+[a video where the creator of Clojure explains this how these data structures are implemented](https://www.youtube.com/watch?v=dGVqrGmwOAw).
 
-These data structures are demarcated by different types of symbols. 
+The data structures are demarcated by different types of symbols. 
 The vector uses `[` and `]`. 
-Just to give you a heads up, this means that in Clojure the argument list looks like this:
+In Clojure the argument list is a vector (not a list) and looks like this:
 
 ```
 (fn [arg] (+ arg 1) 1) ;; => 2
 ```
 
-Since we use Clojure as an implementation language just think of it as a list.
-Since it supports the same basic operations as a list (like `first`, `empty, or `rest`) this is fine to do so.
+Since it supports the same basic operations as a list (like `first`, `empty, or `rest`) it is fine to think about it as a list.
 
-### Example of use
+### Example of use: implementing `map`
 
 To define functions and evaluate it often recursion is used. 
 Below we will define a procedure that is called `map`. 
 `map` applies a given function *f* to every argument in a list (coll) and returns a list with the results. 
-So when we do `(map add1 '(1 2 3 4))` (using `add1` defined above) the result will be `(2 3 4 5)`.
+So when we do `(map add1 '(1 2 3))` (using `add1` defined above) the result will be `(2 3 4)`.
 
 ```
 (defn map [f coll]
@@ -247,9 +253,9 @@ So when we do `(map add1 '(1 2 3 4))` (using `add1` defined above) the result wi
 ```
 
 This is done by `cdr`ing ("`rest`ing" in the case of Clojure) down a list and `cons`ing up the result.
-It applies f to the first element of the list, and combines the result with f mapped to the rest of the list. 
+It applies f to the first element of the list, and combines (`cons`) the result with f mapped to the rest of the list. 
 The recursion breaks if the collection is empty.
-The evaluator has a lot of these type of recursive definitions as well.
+The evaluator has a lot of these type of recursive definitions as well so it is crucial to understand.
 
 The seven forms above (`map` is not a primitive) are all the primitives you need to create a meta-circular evaluator. 
 
@@ -258,27 +264,29 @@ The code belows also uses more forms.
 Most of them can be implemented in the code below, but others can't.
 The reason for that is that sometimes the evaluation order matters.
 
-Take for example the form let, which is of the form 
+Another form we will see is [`let`](https://clojuredocs.org/clojure.core/let), which is of the form 
 
 ```
 (let [var1 val1 var1 val*n*] <body>)
 ```
 
-Let can be used to bind variables (var) to value (val) (to declare variables basically). 
+[`let`](https://clojuredocs.org/clojure.core/let) can be used to bind variables (var) to value (val) (to declare variables basically). 
 These are in scope in the body.
-This let can roughly be written as
+This let can roughly be written as:
 
 ```
 ((fn [var1 var*n*] <body>) val1 val*n*)
 ```
 
-Where you create a lambda where the variables are bound to the last ones.
+Where you create a lambda where the variables are substituted for the values.
 
 This is impossible to implement in a normal function, since the variables are *always* evaluated.
 When evaluation order needs to be controlled, a so-called macro can be created.
 
 A macro hooks directly into the abstract syntax tree and changes it at compile time (before the code runs).
 We will not be using or supporting macro's in this meta-circular evaluator, but it is definitely possible.
+Macros are a very convenient syntax to change code trees at compile time.
+If you want to learn more about macros you can read [Paul Graham's On Lisp](http://www.paulgraham.com/onlisp.html) [or Doug Hoyte's Let Over Lambda](http://letoverlambda.com/).
 
 Now we have defined all the basic operators: let's look at the meta-circular evaluator.
 
@@ -294,15 +302,15 @@ These methods call each other recursively as follows:
 
 (Source: [https://github.com/jiacai2050/JCScheme](https://github.com/jiacai2050/JCScheme))
  
-If no fancy names are used for definitions inside `eval` and `apply`, the whole evaluator fits on 
+If no descriptive names are used for definitions inside `eval` and `apply`, the whole evaluator fits on 
 one page, [as shown in the Lisp manual](http://www.softwarepreservation.org/projects/LISP/book/LISP%201.5%20Programmers%20Manual.pdf#21)
 or as can as demonstrated in SICP lecture 7A, 
 [on the blackboard](https://www.youtube.com/watch?v=0m6hoOelZH8&t=34m36s). 
-Here a bit more descriptive names are used since it helps for clarity.
+Here a bit more descriptive names are used since it helps for clarity and the implementation is therefore longer.
 
-Unfortunately the implementation described below is perhaps not fully a meta-circular evaluator. 
+Unfortunately the implementation described below is possibly not fully a meta-circular evaluator.
 A defining characteristic of a meta-circular evaluator is that it is written in the language it evaluates.
-This evaluator written in Clojure, but it cannot evaluate everything of Clojure. 
+This evaluator is written in Clojure, but it cannot evaluate everything of Clojure. 
 What it can evaluate looks a lot like Scheme translated to Clojure, because in fact it is.
 But since Clojure is a Lisp and Scheme is a Lisp, I think the name meta-circular evaluator is still warranted.
 
@@ -331,23 +339,27 @@ And [like every interesting procedure, it is a case analysis](https://www.youtub
             :else (error "Unknown expression type -- EVAL" exp)))
 ```
 
-When we call `eval` with a quoted expression to evaluate, it will look at what type of expression we are dealing with, and then dispatch to another procedure to handle it.
+When we call `eval` with a quoted expression to evaluate (e.g., `(eval 'definition 'env)` in an environment, 
+it will look at what type of expression we are dealing with, and then dispatch to another procedure to handle it.
 
-When an expression is self-evaluating (like a string ["hello"] or a number [1]) we just get the expression back.
+I'll first go over it just describing `eval` in words, and next dive deeper into the routines.
+When an expression `exp` is self-evaluating (like a string ["hello"], a number [1] or a boolean [`true`]) `eval` just gets the expression back.
 If `exp` is a variable (`a`), we look up the value of the variable in the environment (we will discuss how this works later).
-It `exp` is a definition we want to define the value in the environment
-(If we define (defn a "hello") we want "a" stored in the environment to be "hello", and when we look up the variable a later we want to have "hello" returned.)
-If `exp` is an assignment (set! a "hi"), we will look up "a" in the environment, and set it to a new value.
-If `exp` is a lambda expression we create a procedure of this lambda expression (we create a list tagged with the flag 'procedure), 
+If `exp` is a definition we want to define the value in the environment
+(If we define (`defn a "hello"`) we want "a" stored in the environment to be "hello", and when we look up the variable a later we want to have "hello" returned.)
+If `exp` is an assignment (`set! a "hi"`), we will look up `a` in the environment, and set it to a new value.
+If `exp` is a lambda expression (anonymous function) we create a procedure of this lambda expression (we create a list tagged with the flag 'procedure), 
 where we store the parameters and the body of the procedure alongside with the current environment captured in it (see `make-procedure` below).
-Besides that we have an if-statement and conditional. 
-A conditional is transformed to a list of if-statements. 
+Next, we have an if-statement and conditional:
+a conditional is transformed to a list of if-statements via a routine named `cond->if`. 
 In an if-statement: if the predicate is true the first clause is evaluated, and if false the second clause is evaluated. 
 For example, `(if p 'n<sub>1</sub> 'n<sub>2</sub>)` leads to `n<sub>1</sub>` if `p` is true and to `n<sub>2</sub>` otherwise.
 
+The above is all reasonably straightforward.
 The most interesting thing happens if the expression is an application. 
 Then we apply the result of evaluating the operator of the expression in the environment, to the list of values that follow, each evaluated in the environment. 
-`list-of-values` is implemented as follows:
+
+First we look at `list-of-values`, which is implemented as follows:
 
 ```
 (defn list-of-values [exps env]
@@ -357,11 +369,14 @@ Then we apply the result of evaluating the operator of the expression in the env
           (list-of-values (rest-operands exps) env))))
 ```
 
-This is a recursive definition (like `map` above) where we evaluate construct a new list with as a first argument the first operand evaluated in the environment, 
+This is a recursive definition (like `map` above) where we construct a new list with as first argument the first operand evaluated in the environment, 
 and as a tail the rest of the operands evaluated in the environment. 
-When we come to the empty list `'()` (the last element of a cons cell) the recursion breaks and we return the empty list `'()`.
+When we come to the empty list `'()` 
+(the second element of the last cons cell in a linked list) 
+the recursion breaks and we return the empty list `'()`.
 
-We will discuss the implementation of `apply` after we have looked at the implementation of `eval` a little bit closer.
+We will discuss the implementation of `apply` after we have looked at the inner definitions of `eval` a little bit closer:
+routines to detect expression, routines to get information out of expressions, and routines to transform expressions.
 
 ### Routines to detect expressions.
 
@@ -380,7 +395,7 @@ The checking of the type of an expression we are dealing with, is done by compar
   (and (list? exp) (= (first exp) tag)))
 ```
 
-This checks if the expression is a list, and if the first expression is equal to the tag.
+This checks if the expression is a list, and (using the code inspecting facilities of Lisp) if the first expression is equal to the tag.
 
 For example, to see if a variable is a definition or quoted we check if the first element is respectively the symbol `'quote` or `'defn`:
 
@@ -394,14 +409,13 @@ And in a similar manner:
 ```
 (defn lambda? [exp] (tagged-list? exp 'fn))
 (defn assignment? [exp] (tagged-list? exp 'set!))
-(defn begin? [exp] (tagged-list? exp 'begin))
+(defn begin? [exp] (tagged-list? exp 'do))
 (defn true? [x] (not (= x false)))
 (defn false? [x] (= x false))
 (defn cond? [exp] (tagged-list? exp 'cond))
 (defn compound-procedure? [p] (tagged-list? p 'procedure))
 (...)
 ```
-
 Note that if a definition contains a boolean result (true or false), by convention we end the definition with a question mark `?`.
 
 These were the routines to detect expressions. 
@@ -418,7 +432,7 @@ First we define some helper methods to get certain elements out of a list beside
 (...)
 ```
 
-Anyway, these routines are implemented in Clojure as follows:
+These routines are implemented in Clojure as follows:
 
 ```
 (defn operator [exp] (first exp))
@@ -430,20 +444,22 @@ Anyway, these routines are implemented in Clojure as follows:
 (...)
 ```
 
-here we see that for example `lamba-body` is the `rest-after-second`. 
+Here we see that for example `lamba-body` is the `rest-after-second`. 
 Which is indeed the case. 
 If we look at:
 
 ```
 (fn [a b c d] (+ a b (* c d)))
 ```
+
 We see that everything after the second element `(a b c d) is the body. 
 
 All the other implementations of routines that get information out of expressions are defined in the same manner.
 
-## Routines to manipulate expressions
+### Routines to manipulate expressions
 
-As seen in the definition of `eval` above, when an expression is a lambda expression (as identified by `lambda?`), we make a procedure. This is implemented as follows:
+As seen in the definition of `eval` above, when an expression is a lambda expression (as identified by `lambda?`), we make a procedure. 
+This is implemented as follows:
 
 ```
 (defn make-procedure [parameters body env]
@@ -452,16 +468,20 @@ As seen in the definition of `eval` above, when an expression is a lambda expres
 
 So we create a new list via the procedure `list` (which is a routine to create a linked list via a chain of `cons`'es). 
 
-In a similar manner we can create an if-expresion, to which cond expressions can be converted to via a procedure named `expand-clauses`,
+In a similar manner we can create an if-expresion in `cond->if` 
+(using `->` is a convention to signify the routine is a conversion), 
+to which cond expressions can be converted to via a procedure named `expand-clauses`,
 by recursively expanding every clause.
+
+So by detecting the type of expression, get the information out of the expression and possibly converting it to something else `eval` evaluates the incoming expression.
+Now we come to the interesting part: the application.
 
 ## Apply
 
-Finally we arrive at `apply`. `apply` is called in `eval` if the expression is not one of the other types, but is an application.
-
+We have arrived at `apply`. `apply` is called in `eval` if the expression is not one of the other types, but is an application.
 An expression is an application if it is not one of the special forms, but a `list`. 
 
-Apply is a procedure that takes as input a procedure and its arguments, and produces an expression and an environment:
+`apply` is nothing special either, it is a procedure that takes as input a procedure and its arguments, and produces an expression and an environment:
 
 ```
 (defn apply [procedure arguments]
@@ -475,7 +495,9 @@ Apply is a procedure that takes as input a procedure and its arguments, and prod
                              (procedure-environment procedure))) ; base environment
         :else (error "Unknown procedure type -- APPLY" procedure)))
 ```
-Here we first check if a procedure is a primitive procedure. 
+
+Again it is a case analysis:
+We first check if a procedure is a primitive procedure with `primitive-procedure?`.
 A procedure is a primitive procedure if it is looked up in the environment and it was in the list of primitive procedures defined in the
 environment. 
 The primitive procedures are defined as follows, and are later added to the environment (how the environment is constructed will be discussed later).
@@ -503,7 +525,7 @@ At the beginning of the evaluator we store the underlying `apply` to not confuse
 (defn apply-from-underlying-lisp [procedure arguments] (apply procedure arguments))
 ```
 
-How this apply that is built into Clojure works, is outside of the scope of this post. 
+How this apply that is built into Clojure works, is outside of the scope of this post (to be honest I don't know). 
 
 The application of a primitive procedure is defined as follows:
 
@@ -518,11 +540,13 @@ Where `primitive-implementation` is a method to retrieve the procedure:
 ```
 (defn primitive-implementation [proc] (second proc))
 ```
+
 As can be seen above where the `primitives-procedures` are defined the primitive-implementation is a symbol like `first` or `+`. 
 Again, these are evaluated by the underlying Clojure implementation.
 
 If we are dealing with a compound procedure (a list tagged with `procedure` which can contain more than one inner application), 
 we evaluate the sequence of elements with the routine `eval-sequence`:
+
 ```
 (defn eval-sequence [exps env]
   (if (last-exp? exps)
@@ -532,7 +556,9 @@ we evaluate the sequence of elements with the routine `eval-sequence`:
       (eval-sequence (rest-exps exps) env))))
 ```
 
-This is a recursive definition where we, if we have only one expression, only evaluate this one expression in the environment, 
+Note that [`do`](https://clojuredocs.org/clojure.core/do) is used to evaluate multiple expressions (in `eval` it is detected by `begin?`, a similar construct in Scheme).
+
+`eval-sequence` is a recursive definition where we, if we have only one expression, only evaluate this one expression in the environment, 
 and if we have more than one expression, we evaluate the first expression and `eval-sequence` the rest of the expressions in the environment.
 
 Here `last-exp`, `first-exp` and `rest-exp` are defined as follows:
@@ -544,7 +570,7 @@ Here `last-exp`, `first-exp` and `rest-exp` are defined as follows:
 ```
 
 Naturally the first expression is the first element of the sequence (of expressions), 
-the rest of the expressions are the rest of the sequence, and we are dealing with the the last expression if the rest of the sequence after it is empty.
+the rest of the expressions are the rest of the sequence, and we are dealing with the last expression if the rest of the sequence after it is empty.
 
 Important to note is that when we use `eval-sequence` in the definition of `apply` we extend the environment of the evaluation 
 with the procedure parameters, arguments, and the procedure environment itself. 
@@ -556,23 +582,27 @@ So what exactly is this extending of an environment, and in what way are symbols
 We now go step by step through the environment:
 
 An environment consists of frames stacked together in a list. 
-A frame is empty or consists of two lists: one lists with variable values, and one list of variable values.
+A frame is empty or consists of two lists: one lists with variables, and one list with values.
 When a definition is looked up we look at one frame to see if the variable is defined there. 
 If it is not, we look one frame further to see if it is defined there. 
 Until we finally get to the global environment. 
-If it is not found there we have an error.
+If it is not found there we have an error ("Unbound variable").
 
-A simple environment structure this looks like this:
+A simple environment structure looks like this:
 
 <img src="https://mitpress.mit.edu/sicp/full-text/book/ch3-Z-G-2.gif" alt="Simple environment structure from SICP"/>
 
 Source: [https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-21.html#%_sec_3.2](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-21.html#%_sec_3.2).
 
+Here we see multiple frames (I, II and III) that are connected. 
+A will find that the value of the variable x is 7, but C will find 3.
+
 The environment is crucial to the evaluation process, because it determines the context in which an expression will be evaluated.
 Each time a procedure is applied, a new frame is created.
 
-It turns out that the assumed immutability of Clojure made the implementation quite difficult (for me).
-Clojure has, unlike Scheme (the language where this evaluator was translated from), no mutable (changeable) cons-cells.
+It turns out that the assumed immutability (I thought nothing could be changed, which was not completely true) 
+of Clojure made the implementation quite difficult (for me).
+But Clojure has, unlike Scheme (the language where this evaluator was translated from), no mutable (changeable) cons-cells.
 Where in Scheme you can change the first element or last element of a list respectively with the routines `set-car!` and `set-cdr!`, this is not possible in Clojure. 
 
 We can however accomplish mutation by defining a so-called [`Atom`](http://clojure.org/reference/atoms) (different from the basic building element `atom` defined above).
@@ -596,6 +626,7 @@ The empty environment is an empty list.
 ```
 (def the-empty-environment '())
 ```
+
 (Note that `def` is similar to `defn` without arguments.)
 
 To get the enclosing environment (frame) of the current environment (frame), we look at the rest from the frame we are in now.
@@ -605,7 +636,7 @@ To get the enclosing environment (frame) of the current environment (frame), we 
 (defn first-frame [env] (first env))
 ```
 
-To make a frame, we use a function [`zipmap`](https://clojuredocs.org/clojure.core/zipmap) to add two lists of variables together which
+To make a frame, we use a routine [`zipmap`](https://clojuredocs.org/clojure.core/zipmap) to add two lists of variables together which
 "returns a map with the keys mapped to the corresponding vals" ([ClojureDocs](https://clojuredocs.org/clojure.core/zipmap)). 
 A map is a list of key-value pairs. 
 
@@ -626,7 +657,7 @@ We have a list of variables to be added to the environment:
                      'add1))
 ```
 
-A list of corresponding values (the primitive + and rest operator, and a lambda expression and a created procedure to be added to the environment:
+A list of corresponding values (the primitive `+` and rest operator, and a lambda expression and a created procedure to be added to the environment:
 
 ```
 (def values (list +
@@ -635,27 +666,32 @@ A list of corresponding values (the primitive + and rest operator, and a lambda 
                   '(procedure (x) (fn (x) (+ x 1)) {:+ + :x 2 (...)})))
 
 ```
+
 When we zipmap them:
 
 ```
 (zipmap variables values)
 ```
 
-This leads to the following output:
+This leads to the following result:
 >{+ #object[clojure.core$_PLUS_ (...)],<br>
  rest #object[clojure.core$rest_ (...))],<br>
  add1 (procedure (x) (fn (x) (+ x 1)) {:+ +, :x 2, (...)})}
 
-So a frame is a map (key value pairs) with variables (keys of the map) bound to values (values of the map) (in this case the primitive objects from the underlying Clojure).
+So a frame is a map (key value pairs, differentiated with `{` and `}` in Clojure) with variables (keys of the map) bound to values (values of the map) 
+(in this case the primitive objects from the underlying Clojure).
 
-Next we get methods to add bindings to frames
+Next we get methods to add bindings to frames:
 
 ```
 (defn add-binding-to-frame! [var val frame]
   (swap! frame assoc var val))
 ```
+
+Note that by convention routines that mutate state are ended with an exclamation mark `!`.
+
 `add-binding-to-frame!` uses [`swap!`](https://clojuredocs.org/clojure.core/swap!) in combination with [`assoc`](https://clojuredocs.org/clojure.core/assoc) 
-to associate a variable and new value to a frame.
+to associate a variable and new value to a frame. This is one of the ways to have (safe) mutable state.
 
 Next we need a way to extend our environment (this is the method used in `eval` and `eval-sequence` to add variables and values to a frame, 
 for example when storing the variables of a procedure in the environment where it will be evaluated in, or when new definitions are added):
@@ -668,9 +704,10 @@ for example when storing the variables of a procedure in the environment where i
       (error "Too many arguments supplied " vars)
       (error "Too few arguments supplied " vars))))
 ```
+
 `extend-environment` takes variables and values and a base environment. 
-It then makes a frame of the variables and values and conses that up to the base environment. 
-The rest is error handling for if the amount of variables and values applied are not the same 
+It then makes a frame of the variables and values and `cons`es that up to the base environment. 
+The rest is error handling for when the amount of variables and values applied are not the same 
 (e.g., when evaluating `((fn (x) (+ x 1)) 2 3)` it will returns "Too many arguments supplied").
 
 Next, we have a method to lookup a variable in an environment. 
@@ -678,7 +715,7 @@ This one looks a bit more complicated because of the inner methods.
 
 Know that [`letfn`](https://clojuredocs.org/clojure.core/letfn) is just like [`let`](https://clojuredocs.org/clojure.core/let), 
 only now we define functions and bind them to a name only available in the scope. 
-Furthermore, `contains?` checks is a variable is available in a map and returns true if it does, false it it does not.
+Furthermore, `contains?` checks if a variable is available in a map and returns true if it does, false it it does not.
 
 ```
 (defn lookup-variable-value [variable env]
@@ -700,7 +737,7 @@ What happens at the bottom of `lookup-variable-value` is that we start an `env-l
 
 If the frame contains the variable we [`get`](https://clojuredocs.org/clojure.core/get) (get is a way to retrieve the value belonging to a key) 
 the value belonging to the variable from the frame. 
-Otherwise, we start a new `env-loop` over the enclosing environment. 
+Otherwise, we start a new `env-loop` over the enclosing environment (the next frame or frames). 
 
 When the `env-loop` is started we first check if we are dealing with the empty environment. 
 If that is the case we break the recursion: we have scanned all frames in scope and we are therefore dealing with an unbound variable. 
@@ -724,7 +761,8 @@ To accomplish this we have a similar procedure, which uses a similar scanning me
     (env-loop env)))
 ```
 
-Only now we are trying to find the value, and in the first frame we find which contains the variable we change this variable's value for the current value. 
+The difference with `lookup-variable-value` is that in `set-variable-value!` we are trying to find the value, 
+and in the first frame we find which contains the variable we change this variable's value for the current value. 
 If the frame doesn't contain it we start the `env-loop` over the enclosing environment. 
 The recursion breaks when we end up with the empty environment (unbound variable) or when we find a variable and have set it.
 
@@ -748,14 +786,14 @@ Finally, at the beginning we setup the environment:
     initial-env))
 ```
 
-We load some primitive procedures in the environment, we have `the-empty-environment` as our base environment and we define false and true in it
+We load the primitive procedures in the environment and we set `the-empty-environment` as our base environment.
 
-Next we look at how to interact with this evaluator:
+Now you've seen everything but a way to interact with this evaluator.
 
 ## Interacting with the evaluator
 
 Last but not least we have a way to interact with the evaluator. 
-When we run the code the loop asks for input, and when it has received input it will evaluate that in our environment:
+When we run the code a `driver-loop` asks for input, and when it has received input it will evaluate the input in our environment:
 
 ```
 (def input-prompt ";;; Eval input:")
@@ -810,30 +848,28 @@ I can recommend watching the second part of [Lecture 7A of SICP](https://www.you
 You can also run [the code](https://github.com/erooijak/clojure-experiments/blob/master/meta-circular-experiments/mc-evaluator.clj) 
 of the evaluator and put some break points or `println`s at strategic points.
 
-
 ## Dynamically scoped environment
 
 In my journey to create a working version I also stumbled upon 
 [this implementation of Mathieu Gauthron](https://github.com/matlux/metacircular-evaluator-clj/blob/master/src/clj_eval/core.clj).
 
-The dynamically scoped environment is a bit simpler, what is defined latest is found first (instead of passing an environment a long with a procedure, we just update the environment). 
-It is at runtime defined what is in scope. 
+The dynamically scoped environment is a bit simpler, what is defined latest is found first 
+(instead of passing an environment along in a certain procedure scope, we just update the environment). 
+Therefore in a dynamically scoped environment it is only at runtime defined what is in scope. 
 
-After we define what lexical and dynamic scope is, below there are some experiments with them.
+After we define what lexical and dynamic scope is, below will follow an experiment with the dynamic evaluator.
 
 ## Lexical scoping versus dynamic scoping
 
 Lexical scope means that the structure of the program determines which variables are in scope 
 (for example in C-like languages the scope is defined by curly braces `{` and `}`.
-Scheme was one of the first languages with lexical scope. 
-In dynamic scope the scope is defined at run time, that what was defined latest when the program is evaluated at runtime is found first.
+In dynamic scope the scope is defined at runtime, that what was defined latest when the program is evaluated at runtime is found first.
 Currently there are almost no languages with dynamic scope. 
 Lexical scope is more logical to reason about.
 Nevertheless there are valid use cases for dynamic scope. 
 A [nice example](http://programmers.stackexchange.com/questions/103164/when-would-dynamic-scoping-be-useful#273005) 
 is exception handling (throwing an exception and catching it):
->Exception handling in most languages utilizes dynamic scoping;
-when an exception occurs control will be transferred back to the closest handler on the (dynamic) activation stack.
+>Exception handling in most languages utilizes dynamic scoping; when an exception occurs control will be transferred back to the closest handler on the (dynamic) activation stack.
 
 You can test if a language is dynamic or static for example with the 
 [following idea](http://stackoverflow.com/questions/32344615/program-to-check-if-the-scoping-is-lexical-or-dynamic#32347224). 
@@ -861,14 +897,14 @@ Next when you introduce a new binding with the same name (`scope`) wherein you c
 ((fn [scope] (test)) (quote dynamic))
 ```
 
-A lexically scoped language will return 'Is not a valid symbol -- LOOKUP-VARIABLE-VALUE scope' as above, 
+A lexically scoped language will return "Is not a valid symbol -- LOOKUP-VARIABLE-VALUE scope" as above, 
 because the environment when the definition of `test` was created does not contain this binding. 
-A dynamically scoped language will return 'dynamic. 
+A dynamically scoped language will return `'dynamic`. 
 It does not care about what the value of scope was *when test was defined* and just looks up the nearest definition. 
 In other words: the lexical environment was not captured.
 
-(This idea was obtained from [this Stack Overflow answer](http://stackoverflow.com/questions/32344615/program-to-check-if-the-scoping-is-lexical-or-dynamic#32347224), 
-but slightly modified since our language does not know how to evaliuate `let`.
+(The idea for the test was obtained from [this Stack Overflow answer](http://stackoverflow.com/questions/32344615/program-to-check-if-the-scoping-is-lexical-or-dynamic#32347224), 
+but slightly modified since our language does not know how to evaluate `let`.
 
 As expected from the above description, 
 [the evaluator with the dynamic environment](https://github.com/erooijak/clojure-experiments/blob/master/meta-circular-experiments/mc-evaluator-dynamic.clj) 
@@ -881,10 +917,11 @@ has the following behavior:
 ## Closing remarks
 
 What we have seen above is some nice copy, paste and explaining.
-For this I was inspired by SICP, and the evaluators of [Greg Sexton](https://github.com/gregsexton/SICP-Clojure), [Jake McCrary](https://github.com/jakemcc/sicp-study/) and [Mathieu Gauthron](https://github.com/matlux/metacircular-evaluator-clj/blob/master/src/clj_eval/core.clj).
+For this I was inspired by SICP, and the evaluators of [Greg Sexton](https://github.com/gregsexton/SICP-Clojure), 
+[Jake McCrary](https://github.com/jakemcc/sicp-study/) and [Mathieu Gauthron](https://github.com/matlux/metacircular-evaluator-clj/blob/master/src/clj_eval/core.clj).
 
-What we have described above is a model of computation. 
-Using just seven primitives we can define `eval` which can implement our language.
+What we have described is a model of computation. 
+Using seven primitives we can define `eval` which can implement our language.
 The idea that an evaluator is just another program (and such a short one) is remarkable. 
 Once you understand how the meta-circular evaluator works, it becomes possible to change the implementation and create interpreters for other languages. 
 
@@ -897,21 +934,22 @@ In SICP among other things the evaluator is extended and modified to become an e
 * [An evaluator with lazy (call-by-name) evaluation](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-27.html)
 * [A declarative Logic Programming language](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-29.html#%_sec_4.4)
 
-And same idea is even used to create an [evaluator for machine language](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-32.html#%_sec_5.2) and to create a 
-[compiler](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-35.html#%_sec_5.5.1) 
+And the same idea is even used to create an [evaluator for machine language](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-32.html#%_sec_5.2) 
+and to create a [compiler](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-35.html#%_sec_5.5.1) 
 that converts Scheme to a machine language. 
-There it is also explained how the mechanisms works by which procedures call other procedures and return values to their callers.
+In SICP it is also explained how the mechanisms works by which procedures call other procedures and return values to their callers 
+(which the meta-circular evaluator borrows from the underlying Lisp).
 
-What is missing in the above implementation is a way to define [macros](stackoverflow.com/questions/267862/what-makes-lisp-macros-so-special#4621882), 
+One of the other things that is missing in the above implementation is a way to define 
+[macros](stackoverflow.com/questions/267862/what-makes-lisp-macros-so-special#4621882), 
 which are used for defining syntax language extensions.
-I am not so well-versed in them yet, so I will probably describe them in a later post to.
+I am not so well-versed in them yet, I will probably describe them in a later post too.
 
 The source code of the evaluators can be found at:
 * [Meta-circular evaluator](https://github.com/erooijak/clojure-experiments/blob/master/meta-circular-experiments/mc-evaluator.clj)
 * [Dynamic evaluator](https://github.com/erooijak/clojure-experiments/blob/master/meta-circular-experiments/mc-evaluator-dynamic.clj)
 
-Although it might not be the best way to learn Clojure, I did learn a great deal from the above implementation. 
-I hope it is useful for others as well.
+I did learn a great deal from the above implementation. I hope it is useful for others as well.
 
 Further reading:
 - [Guy Steele and Gerald Jay Sussman - Lambda papers](http://library.readscheme.org/page1.html) 
