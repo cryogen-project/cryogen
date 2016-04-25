@@ -1,5 +1,5 @@
 {% extends "/html/base.html" %}
-{%block subtitle %}: {{post.title}}{% endblock %}
+{%block subtitle %}{{separator}}{{post.title}}{% endblock %}
 {% block content %}
 <div id="post">
     {% include "/html/post-content.html" %}

@@ -24,4 +24,5 @@
  :posts-per-page     5
  :blocks-per-preview 1000 ;; Display full post for now this way (better to improve posts-per-page variable)
  :previews?          true
+ :separator          " :: "
  :clean-urls?        true}
