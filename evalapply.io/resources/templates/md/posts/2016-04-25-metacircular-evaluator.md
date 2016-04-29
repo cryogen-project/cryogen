@@ -142,8 +142,9 @@ This is similar to our use of quotes in natural language, where we use quotes to
 To "say your name" I reply with "Erwin", to "say 'your name'" I reply with "your name".
 The quote operator can be used to blur the distinction between code and data. 
 By quoting code you can pass it as data to another method which can then inspect and evaluate the expression. 
+To quote you can use the operator `quote` or put a `'` in front of the expression.
 
-Example: `'(+ 1 2 3)`. 
+Example: `'(+ 1 2 3)`. Which is equal to `(quote (+ 1 2 3))`.
 When this expression is evaluated the result is `(+ 1 2 3)` (instead of 6, the result of evaluating the unquoted `(+ 1 2 3)`).
 
 ### `eq? a b`
@@ -180,13 +181,13 @@ E.g., the car of the `cdr` (the second element of a list) is the `cadr`.
 Clojure breaks this connection with these roots, but has introduced other forms to make it easier to chain methods together 
 (e.g., [->](https://clojuredocs.org/clojure.core/-%3E)) and has special utility methods like `nth` to obtain the nth element from a list.
 
-### `cond p<sub>1</sub> e<sub>1</sub> ... p<sub>n</sub> e<sub>n</sub>`
+### `cond <p1> <e1> ... <pn> <en>`
 
 A conditional (conditionals were among other things first introduced in the paper of McCarthy). 
 If *p<sub>n</sub>* is true *e<sub>n</sub>* is evaluated. 
 Also an :else clause can be introduced if no predicates are true.
 
-So in `(cond (p1 n1) (p2 n2) :else "Hi")` the result is *n<sub>1</sub>* if *p<sub>1</sub>* is true, *n<sub>2</sub>* if *p<sub>1</sub>* is false,
+So in `(cond (p<sub>1</sub> n<sub>1</sub>) (p<sub>2</sub> n<sub>2</sub>) :else "Hi")` the result is *n<sub>1</sub>* if *p<sub>1</sub>* is true, *n<sub>2</sub>* if *p<sub>1</sub>* is false,
 and *p<sub>2</sub>* is true, and `"Hi"` if both *p<sub>1</sub>* and *p<sub>2</sub>* are false.
 
 Besides these fundamental forms you can create functions with `fn`. 
@@ -261,7 +262,7 @@ The reason for that is that sometimes the evaluation order matters.
 Another form we will see is [`let`](https://clojuredocs.org/clojure.core/let), which is of the form 
 
 ```
-(let [var<sub>1</sub> val<sub>1</sub> var<sub>n</sub> val<sub>n</sub>] <body>)
+(let [<var1> <val1> <varn> <valn>] <body>)
 ```
 
 [`let`](https://clojuredocs.org/clojure.core/let) can be used to bind variables (var) to value (val) (to declare variables basically). 
@@ -269,7 +270,7 @@ These are in scope in the body.
 This let can roughly be written as:
 
 ```
-((fn [var<sub>1</sub> var<sub>n</sub>] <body>) val<sub>1</sub> val<sub>n</sub>)
+((fn [<var1> <varn>] <body>) <val1> <valn>)
 ```
 
 Where you create a lambda where the variables are substituted for the values.
@@ -297,10 +298,12 @@ This can be displayed as follows:
 (Source: [https://github.com/jiacai2050/JCScheme](https://github.com/jiacai2050/JCScheme))
  
 If no descriptive names are used for definitions inside `eval` and `apply`, the whole evaluator fits on 
-one page, [as shown in the Lisp manual](http://www.softwarepreservation.org/projects/LISP/book/LISP%201.5%20Programmers%20Manual.pdf#21)
-or as demonstrated in SICP lecture 7A, 
-[on the blackboard](https://www.youtube.com/watch?v=0m6hoOelZH8&t=34m36s). 
-In the current implementation a bit more descriptive names are used since it helps for clarity. The code does not fit on one page though.
+one page. As shown in the [Lisp manual (p. 13)](http://www.softwarepreservation.org/projects/LISP/book/LISP%201.5%20Programmers%20Manual.pdf#21) it fits on one page,
+and as demonstrated in SICP lecture 7A: 
+[on a blackboard](https://www.youtube.com/watch?v=0m6hoOelZH8&t=34m36s). 
+In the current implementation a bit more descriptive names are used since it helps for clarity. 
+And also a somewhat sophisticated environment structure is used to store procedures.
+Therefore this code does not fit on one page, but it is definitely still a short program.
 
 Unfortunately the implementation described below is possibly not truly a meta-circular evaluator.
 A defining characteristic of a meta-circular evaluator is that it is written in the language it evaluates.
@@ -349,9 +352,12 @@ a conditional is transformed to a list of if-statements via a routine named `con
 In an if-statement: if the predicate is true the first clause is evaluated, and if false the second clause is evaluated. 
 For example, `(if p 'n<sub>1</sub> 'n<sub>2</sub>)` leads to `n<sub>1</sub>` if `p` is true and to `n<sub>2</sub>` otherwise.
 
-The above is all reasonably straightforward.
-The most interesting thing happens if the expression is an application. 
-Then we apply the result of evaluating the operator of the expression in the environment, to the list of values that follow, each evaluated in the environment. 
+The above is all reasonably straightforward. It is a way to implement all the reserved words. As an aside, Gerald Jay Sussman states:
+
+>The number of reserved words that should exist in a language should be no more than a person can remember on its fingers and toes. I get very upset with languages which have hundreds or reserved words. ([Source](https://www.youtube.com/watch?v=0m6hoOelZH8&t=17m54s))
+
+If the expression does not start with a reserved word, the  expression is an application. 
+This means we apply the result of evaluating the operator of the expression in the environment, to the list of values that follow, each evaluated in the environment. 
 
 First we look at `list-of-values`, which is implemented as follows:
 
@@ -461,19 +467,38 @@ This is implemented as follows:
 ```
 
 So we create a new list via the procedure `list` (which is a routine to create a linked list via a chain of `cons`'es). 
+Note that the procedure creates a new list where the environment is stored in.
+This is a way to create something called a closure: the environment at the moment the procedure was called is captured.
+Next when we look at `apply` we will see how this environment is retrieved.
+Furthermore, we will discuss the difference between two types of scope (dynamic and lexical) and their implementation later.
 
-In a similar manner we can create an if-expresion in `cond->if` 
-(using `->` is a convention to signify the routine is a conversion), 
-to which cond expressions can be converted to via a procedure named `expand-clauses`,
-by recursively expanding every clause.
+In a similar manner as `make-procedure` we can create a new type of expression from an if-expresion in `cond->if`.
 
-So by detecting the type of expression, getting the information out of the expression and possibly converting it to something else, `eval` evaluates the incoming expression.
-Now we come to the most interesting part: the application.
+Note: using `->` is a convention to signify the routine is a conversion. 
+
+Via `cond->if` a `cond` expressions (conditional) can be converted using an internal procedure named `expand-clauses`.
+`expand-clauses` recursively expands every clause of a `cond` expression to nested if-statements.
+
+So `eval` evaluated an expression by detecting the type of expression, getting the information out of the expression and possibly converting it to something else, 
+If it does not start with one of the reserved words it is treated as an application.
+This will be handled with `apply` in the next segment.
 
 ## Apply
 
-We have arrived at `apply`. `apply` is called in `eval` if the expression is not one of the other types, but is an application.
-An expression is an application if it is not one of the special forms, but a `list`. 
+We have arrived at `apply`. `apply` is called in `eval` if the expression is not one of the reserved words (like `if`, `cond`, `fn`, `defn` and `set!`).
+An expression is an application if it is not one of the special forms, but still a `list`  (e.g., in the case of `(+ 1 2)`, `+` is not in the list of the reserved words).
+Then the expression will be handled by this part of `eval` (see above):
+
+```
+(...)
+(apply (eval (operator exp) env) 
+       (list-of-values (operands exp) env)
+(...)
+```
+
+We already looked at `list-of-values` that evaluated all the operands in an environment. 
+What remains is applying the operator to the arguments. 
+`apply` then feeds back the expression and the environment to `eval`, et cetera.
 
 `apply` is a procedure that takes as input a procedure and its arguments, and produces an expression and an environment:
 
@@ -490,7 +515,7 @@ An expression is an application if it is not one of the special forms, but a `li
         :else (error "Unknown procedure type -- APPLY" procedure)))
 ```
 
-Again it is a case analysis:
+Again it is a case analysis. Let's go through it.
 We first check if a procedure is a primitive procedure with `primitive-procedure?`.
 A procedure is a primitive procedure if it is looked up in the environment and it was in the list of primitive procedures defined in the
 environment. 
@@ -512,7 +537,7 @@ The primitive procedures are defined as follows, and are later added to the envi
         ))
 ```
 
-If the procedure is a primitive procedure we apply the primitive procedure with the underlying apply of Clojure:
+If the procedure is a primitive procedure we apply the primitive procedure with the underlying apply of Clojure.
 At the beginning of the evaluator we store the underlying `apply` to not confuse it with the newly defined `apply`:
 
 ```
@@ -520,6 +545,9 @@ At the beginning of the evaluator we store the underlying `apply` to not confuse
 ```
 
 How this apply that is built into Clojure works, is outside of the scope of this post (to be honest I don't know). 
+Interesting to note is that these types of primitives are not essential for computation. 
+You can do everything with lambda and something called a Y Combinator.
+But using that is not as convenient.
 
 The application of a primitive procedure is defined as follows:
 
@@ -582,6 +610,7 @@ If we find it we return the value.
 If it is not, we look one frame further to see if it is defined there. 
 Until we finally get to the global environment. 
 If it is not found there we have an error ("Unbound variable").
+So the goal of an environment is to store variables and the values associated with them.
 
 A simple environment structure looks like this:
 
@@ -607,8 +636,8 @@ An Atom in Clojure is a mutable value, that can be mutated in an atomic way, fre
 The algorithm used in the Scheme version checks the first frame, loops over it (with a method called scan) and if it finds the variable, it returns the value associated with it. 
 If it does not find anything it will loop over the enclosing environment and scans there.
 
-When re-defining a variable in the environment, a similar process is used. 
-When the variable is found however, `set-car!` is used to overwrite the environment.
+When redefining a variable in the environment, a similar process is used. 
+When the variable is found however, `set-car!` is used to overwrite the variable value in that frame.
 
 After using some environment structures with bugs in them (for example being unable to define recursive definitions) I found a better environment definition in the 
 [SICP answers of Jake McCrary](https://github.com/jakemcc/sicp-study/blob/master/clojure/section4.2/src/environment.clj). 
@@ -735,7 +764,7 @@ Otherwise, we start a new `env-loop` over the enclosing environment (the next fr
 
 When the `env-loop` is started we first check if we are dealing with the empty environment. 
 If that is the case we break the recursion: we have scanned all frames in scope and we are therefore dealing with an unbound variable. 
-If we are not dealing with the empty environment, we are getting the first frame from the environment (remember that the environment is a list of frames), 
+If we are not dealing with the empty environment, we are getting the first frame from the (remaining) environment (remember that the environment is a list of frames), 
 get the value from the atom by using [`@`](http://www.braveclojure.com/zombie-metaphysics/#Atoms), and scan that.
 
 So now we can understand how to lookup a variable, 
@@ -941,7 +970,7 @@ modify its structure (like Java or APL) and Lisp as follows:
 One nice example of the ball of mud idea is the [`go`-routine](https://clojure.github.io/core.async/) 
 that is added to Clojure for asynchronous programming (communicating sequential processes). 
 Go also has them, but for Go is it a fundamental language feature.
-In Clojure it could be introduced as a library. (See [here](http://www.leonardoborges.com/writings/2013/07/06/clojure-core-dot-async-lisp-advantage/) for more information.)
+Because the language can be fundamentally and syntactically changed, it could be introduced as a library in Clojure. (See [here](http://www.leonardoborges.com/writings/2013/07/06/clojure-core-dot-async-lisp-advantage/) for more information.)
 
 In SICP among other things the evaluator is extended and modified to become an evaluator for:
 
