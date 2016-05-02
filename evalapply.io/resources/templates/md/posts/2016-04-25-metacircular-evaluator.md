@@ -2,6 +2,7 @@
 :layout :post
 :tags ["Clojure" "Life" "Lisp" "SICP"]}
 
+Meta-circular evaluators are awe-inspiring.
 This will be a walkthrough of the meta-circular evaluator demonstrated in 
 [Chapter 4](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-25.html) and 
 [Lecture 7A](https://www.youtube.com/watch?v=0m6hoOelZH8) of 
@@ -280,7 +281,8 @@ When evaluation order needs to be controlled, a so-called macro can be created.
 
 A macro hooks provides a convenient way to hook directly into the abstract syntax tree and change it at compile time (before the code runs).
 We will not be using or supporting macro's in this meta-circular evaluator, but it is definitely possible.
-If you want to learn more about macros you can read [Paul Graham's On Lisp](http://www.paulgraham.com/onlisp.html) [or Doug Hoyte's Let Over Lambda](http://letoverlambda.com/).
+If you want to learn more about macros you can read Paul Graham's [On Lisp](http://www.paulgraham.com/onlisp.html)  
+or Doug Hoyte's <a  href="http://www.amazon.com/gp/product/1435712757/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1435712757&linkCode=as2&tag=evalapply-20&linkId=F3253FX5SJN7YEHG">Let Over Lambda</a><img src="http://ir-na.amazon-adsystem.com/e/ir?t=evalapply-20&l=as2&o=1&a=1435712757" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />.
 
 Now we have defined all the basic operators. Let's look at the meta-circular evaluator.
 
