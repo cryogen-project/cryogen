@@ -1,6 +1,6 @@
 {:title "Vim and Emacs"
 :layout :post
-:tags ["Clojure" "Emacs" "Vim" "Evil"]}
+:tags ["Emacs" "Vim" "Evil" "Lisp" "Clojure"]}
 
 I'll show you why I love Vim and why I switched to Emacs and why you might too. 
 
