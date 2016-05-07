@@ -3,11 +3,13 @@
 :tags ["Clojure" "Life" "Lisp" "SICP"]}
 
 Meta-circular evaluators are awe-inspiring.
+
 This will be a walkthrough of the meta-circular evaluator demonstrated in 
 [Chapter 4](https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-25.html) and 
 [Lecture 7A](https://www.youtube.com/watch?v=0m6hoOelZH8) of 
 [The Structure and Interpretation of Computer Programs](https://mitpress.mit.edu/sicp/) (SICP). 
 The chapter and video are on the subject of "meta-linguistic abstraction" -- the establishing of new languages.
+
 To evaluate a computer language you need an evaluator (also called interpreter) for that language.
 Evaluating an expression in a programming language means that the evaluator performs or executes the instructions described in the expression.
 An evaluator is called meta-circular if it evaluates the same language as it is written in using the same language constructs as the language itself (circular definitions).
