@@ -119,6 +119,10 @@ The whole file is done. This would have worked just as fast for 100 rows by the 
 
 I find these possibilities so cool.
 
+*/edit As Veedrac showed in a [comment on reddit](https://www.reddit.com/r/programming/comments/4hcvya/ill_show_you_why_i_love_vim_and_why_i_switched_to/d2pfiun) in *
+*Sublime Text this refactoring is also possible and arguably more intuitive using multiple cursors. *
+*Vedrac made a video where multiple cursors are used to do the same refactoring. This video can be watched [here](https://sendvid.com/7o5z2ky6).*
+
 Note that the jumping around in Vim and selecting text is usually the biggest time saver.
 As JangoSteve writes in the comments on Hacker News in response to the article Vim Creep:
 
@@ -177,31 +181,45 @@ The reason for that is it has tight integration with the language and you can us
 But even before I used Emacs to learn the Lisp-dialect Clojure I had already switched to it. 
 The reason for that was the video "Evil Mode: Or, How I Learned to Stop Worrying and Love Emacs":
 
+(Warning: it is a bit long.)
+
 <iframe src="https://www.youtube.com/embed/JWD1Fpdd4Pc" allowfullscreen="" frameborder="0" height="315" width="420"></iframe>
 
-Emacs is a much better environment than Vim. 
+Evil Mode is an **E**xtensible **v**i **l**ayer for Emacs. 
+This means you can have Vim keybindings while having the Emacs environment.
+
+Why would you want that?
+Well, Emacs is a much better environment than Vim. 
 Some people call it an operating system instead of a text-editor.
 And it is true. 
 Where Vim will sometimes hang when performing large operations, Emacs just runs on easily.
 
-In the video some examples are shown how things that would block normal Vim can sometimes go on in Emacs on a background thread.
+In the video above examples are shown how things that would block normal Vim can sometimes go on in Emacs on a background thread.
 And for me Emacs with Evil mode just feels lighter than Vim. 
 There are some other attempts to improve the performance of Vim (notably [NeoVim](https://neovim.io/)), but this would still not have the Lisp integration Emacs has.
 
 Furthermore, things like searching and replacing are better. 
-You see things changing or lighting up before you finished typing them in the command bar before you execute the command (an example is shown in the video at the end).
+You visually see in the text what will change while a substitution command is typed. And search matches light up before you finished typing your search. 
+Examples of search and replace are shown in the video at the end.
+And when you start typing in the command area it automatically starts showing suggestions. 
+There are a lot of these minor things that make Emacs with Evil mode very pleasurable.
 
-Because of the Lisp integration (firing up a REPL and never having to leave Emacs) and the better performance I use it.
+Because of the Lisp integration (firing up a REPL and never having to leave Emacs), nice quirks as command completion, and the better performance I use Emacs.
 
+To configure Emacs you can edit a .emacs file or the ~/.emacs.d/init.el file.
+Evil mode provides a [lot of ways to hook into the execution flow and plugins](https://www.emacswiki.org/emacs/Evil).
 For editing Clojure I just use the Emacs setup as described in [Clojure for the Brave and True](http://www.braveclojure.com/basic-emacs/) extended with
 Evil mode.
 
-Some of the cool features are mentioned in that book already, like CTRL-c CTRL-k to compile code and CTRL-c CTRL-d CTRL-d to view the library definition
+Some of the non-Evil features I use for editing Clojure are mentioned there.
+Things like CTRL-c CTRL-k to compile code and CTRL-c CTRL-d CTRL-d to view the library definition
 (if I am not mistaken, fact of the matter is the keybindings for Emacs to me are much more unlogical than those of Vim).
 
-Now I will visually show some of the other awesomeness:
+Now I will visually show some of the other awesomeness, but related to Evil mode. 
+Just to give an impression.
 
 Redoing things with the .-command work just as in Vim:
+
 <a href="http://i.imgur.com/0UW5Jke.gif">
 <img src="http://i.imgur.com/0UW5Jke.gif" alt="Redo command in Evil mode" />
 </a>
@@ -236,11 +254,11 @@ Undo history can easily be viewed and navigated by typing the command:
 
 How cool is that?
 
-And of course we can add a very rich set of plugins. 
+And we can add a very rich set of plugins to Emacs.
 Of course we have all the plugins added for Clojure by the author of Clojure for the Brave and True.
 Which provide syntax highlighting and tight integration with documentation, the REPL and executing code.
 
-I'll show you two other plugins I use to give you an impression:
+I'll now show two other plugins I find very interesting.
 
 We can display the file system on the left if we want with F8 by using [NeoTree](https://github.com/jaypei/emacs-neotree):
 <a href="http://i.imgur.com/B1RszIj.gif">
@@ -267,13 +285,19 @@ Is everything rose shine and moon light? No. I have identified the following sho
 That's all I can come up with and I have thought really hard.
 
 ## Closing remarks
-Last but not least I don't want you to miss out on this great demonstration of Evil mode:
+I think Emacs Evil mode is a very nice environment to edit text. 
+I hope I was able to show some of that by the examples.
+If you want some more of Evil mode I can recommend this great demonstration:
 
 <iframe src="https://www.youtube.com/embed/Uz_0i27wYbg" allowfullscreen="" frameborder="0" height="315" width="420"></iframe>
 
-You can download the Clojure for the Brave and True emac dotfiles which I extended with Evil mode as descibed above [by clicking here](https://github.com/erooijak/emacs). If you install Emacs and place the repository in the ~/.emacs.d directory everything will install automatically. Note that there are probably better dotfiles out there.
-If you start using Vim do not forget to remap your Capslock to Escape. 
-You will be pressing Escape a lot and on todays keyboards it is too faraway.
+You can download the [Clojure for the Brave and True emac setup](http://www.braveclojure.com/basic-emacs/) 
+which I extended with Evil mode as descibed above [by clicking here](https://github.com/erooijak/emacs). 
+If you install Emacs and place the repository in the ~/.emacs.d directory everything will install automatically. Note that there are probably better dotfiles out there.
+The way to install plain Vim can be found [here](http://www.vim.org/download.php).
+
+One final note: if you start using Vim do not forget to remap your Capslock to Escape. 
+You will be pressing Escape a lot and on todays keyboards it is too faraway from the homerow.
 
 Thank you for reading. Comments are welcome.
 
