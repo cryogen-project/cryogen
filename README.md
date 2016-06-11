@@ -175,6 +175,7 @@ More information on deployment can be found [here](http://cryogenweb.org/docs/de
 * [LambdaX](http://lambdax.io/blog/)
 * [szcz](http://www.szcz.org/)
 * [himmAllRight's blog](http://ryan.himmelwright.net)
+* [Clojurians](http://blog.clojurians.org)
 
 ## License
 
