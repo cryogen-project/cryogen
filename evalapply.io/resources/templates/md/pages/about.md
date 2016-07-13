@@ -3,7 +3,7 @@
  :page-index 0
  :navbar? true}
 
-## This is a blog about my life, my journey learning Clojure, and sometimes Scala.
+## This is a blog about my life, my Clojure journey, and sometimes Scala.
 
 ### Who?
 I am Erwin Rooijakkers. 
