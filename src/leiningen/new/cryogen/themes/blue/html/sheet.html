@@ -1,10 +1,10 @@
 {% extends "/html/view.html" %}
-{%block subtitle %}: {{page.title}}{% endblock %}
+{%block subtitle %}: {{post.title}}{% endblock %}
 
 {% block sheetdata %}
-<div id="sheet-data" data-source="{{page.source}}"
-     data-user="{{page.user}}"
-     data-repo="{{page.repo}}"
-     data-path="{{page.path}}">
+<div id="sheet-data" data-source="{{post.source}}"
+     data-user="{{post.user}}"
+     data-repo="{{post.repo}}"
+     data-path="{{post.path}}">
 </div>
 {% endblock %}
