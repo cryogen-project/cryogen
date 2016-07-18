@@ -1,0 +1,101 @@
+{% extends "/html/base.html" %}
+
+{% block content %}
+
+    <link href='http://fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic|Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <!--<link href='css/fonts.css' rel='stylesheet' type='text/css'/>-->
+    <link rel="stylesheet" href="/blog/js/gorilla-repl/jslib/codemirror-4.5/lib/codemirror.css"/>
+    <!--link rel="stylesheet" href="css/worksheet.css"/>
+    <link rel="stylesheet" href="css/output.css"/>
+    <link rel="stylesheet" href="css/viewer.css"/-->
+
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG-full.js&delayStartupUntil=configured"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/jslib/marked/marked.min.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/jslib/codemirror-4.5/lib/codemirror.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/jslib/codemirror-4.5/addon/runmode/runmode.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/jslib/codemirror-4.5/addon/runmode/colorize.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/jslib/codemirror-4.5/mode/clojure/clojure.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/jslib/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/jslib/underscore/underscore.min.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/jslib/knockoutjs/knockout-3.0.0.min.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/jslib/d3/d3.v3.min.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/jslib/d3/d3.geo.projection.min.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/jslib/vega/vega.1.3.3.min.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/jslib/uuid/uuid.core.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/js/worksheetParser.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/js/utils.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/js/mathJaxViewer.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/js/outputViewer.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/js/renderer.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/js-viewer/segment-viewer.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/js-viewer/worksheet-viewer.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/js-viewer/github.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/js-viewer/bitbucket.js"></script>
+    <script type="text/javascript" src="/blog/js/gorilla-repl/js-viewer/main-viewer.js"></script>
+
+    <title data-bind="text: title">Gorilla REPL viewer</title>
+
+<!-- The page stub -->
+<!--div class="header">
+    <div class="header-left">Made with <a href="http://clojure.org" target="_blank">Clojure</a> and
+        <a href="http://gorilla-repl.org" target="_blank">Gorilla REPL</a></div>
+    <div class="header-right">
+        <a href="#" data-bind="click: showCopyBox">View this worksheet on <span data-bind="text: host"></span></a>
+    </div>
+</div-->
+
+
+<div id="contents" data-bind="css: {veiled: copyBoxVisible}">
+    <div class="segment container-segment">
+        <div class="container-children">
+            <div data-bind="template: {name: 'segment-template', foreach: worksheet().segments()}">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="scroll-pad"></div>
+
+<!-- Templates -->
+<script type="text/html" id="segment-template">
+    <div data-bind="template: {name: renderTemplate}"></div>
+</script>
+
+<script type="text/html" id="code-segment-template">
+    <div class="segment code">
+
+        <div class="segment-main">
+            <pre class="static-code clojure"><code data-bind="text: contents"></code></pre>
+        </div>
+        <div class="error-text" data-bind="text: errorText, visible: errorText() !== ''"></div>
+        <div class="console-text" data-bind="visible: consoleText() !== ''">
+            <pre><code data-bind="html: consoleText"></code></pre>
+        </div>
+        <div class="output"
+             data-bind="visible: (output() != ''), outputViewer: output, segmentID: id">
+        </div>
+        <div class="segment-footer"></div>
+    </div>
+</script>
+
+<script type="text/html" id="free-segment-template">
+    <div class="segment free">
+        <div class="segment-main">
+            <div class="free-preview" data-bind="mathJaxViewer: renderedContent"></div>
+        </div>
+        <div class="segment-footer"></div>
+    </div>
+</script>
+<script type="text/javascript">
+    var viewer = app();
+    var sd = document.getElementById("sheet-data");
+     var source = sd.getAttribute("data-source");
+    var user = sd.getAttribute("data-user");
+    var repo = sd.getAttribute("data-repo");
+    var path = sd.getAttribute("data-path");
+    getFromGithub(user, repo, path, function (data) {
+                viewer.start(data, "https://github.com/" + user + "/" + repo, path, source);
+            });
+</script>
+{% endblock %}
