@@ -1,0 +1,28 @@
+/*
+ * This file is part of gorilla-repl. Copyright (C) 2014-, Jony Hudson.
+ *
+ * gorilla-repl is licenced to you under the MIT licence. See the file LICENCE.txt for full details.
+ */
+
+.clj-vector {color: #1C005A}
+.clj-raw {color: red}
+.clj-nil {color: grey}
+.clj-lazy-seq {color: lightgreen}
+.clj-list {color: green}
+.clj-map {color: purple}
+.clj-set {color: brown}
+.clj-symbol {color: steelblue}
+.clj-keyword {color: blue}
+.clj-var {color: deeppink}
+.clj-atom {color: darkorange}
+.clj-agent {color: darkorange}
+.clj-ref {color: darkorange}
+.clj-string {color: grey}
+.clj-char {color: dimgrey}
+.clj-long {color: blue}
+.clj-double {color: darkgreen}
+.clj-bigint {color: blue; font-weight: bold}
+.clj-bigdecimal {color: darkgreen; font-weight: bold}
+.clj-ratio {color: darkblue}
+.clj-class {color: indigo}
+.clj-record {color: #5dcd03}
