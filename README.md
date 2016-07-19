@@ -176,6 +176,8 @@ More information on deployment can be found [here](http://cryogenweb.org/docs/de
 * [szcz](http://www.szcz.org/)
 * [himmAllRight's blog](http://ryan.himmelwright.net)
 * [Clojurians](http://blog.clojurians.org)
+* [Gundee and Company](http://www.gundee.com/)
+* [Teamcool Rocks](http://www.teamcool.net/index.html)
 
 ## License
 
