@@ -159,6 +159,14 @@ in the `/var/blog/404.html` file.
 
 More information on deployment can be found [here](http://cryogenweb.org/docs/deploying-to-github-pages.html).
 
+## Third Party Libraries
+
+#### https://github.com/greywolve/cryogen-markdown-external
+
+A Clojure library to provide Markdown rendering to the cryogen-core compiler by using an external command/program, such as pandoc.
+
+
+
 ## Some Sites Made With Cryogen
 
 * [My personal blog](http://carmenla.me/blog/archives)
