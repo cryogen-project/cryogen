@@ -84,6 +84,15 @@ The site configuration file is found at `templates/config.edn`, this file looks 
 
 For information about each key please see the ["Configuration"](http://cryogenweb.org/docs/configuration.html) portion of the Cryogen documentation site.
 
+### Site options
+
+A site that supports embedded ["Gorilla-repl worksheets"](http://gorilla-repl.org) can be enabled using:
+
+```
+lein new cryogen my-blog +gorilla-repl
+```
+Documentation for adding a gorilla-repl worksheet as an post can be found in `doc/gorilla-repl.md`.
+
 ### Switching between Markdown and AsciiDoc
 
 Cryogen comes with Markdown support as default. If you want to use AsciiDoc instead, open the `project.clj` in your created blog (e.g. `my-blog`), and change the line in `:dependencies` that says `cryogen-markdown` to `cryogen-asciidoc`.
