@@ -21,10 +21,15 @@ To embed a Gorilla-repl worksheet as a blog post, here's what one needs to do:
 ## Headers to note:
 
 * The :layout field should be set to :sheet
-* The :source should be set to github/bitbucket/gist. One needs to change the code in view.html to load from a source other than Github.
+* The :source should be set to github. To load a sheet from BitBucket or Github gist, one needs to change the (javascript) code in view.html.
 * The :user should be the Github username 
 * The :repo field is the name of the repository
 * The :path field is the path to the Gorilla-repl worksheet in the *master* branch of the repository.
+
+## Content
+
+* The post needs no content apart from the headers indicating the Gorilla-repl worksheet's parameters
+* Any content in the post will show up in the main blog page listing all the posts. However, only the first line is displayed.
 
 ## Implementation:
 
