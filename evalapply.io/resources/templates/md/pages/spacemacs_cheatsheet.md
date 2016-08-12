@@ -1,19 +1,25 @@
 {:title "Spacemacs Cheatsheet"
  :layout :page
- :page-index 3
+ :page-index 1
  :navbar? true}
-
-# Spacemacs cheatsheet
 
 This is my Spacemacs cheatsheet.
 
-## Cider
+# Table of contents
+1. [Cider](#cider)
+2. [Testing and debugging](#testing_and_debugging)
+3. [Navigation](#navigation)
+4. [Editing](#editing)
+5. [Clojure mode](#clojure_mode)
+6. [Magit](#magit)
+
+# Cider
 
 ### , s [iI]
 Start Clojure (i) or ClojureScript (I) cider-jack-in.
 
 ### :cider-restart <RET>
-Restart Cider.-new
+Restart Cider.
 
 ### C-c C-z 
 Switch to REPL, in REPL switches to previous buffer.
@@ -27,15 +33,18 @@ The same as `C-x C-e` except the result is sent to the REPL.
 ### C-c C-k
 Evaluate buffer.
 
-### C-c C-d d
+### C-c C-d d or , h h
 Show the documentation as you would with (doc function-name).
+
+### , g g
+Go to declaration
 
 ### C-c M-n 
 Switch to namespace of current Clojure buffer. 
 
-## Testing and debugging
+# Testing and debugging
 
-### SPC-m-t-*
+### , t [art]
 Unit testing options: 
 a all tests (as in file, looks for file with same name prefixed with tests).
 r rerun last tests.
@@ -50,7 +59,13 @@ n next
 i into
 More: https://github.com/clojure-emacs/cider/blob/master/doc/debugging.md
 
-## Navigation
+### C-c C-c
+Remove breakpoints in method (if I am not mistaken).
+
+# Navigation
+
+### TAB
+HELM completion at point.
 
 ### SPC w l
 It is impossible to move out of Neotree with C-w Vim movements since the
@@ -62,7 +77,16 @@ Show dot file.
 ### C-x b
 List of open buffers (and switch to them).
 
-## Editing
+### SPC b [np]
+p Previous useful buffer.
+n Next useful buffer.
+
+### SPC TAB
+Previous buffer.
+
+Also see some Cider commands
+
+# Editing
 
 ### SPC S c
 Correct spelling of word under cursor
@@ -71,7 +95,7 @@ For Vim/Evil keybindings:
 - http://vim.rtorr.com/
 - `:evil-tutor`
 
-## Clojure mode
+# Clojure mode
 
 ### C-A-\
 Indent region
@@ -103,7 +127,7 @@ Leads to:
 ```
 See https://github.com/clojure-emacs/clojure-mode
 
-## Magit
+# Magit
 
 ### SPC g s
 Display git status

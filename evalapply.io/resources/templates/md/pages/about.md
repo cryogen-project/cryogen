@@ -1,6 +1,6 @@
 {:title "About"
  :layout :page
- :page-index 0
+ :page-index 3
  :navbar? true}
 
 ## This is a blog about my life, my Clojure journey, and sometimes Scala.
@@ -14,7 +14,8 @@ I developed a strong interest in programming. I had however no idea how to start
 I consider myself lucky that I was accepted in a software engineering traineeship at a Dutch company called [Sogyo](http://www.sogyo.nl/). 
 Here I learned about software principles and got exposed to Java, .NET and various other stuff (e.g., Erlang). 
 In my free time I coded in Ruby (on Rails) and on Mono. 
-Now I work at ING where I do serious business with Scala and Java. 
+Then I worked at ING where I did serious business with Scala and Java. 
+Currently a dream came true since I can work in Clojure and help develop a data and privacy standard for smart meters.
 I love Lisp, functional programming, and life.
 
 ### Why?

@@ -1,6 +1,6 @@
 {:title "Recommended Reading"
  :layout :page
- :page-index 0
+ :page-index 2
  :navbar? true}
 
 ## Structure and Interpretation of Computer Programs
