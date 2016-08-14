@@ -82,7 +82,7 @@ HELM completion at point.
 Display undo tree.
 
 ### SPC w l
-It is impossible to move out of Neotree with C-w Vim movements since the
+It is impossible to move out of Neotree with C-w Vim movements since the 
 Vim keybindings are disabled. To move to another buffer use `C-x o` or `SPC w l` to move to the left (so SPC is substituted for C here).
 
 ### SPC f e d
