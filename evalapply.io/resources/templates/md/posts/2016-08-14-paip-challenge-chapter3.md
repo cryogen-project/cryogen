@@ -228,7 +228,7 @@ For now, we just ask the questions and update if the user has an answer.
 
 Usage of the program looks like this:
 
-<img src="http://i.imgur.com/1GniKoN.png" alt="Interacting with the program via the REPL."/>
+<img src="http://i.imgur.com/JDVnLUs.png" alt="Interacting with the program via the REPL."/>
 
 The node in the tree is updated after an answer is given. The next time the same sequence of questions are answered the program responds with the answer the user added earlier. The representation is shown by dereferencing the atom.
 
