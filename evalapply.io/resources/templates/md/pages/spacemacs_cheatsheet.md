@@ -5,6 +5,8 @@
 
 This is my Spacemacs cheatsheet.
 
+For the shortcuts C is CTRL and M (Meta) is ALT.
+
 # Table of contents
 1. [Cider](#cider)
 2. [Testing and debugging](#testing_and_debugging)
@@ -27,14 +29,23 @@ Switch to REPL, in REPL switches to previous buffer.
 ### C-x C-e 
 Evaluate expression before cursor.
 
+### C-x M-p
+Send expression before cursor to REPL.
+
 ### C-c M-e 
 The same as `C-x C-e` except the result is sent to the REPL.
 
 ### C-c C-k
 Evaluate buffer.
 
+### C-c C-b
+Interrupt any pending evaluations.
+
 ### C-c C-d d or , h h
 Show the documentation as you would with (doc function-name).
+
+### C-c C-d r or , h g
+Display documentation with examples via Grimoire (from Clojure site).
 
 ### , g g
 Go to declaration
@@ -67,6 +78,9 @@ Remove breakpoints in method (if I am not mistaken).
 ### TAB
 HELM completion at point.
 
+### SPC a u
+Display undo tree.
+
 ### SPC w l
 It is impossible to move out of Neotree with C-w Vim movements since the
 Vim keybindings are disabled. To move to another buffer use `C-x o` or `SPC w l` to move to the left (so SPC is substituted for C here).
@@ -97,7 +111,7 @@ For Vim/Evil keybindings:
 
 # Clojure mode
 
-### C-A-\
+### C-M-\
 Indent region
 
 ### SPC k s
