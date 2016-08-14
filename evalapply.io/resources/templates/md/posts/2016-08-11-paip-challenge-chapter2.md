@@ -14,7 +14,7 @@ For those that do not speak Latin, this is the rough translation: "One is certai
 
 In this chapter we build a more elaborate Lisp program and therefore live a more certain life.
 The program we will build generates random English sentences.
-In fancy terms we call the program *generative syntax* for a *context-free phase-structure grammar*.
+In fancy terms we call the program *generative syntax* for a *context-free phrase-structure grammar*.
 
 The original Common Lisp code from the book can be viewed [here](http://norvig.com/paip/simple.lisp). 
 First I translated this code to Clojure below.

@@ -48,7 +48,9 @@ There are six maxims every programmer should know about:
    (cons 1 '(2 3 4))) ; => true
 ```
 
-### Exercise 3.3 [m] Write a function that will print an expression in dotted pair notation. Use the built-in function `princ` to print each component of the expression.
+### Exercise 3.3 [m] 
+
+*Write a function that will print an expression in dotted pair notation. Use the built-in function `princ` to print each component of the expression.*
 
 Note: princ prints suitable output without escape characters and binds some values to special Common Lisp parameters. I use `print`.
 
@@ -112,7 +114,8 @@ This works as follows for a list created by a chain of cons cells, the shorter n
 ; => (1 . (2 . ((3 . (4 . '())) . '())))
 ```
 
-### Exercise 3.4 [m] Write a function that, like the regular `print` function, will print an expression in dotted pair notation when necessary but will use normal list notation when possible.
+### Exercise 3.4 [m]
+*Write a function that, like the regular `print` function, will print an expression in dotted pair notation when necessary but will use normal list notation when possible.*
 
 Dotted pair notation is only necessary when the `rest` of a list is not a list. To implement this we have to make changes to the `create-dotted-pair-rest` method. Unfortunately it is impossible to create an improper list with native Clojure data structures.
 
@@ -122,4 +125,111 @@ Dotted pair notation is only necessary when the `rest` of a list is not a list. 
 
 This makes it impossible to write a test without implementing a linked list data structure in Clojure (like Max Countryman [did](http://macromancy.com/2014/01/16/data-structures-clojure-singly-linked-list.html)). Therefore I'll skip this exercise.
 
-### Exercise 3.5 ...
+Now the first hard exercise:
+
+### Exercise 3.5 [h] 
+
+*(Exercise in altering structure.) Write a program that will play the role of guesser in the game Twenty Questions. The user of the program will have in mind any type of thing. The program will ask questions of the user, which must be answered yes or no, or "it" when the program has guessed it. If the program runs out of guesses, it gives up and asks the user what "it" was. At first the program will not play well, but each time it plays, it will remember the user's replies and use them for subsequent guesses.*
+
+The idea seems to be that the program has a tree of questions and remembers the answer for each node.
+
+To solve it we need state. For mutable state we create a map which we hold in an [`atom`](http://clojure.org/reference/atoms).
+
+I use the following map to build a tree of questions and answers:
+
+```
+(def questions-and-answers
+  "Questions and answers database atom.
+  Keywords are used to traverse the tree.
+  An answer needs to be non-existent (nil) or in the form of a string."
+  (atom
+   {:is_it_a_programming_language?
+    {:yes
+     {:is_it_statically_typed?
+      {:yes
+       nil
+       :no
+       nil}}
+     :no
+     {:ca_va?
+      {:yes
+       nil
+       :no
+       nil}}}}))
+```
+
+The program could be made more interesting if it was possible to add new questions and answers. This way the database of questions and answers can keep growing.
+For now, we just ask the questions and update if the user has an answer.
+
+```
+(defn get-remaining
+  "Gets the remaining questions and answers from the questions-and-answers database.
+  previous should be a vector of the previous questions and answers."
+  [previous]
+  (if (empty? previous) @questions-and-answers
+      (get-in @questions-and-answers previous)))
+
+(defn get-next-question
+  "Gets the next question from questions-and-answers
+  previous should be a vector of the previous questions and answers."
+  [previous]
+  (-> previous get-remaining ffirst))
+
+(defn further-questions?
+  "True if there is an answer for a question. False if not."
+  [previous]
+  (if (empty? previous) true
+      (not (nil? (get-remaining previous)))))
+
+(defn found-answer?
+  "True if we have found the answer."
+  [previous]
+  (string? (get-remaining previous)))
+
+(defn set-answer!
+  "Sets the answer to the value provided.
+  previous should be a vector of the previous questions and answers."
+  [previous answer]
+  (swap! questions-and-answers assoc-in previous answer))
+
+(defn key->string
+  "Create a string of the answer of question key."
+  [key]
+  (-> (name key) (clojure.string/replace "_" " ") clojure.string/capitalize))
+
+(defn string->key
+  "Create a key of the answer string."
+  [answer]
+  (-> answer (clojure.string/replace " " "_") clojure.string/lower-case keyword))
+
+(defn driver-loop
+  "Asks the questions, updates the answers.
+  previous is vector containing the previous questions."
+  ([] (driver-loop [])) ; Start with no previous provided answers.
+  ([previous]
+   (let [question (get-next-question previous)
+         ask-it (println (key->string question)) ; ask-it is dummy variable to not create nested lets
+         answer (read)
+         print-answer (println answer) ; dummy, idem
+         previous (conj previous question (string->key answer))]
+     (cond (found-answer? previous)
+           (let [found-answer (get-remaining previous)]
+             (println (str "The answer is: " found-answer)))
+           (not (further-questions? previous))
+           (do (println "What was it?")
+               (let [given-answer (str (read))]
+                 (println given-answer)
+                 (set-answer! previous given-answer)
+                 (println "Thank you.")))
+           :else (recur previous)))))
+
+; (driver-loop)
+```
+
+Usage of the program looks like this:
+
+<img src="http://i.imgur.com/1GniKoN.png" alt="Interacting with the program via the REPL."/>
+
+The node in the tree is updated after an answer is given. The next time the same sequence of questions are answered the program responds with the answer the user added earlier. The representation is shown by dereferencing the atom.
+
+*TODO:* Rest of the exercises.
