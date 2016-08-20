@@ -1,0 +1,181 @@
+/*
+ * This file is part of gorilla-repl. Copyright (C) 2014-, Jony Hudson.
+ *
+ * gorilla-repl is licenced to you under the MIT licence. See the file LICENCE.txt for full details.
+ */
+
+body {
+    /*padding-top: 40px;*/
+}
+
+div#contents {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+h1 {
+    margin-bottom: 0.3em;
+}
+
+div.segment {
+    padding: 0.5em;
+    margin: 0.2em 0.2em 0.2em 0.2em;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #cccccc;
+}
+
+
+div.free {
+    background-color: #ffffff;
+    border-style: none;
+    padding: 0em 0.5em 0em 0.5em;
+    font-family: 'Lora', serif;
+    margin-top: 0.5em;
+}
+
+div.free h1,h2,h3,h4,h5 {
+    font-family: 'Arvo', serif;
+    color: #4682b4;
+}
+
+div.free p {
+    padding-left: 0.5em;
+}
+
+div.code {
+    background-color: #eeeeee;
+    margin: 0.5em 1.5em 0.2em 1.5em;
+    padding: 0.2em;
+}
+
+div.code .segment-main {
+    padding: 0.5em;
+    overflow: hidden;
+}
+
+div.output {
+    padding: 0.5em 1em 0.5em 1em;
+    border-style: solid;
+    background-color: white;
+    border-width: 1px;
+    border-color: #cccccc;
+    word-wrap: break-word;
+}
+
+div.html-output {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+div.output pre {
+    font-family: monospace;
+    white-space: pre-wrap;
+}
+
+div.error-text {
+    font-family: monospace;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ff0000;
+    color: #ff0000;
+    clear: both;
+    padding: 0.5em 1em 0.5em 1em;
+    margin-bottom: 0.3em;
+    background-color: #faf0f2;
+}
+
+div.stack-trace {
+    font-family: monospace;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ff0000;
+    color: #ff0000;
+    clear: both;
+    padding: 0.5em 1em 0.5em 1em;
+    margin-bottom: 0.3em;
+    background-color: white;
+}
+
+div.stack-trace ul {
+    margin-top: 0.25em;
+}
+
+li.clj-stackframe {
+    color: lightseagreen;
+}
+
+li.java-stackframe {
+    color: steelblue;
+}
+
+li.tooling-stackframe {
+    opacity: 0.25;
+}
+
+span.stackframe-ns {
+    color: #666666;
+}
+
+span.stackframe-fileloc {
+    color: #444444;
+}
+
+span.exception-header {
+    color: #444444;
+}
+
+
+div.console-text {
+    padding: 0.5em 1em 0.5em 1em;
+    margin-bottom: 0.3em;
+    font-family: monospace;
+    font-size: 12px;
+    color: steelblue;
+    border-color: #cccccc;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #FFFFFF;
+    word-wrap: break-word;
+}
+
+div.console-text pre {
+    white-space: pre-wrap;
+}
+
+div.vega {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+canvas.marks {
+    display: inline-block;
+}
+
+div.segment-footer {
+    clear: both;
+}
+
+/* So named to avoid conflict with bootstrap container */
+div.container-segment {
+    border-style: none;
+}
+
+
+table {
+    border: 1px #666;
+    border-collapse: collapse;
+}
+th {
+    font-family: 'Arvo', serif;
+    color: #4682b4;
+    padding: 0.5em;
+    border: 1px solid #666;
+    background-color: #ddd;
+}
+
+td {
+    padding: 1em;
+    border: 1px solid #666;
+    background-color: white;
+}

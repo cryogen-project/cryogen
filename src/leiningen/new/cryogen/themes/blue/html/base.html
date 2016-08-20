@@ -13,8 +13,6 @@
     {% style "css/screen.css" %}
 </head>
 <body>
-
-
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
@@ -50,6 +48,9 @@
     <div class="row">
         <div class="col-lg-9">
             <div id="content">
+
+		{% block sheetdata %}
+                {% endblock %}
                 {% block content %}
                 {% endblock %}
             </div>
