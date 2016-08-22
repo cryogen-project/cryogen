@@ -14,6 +14,7 @@ For the shortcuts C is CTRL and M (Meta) is ALT.
 4. [Editing](#editing)
 5. [Clojure mode](#clojure_mode)
 6. [Magit](#magit)
+7. [Vim](#vim)
 
 # Cider
 
@@ -29,14 +30,17 @@ Switch to REPL, in REPL switches to previous buffer.
 ### C-x C-e 
 Evaluate expression before cursor.
 
-### C-x M-p
-Send expression before cursor to REPL.
-
 ### C-c M-e 
 The same as `C-x C-e` except the result is sent to the REPL.
 
+### C-x M-p
+Send expression before cursor to REPL.
+
 ### C-c C-k
 Evaluate buffer.
+
+### , f b
+Format buffer (indentation)
 
 ### C-c C-b
 Interrupt any pending evaluations.
@@ -52,6 +56,9 @@ Go to declaration
 
 ### C-c M-n 
 Switch to namespace of current Clojure buffer. 
+
+### SPC m r f u or , r f u
+Find usages.
 
 # Testing and debugging
 
@@ -84,6 +91,9 @@ Display undo tree.
 ### SPC w l
 It is impossible to move out of Neotree with C-w Vim movements since the 
 Vim keybindings are disabled. To move to another buffer use `C-x o` or `SPC w l` to move to the left (so SPC is substituted for C here).
+
+### SPC p t
+Open Neotree in root of project.
 
 ### SPC f e d
 Show dot file.
@@ -147,5 +157,19 @@ See https://github.com/clojure-emacs/clojure-mode
 Display git status
 - s Add untracked file to staging area
 - i Add file to .gitignore
+- TAB for viewing changes
+- k for undoing changes
+- C-SPC start selection and stop with C-SPC
+- s add selected area to staging area
+- S stage everything
+- c commit selection
+- C-c C-k commit cancelled
+- p voor pull
+- P voor push
 
 See http://daemianmack.com/magit-cheatsheet.html
+
+# Evil-mode
+
+### C-z
+Toggle evil-mode.
