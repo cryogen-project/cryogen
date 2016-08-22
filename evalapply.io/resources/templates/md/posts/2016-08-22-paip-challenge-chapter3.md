@@ -232,4 +232,105 @@ Usage of the program looks like this:
 
 The node in the tree is updated after an answer is given. The next time the same sequence of questions are answered the program responds with the answer the user added earlier. The representation is shown by dereferencing the atom.
 
-*TODO:* Rest of the exercises.
+### Exercise 3.6 [h] 
+*Given the following initialization for the lexical variable a and the special variable \*b\*, what will be the value of the 1st form?*
+
+Initialization is translated to Clojure:
+
+```
+(def a 'global-a)
+(def ^:dynamic *b* 'global-b)
+(def f (fn [] *b*))
+
+(let [a   'local-a
+      *b* 'local-b]
+  (list a *b* (f) (var-get #'a) (var-get #'*b*)))
+```
+
+This returns `(local-a local-b global-b global-a global-b).
+
+I hoped to see the dynamic scoping at work in (var-get) #'*b* so that the showed version was returned, this did not work like this.
+
+### Exercise 3.7 [s]
+*Why do you think the leftmost of two keys is the one that counts, rather than the rightmost?*
+
+Quicker search to argument list and easier to cons up new value to the beginning of a list (in Common Lisp).
+The latter is not the case in Clojure with its vector argument lists.
+
+### Exercise 3.8 [m]
+*Some versions of  Kyoto Common Lisp (KCL) have a bug wherein they use the rightmost value when more than one keyword/value pair is specified for the same keyword. Change the definition of find-all so that it works in KCL.*
+
+```
+(defn llast
+  "Gets second to last value."
+  [coll]
+  (-> coll butlast last))
+
+(defn get-value
+  "Finds the value for a key from right to left. Returns value."
+  [key coll]
+  (if (= key (llast coll))
+    (last coll)
+    (recur key (drop-last 2 coll))))
+
+(defn find-all
+  "Find all those elements of sequence that match item, according to the keywords.
+  Doesn't alter sequence."
+  [item coll & options]
+  (cond
+    (and (some #(= :test-fn %) options) (some #(= :key-fn %) options))
+    (let [test-fn (get-value :test-fn options)
+          key-fn (get-value :key-fn options)
+          result (remove #(not (test-fn % item)) coll)
+          final-result (map key-fn result)]
+      final-result)
+    (some #(= :test-fn %) options)
+    (let [test-fn (get-value :test-fn options)
+          final-result (remove #(not (test-fn % item)) options)]
+      final-result)
+    (some #(= :key-fn %) options)
+    (let [key-fn (get-value :key-fn options)
+          result (remove #(not (= % item)) coll)
+          final-result (map key-fn result)]
+      final-result)
+    :else (remove #(not (= % item)) coll)))
+```
+
+`(find-all 1 '(1 1 2 3 4 5 6) :test-fn = :key-fn inc :test-fn >)` returns `'(3 4 5 6 7)`. The rightmost `key-fn:` is used (`>`).
+
+### Exercise 3.9 [m]
+*Write a version of 1ength using the function reduce.*
+
+```
+(defn length
+  "Finds the length of coll using the function reduce."
+  [coll]
+  (reduce (fn [acc e] (inc acc)) coll))
+```
+
+### Exercise 3.10 [m]
+*Use a reference manual or describe to figure out what the functions lcm and nreconc do.*
+`lcm` finds the lowest common denominator and `nreconc` does some sort of reversing. The first is available in Clojure contrib library, the second is not available in Clojure.
+
+### Exercise 3.11 [m]
+*There is a built-in Common Lisp function that, given a key, a value, and an association list, returns a new association list that is extended to include the key/value pair. What is the name of this function?*
+
+Clojure's assoc does this:
+
+```
+(assoc {:other-key 'other-value} :key 'value) ; => {:other-key other-value, :key value}
+```
+
+### Exercise 3.12 [m]
+*Write a single expression using format that will take a list of words and print them as a sentence, with the first word capitalized and a period after the last word. You will have to consult a reference to learn new format directives.*
+
+I think this cannot be done by format. It can for example be done via `clojure.string` methods:
+
+```
+(defn as-sentence
+  "Takes a list of words and creates a sentence with first word capitalized and period at end."
+  [word-list]
+  (str (clojure.string/capitalize (clojure.string/join " " word-list)) "."))
+```
+
+That's it. In Chapter 4 we will built a General Problem Solver.
