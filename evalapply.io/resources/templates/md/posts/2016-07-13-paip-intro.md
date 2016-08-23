@@ -1,4 +1,4 @@
-{:title "PAIP in Clojure Challenge Chapter 1"
+{:title "PAIP in Clojure Chapter 1"
 :layout :post
 :tags ["Clojure" "Lisp" "PAIP"]}
 
@@ -8,9 +8,9 @@ From my parents I received the book [*Paradigms of Artificial Intelligence Progr
 
 PAIP is a classic with high standard Common Lisp code to solve problems in artificial intelligence. My goal is to have read this book and finished a selection of the exercises in Clojure within a year.
 
-There are 25 chapters and there are 52 weeks till 13 july 2017. This means I have to finish a chapter every two weeks.
+There are 25 chapters and there are 52 weeks till 13 July 2017. This means I have to finish a chapter every two weeks.
 
-The PAIP Clojure Challenge is reading PAIP and doing as much exercises as you can handle within a year.
+I will read PAIP and try to do as much exercises as I can handle.
 
 ## Summary for Chapter 1: Introduction to Lisp
 The chapter starts with a quote by Alan Perlis:

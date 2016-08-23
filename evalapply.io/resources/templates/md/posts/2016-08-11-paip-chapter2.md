@@ -1,4 +1,4 @@
-{:title "PAIP in Clojure Challenge Chapter 2"
+{:title "PAIP in Clojure Chapter 2"
 :layout :post
 :tags ["Clojure" "Lisp" "PAIP"]}
 

@@ -1,8 +1,8 @@
-{:title "PAIP in Clojure Challenge Chapter 3"
+{:title "PAIP in Clojure Chapter 3"
 :layout :post
 :tags ["Clojure" "Lisp" "PAIP"]}
 
-The Chapter of [Paradigms of Artificial Intelligence Programming: Case Studies in Common Lisp](http://amzn.to/29CsgBt) (PAIP) that dives into Common Lisp syntax.
+This is the chapter of [Paradigms of Artificial Intelligence Programming: Case Studies in Common Lisp](http://amzn.to/29CsgBt) (PAIP) that dives into Common Lisp syntax.
 
 ## Summary for Chapter 3: Overview of Lisp
 
