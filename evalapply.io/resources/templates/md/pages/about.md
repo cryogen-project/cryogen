@@ -25,7 +25,7 @@ Starting a blog is a good idea because you learn from the topics you write about
 My goal with the blog are exactly those things: to improve myself as a programmer and writer and to start conversations with others.
 
 ### What?
-I'll try to write one long (> 1.000 words) blog post a week about Clojure, life, Scala or a combination.
+I'll try to write one long (> 1.000 words) blog post once every two weeks about Clojure, life, Scala or a combination.
 
 ### How?
 The blog is built using [Cryogen](http://cryogenweb.org/). 
