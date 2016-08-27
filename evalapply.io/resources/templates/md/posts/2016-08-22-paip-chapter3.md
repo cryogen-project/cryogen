@@ -10,7 +10,7 @@ The chapter starts with a quote by Guy L. Steele, Jr.:
 
 >*No doubt about it. Common Lisp is a *big* language*.
 
-There is a lot to Common Lisp. In this chapter we will learn the subset of Lisp Norvig uses in his book.
+There is a lot to Common Lisp. In this chapter Norvig shows us the subset of Lisp he uses in his book.
 
 There are six maxims every programmer should know about:
 - Be specific. (Use `when` instead of `if` if there is only one clause.)
@@ -52,7 +52,7 @@ There are six maxims every programmer should know about:
 
 *Write a function that will print an expression in dotted pair notation. Use the built-in function `princ` to print each component of the expression.*
 
-Note: princ prints suitable output without escape characters and binds some values to special Common Lisp parameters. I use `print`.
+Note: `princ` prints suitable output without escape characters and binds some values to special Common Lisp parameters. I use Clojure's `print`.
 
 Dotted pair notation is used in Lisps to show we are dealing with an *improper* list: a linked list where the second element of a cell is not a list.
 This is notated with a dotted pair. E.g., `(cons 1 2) ; => '(1 . 2)`.
@@ -233,9 +233,6 @@ Usage of the program looks like this:
 The node in the tree is updated after an answer is given. The next time the same sequence of questions are answered the program responds with the answer the user added earlier. The representation is shown by dereferencing the atom.
 
 ### Exercise 3.6 [h] 
-*Given the following initialization for the lexical variable a and the special variable \*b\*, what will be the value of the 1st form?*
-
-Initialization is translated to Clojure:
 
 ```
 (def a 'global-a)
@@ -247,9 +244,13 @@ Initialization is translated to Clojure:
   (list a *b* (f) (var-get #'a) (var-get #'*b*)))
 ```
 
-This returns `(local-a local-b global-b global-a global-b).
+*Given the initialization for the lexical variable a and the special variable \*b\* above, what will be the value of the 1st form?*
 
-I hoped to see the dynamic scoping at work in (var-get) #'*b* so that the showed version was returned, this did not work like this.
+This returns `(local-a local-b global-b global-a global-b)`.
+
+I translated the Common Lisp example from the book to Clojure. That example had different behavior. 
+I hoped to see the dynamic scoping at work in `(var-get #'*b*)` so that the shadowed `*b*` was returned in the second position.
+I will probably figure out later how to do this.
 
 ### Exercise 3.7 [s]
 *Why do you think the leftmost of two keys is the one that counts, rather than the rightmost?*

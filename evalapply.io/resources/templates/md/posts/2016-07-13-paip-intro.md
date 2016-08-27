@@ -6,11 +6,10 @@ From my parents I received the book [*Paradigms of Artificial Intelligence Progr
 
 <a href="http://amzn.to/29CsgBt"><img src="https://images-na.ssl-images-amazon.com/images/I/516h5FydqNL._SX359_BO1,204,203,200_.jpg"></img></a>
 
-PAIP is a classic with high standard Common Lisp code to solve problems in artificial intelligence. My goal is to have read this book and finished a selection of the exercises in Clojure within a year.
+PAIP is a classic with high standard Common Lisp code to solve problems in artificial intelligence. 
+The coming year I will study this book.
 
-There are 25 chapters and there are 52 weeks till 13 July 2017. This means I have to finish a chapter every two weeks.
-
-I will read PAIP and try to do as much exercises as I can handle.
+There are 25 chapters and there are 52 weeks till 13 July 2017. This means I have to finish a chapter roughly every two weeks.
 
 ## Summary for Chapter 1: Introduction to Lisp
 The chapter starts with a quote by Alan Perlis:
@@ -64,7 +63,7 @@ With the use of an iterative loop:
 ```
 
 ### Exercise 1.3 [m] 
-*Write a function that counts the number of atoms in an expression. For example: `(count-atoms '(a (b) c)) = 3`. Notice that there is something of an ambiguity in this: should (a nil c) count as three atoms, or as two, because it is equivalent to (a () c)?*
+*Write a function that counts the number of atoms in an expression. For example: `(count-atoms '(a (b) c)) = 3`. Notice that there is something of an ambiguity in this: should `(a nil c)` count as three atoms, or as two, because it is equivalent to `(a () c)`?*
 
 ```
 (defn count-atoms
@@ -93,7 +92,7 @@ With the use of an iterative loop:
 ### Exercise 1.5 [m]
 *Write a function to compute the dot product of two sequences of numbers, represented as lists. The dot product is computed by multiplying corresponding elements and then adding up the resulting products. Example:*
 
-`(dot-product `(10 20) '(3 4)) = 10 x 3 + 20 x 4 = 110`
+`(dot-product '(10 20) '(3 4)) = 10 x 3 + 20 x 4 = 110`
 
 ```
 (defn dot-product
