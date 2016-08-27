@@ -164,8 +164,14 @@ Display git status
 - S stage everything
 - c commit selection
 - C-c C-k commit cancelled
-- p voor pull
-- P voor push
+- p for pull
+- P for push
+
+### ?
+Show options. :)
+
+### gr
+Refresh Magit buffer.
 
 See http://daemianmack.com/magit-cheatsheet.html
 
@@ -173,3 +179,7 @@ See http://daemianmack.com/magit-cheatsheet.html
 
 ### C-z
 Toggle evil-mode.
+
+# SPC-?
+
+Search documentation in Spacemacs.
