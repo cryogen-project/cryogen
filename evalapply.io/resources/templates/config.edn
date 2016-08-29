@@ -15,14 +15,14 @@
  :post-date-format   "yyyy-MM-dd"
  :sass-src           nil
  :sass-dest          nil
- :theme              "blue"
- :resources          ["img"]
+ :theme              "future-imperfect"
+ :resources          ["img" "fonts"]
  :keep-files         [".git"]
  :disqus?            false
  :disqus-shortname   "evalapply"
  :ignored-files      [#"\.#.*" #".*\.swp$"]
  :posts-per-page     5
- :blocks-per-preview 1000 ;; Display full post for now this way (better to improve posts-per-page variable)
+ :blocks-per-preview 2
  :previews?          true
  :separator          " :: "
  :clean-urls?        true}
