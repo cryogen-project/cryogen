@@ -69,17 +69,10 @@
                ["resources/templates/themes/nucleus/js/highlight.pack.js" (render "themes/nucleus/js/highlight.pack.js")]
                ["resources/templates/themes/nucleus/js/scripts.js" (render "themes/nucleus/js/scripts.js")]
                ["resources/templates/themes/nucleus/css/buttons.css" (render "themes/nucleus/css/buttons.css")]
-               ["resources/templates/themes/nucleus/css/highlight-tomorrow-night-eighties.css" (render "themes/nucleus/css/highlight-tomorrow-night-eighties.css")]
                ["resources/templates/themes/nucleus/css/menu.css" (render "themes/nucleus/css/menu.css")]
                ["resources/templates/themes/nucleus/css/reset.css" (render "themes/nucleus/css/reset.css")]
                ["resources/templates/themes/nucleus/css/style.css" (render "themes/nucleus/css/style.css")]
                ["resources/templates/themes/nucleus/css/typography.css" (render "themes/nucleus/css/typography.css")]
-               ["resources/templates/themes/nucleus/css/fonts/fontawesome/font-awesome.css" (render "themes/nucleus/css/fonts/fontawesome/font-awesome.css")]
-               ["resources/templates/themes/nucleus/css/fonts/fontawesome/FontAwesome.otf" (render "themes/nucleus/css/fonts/fontawesome/FontAwesome.otf")]
-               ["resources/templates/themes/nucleus/css/fonts/fontawesome/fontawesome-webfont.eot" (render "themes/nucleus/css/fonts/fontawesome/fontawesome-webfont.eot")]
-               ["resources/templates/themes/nucleus/css/fonts/fontawesome/fontawesome-webfont.svg" (render "themes/nucleus/css/fonts/fontawesome/fontawesome-webfont.svg")]
-               ["resources/templates/themes/nucleus/css/fonts/fontawesome/fontawesome-webfont.ttf" (render "themes/nucleus/css/fonts/fontawesome/fontawesome-webfont.ttf")]
-               ["resources/templates/themes/nucleus/css/fonts/fontawesome/fontawesome-webfont.woff" (render "themes/nucleus/css/fonts/fontawesome/fontawesome-webfont.woff")]
 
                ;;Markdown templates
                ["resources/templates/md/pages/about.md" (render "md/pages/about.md")]

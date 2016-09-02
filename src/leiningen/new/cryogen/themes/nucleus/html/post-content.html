@@ -13,12 +13,14 @@
 </div>
 {% if post.tags|not-empty %}
 <div id="post-tags">
+    <br/> 
     <b>Tags: </b>
     {% for tag in post.tags %}
     <a href="{{tag.uri}}">{{tag.name}}</a>
     {% endfor %}
 </div>
 {% endif %}
+<br/>
 
 
   <!--   <h1>Donec et lacus sed nibh faucibus elementum</h1> -->
