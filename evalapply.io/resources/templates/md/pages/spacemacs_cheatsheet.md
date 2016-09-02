@@ -1,6 +1,6 @@
 {:title "Spacemacs Cheatsheet"
  :layout :page
- :page-index 1
+ :page-index 2
  :navbar? true}
 
 This is my Spacemacs cheatsheet.
@@ -14,7 +14,7 @@ For the shortcuts C is CTRL and M (Meta) is ALT.
 4. [Editing](#editing)
 5. [Clojure mode](#clojure_mode)
 6. [Magit](#magit)
-7. [Vim](#vim)
+7. [Vim](#evil-mode)
 
 # Cider
 
