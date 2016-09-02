@@ -91,7 +91,7 @@ Instead of looking for files ending in `.md` in the `resources/templates/md` dir
 
 ### Selecting a Theme
 
-The Cryogen template comes with two themes in the `resources/templates/themes` folder. To change your blog's theme, change the value of the `:theme` key in `config.edn`.
+The Cryogen template comes with three themes in the `resources/templates/themes` folder. To change your blog's theme, change the value of the `:theme` key in `config.edn`.
 
 ### Customizing Layouts
 
