@@ -1,0 +1,20 @@
+{% extends "/html/base.html" %}
+{%block subtitle %}: {{page.title}}{% endblock %}
+{% block content %}
+<div id="custom-page">
+    <div id="page-header">
+        <h1>{{page.title}}</h1>
+    </div>
+    {% if page.toc %}{{page.toc|safe}}{% endif %}
+    {{page.content|safe}}
+
+    <div id="prev-next">
+        {% if page.prev %}
+        <a class="button" href="{{page.prev.uri}}">&laquo; {{page.prev.title}}</a>
+        {% endif %}
+        {% if page.next %}
+        <a class="right button" href="{{page.next.uri}}">{{page.next.title}} &raquo;</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
