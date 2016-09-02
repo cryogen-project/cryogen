@@ -8,7 +8,7 @@
             {% if post.author %}
             <div class="author">{{post.author}}</div>
             {% endif %}
-            <div class="date">{{post.date|date:longDate}}</div>
+            <strong>{{post.date|date:longDate}}</strong>
         </div>
     </div>
     {{post.content|safe}}
