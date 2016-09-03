@@ -4,8 +4,8 @@
 <!--[if IE 8 ]><html class="ie ie8" lang="en"><![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
 <head>
-  <!-- Website Template designed by www.downloadwebsitetemplates.co.uk
-    Modified to fit Cryogen.-->
+    <!-- Website Template designed by www.downloadwebsitetemplates.co.uk -->
+    <!-- Modified to fit Cryogen.-->
     <meta charset="UTF-8">
     <title>{{title}}{% block subtitle %}{% endblock %}</title>
     <meta name="description" content="">
@@ -37,34 +37,34 @@
         </a>
     </p>
 
-  <div id="menucont" class="bodycontainer clearfix">
-      <div class="menutitle">
-          <p><span class="fa fa-reorder"></span><strong>Menu</strong></p>
-      </div>
-      <ul class="menu">
-          <li {% if home %} class="active" {% endif %}><a title="Home" href="{{index-uri}}">Home</a></li>
-          <li {% if archives %} class="active" {% endif %}><a title="Archives" href="{{archives-uri}}">Archives</a></li>
-          {% if tags|not-empty %}
-          <li {%ifequal uri tags-uri %} class="active" {% endifequal %}><a title="Tags" href="{{tags-uri}}">Tags</a></li>
-          {% endif %}
-          {% for nav-page in navbar-pages %}
-          <li {%ifequal page.uri nav-page.uri %} class="active" {% endifequal %}>
-              <a href="{{nav-page.uri}}">{{nav-page.title}}</a>
-          </li>
-          {% endfor %}
-          <li><a title="RSS" href="{{rss-uri}}">RSS</a></li>
-      </ul>
-  </div>
+    <div id="menucont" class="bodycontainer clearfix">
+        <div class="menutitle">
+            <p><span class="fa fa-reorder"></span><strong>Menu</strong></p>
+        </div>
+        <ul class="menu">
+            <li {% if home %} class="active" {% endif %}><a title="Home" href="{{index-uri}}">Home</a></li>
+            <li {% if archives %} class="active" {% endif %}><a title="Archives" href="{{archives-uri}}">Archives</a></li>
+            {% if tags|not-empty %}
+            <li {%ifequal uri tags-uri %} class="active" {% endifequal %}><a title="Tags" href="{{tags-uri}}">Tags</a></li>
+            {% endif %}
+            {% for nav-page in navbar-pages %}
+            <li {%ifequal page.uri nav-page.uri %} class="active" {% endifequal %}>
+                <a href="{{nav-page.uri}}">{{nav-page.title}}</a>
+            </li>
+            {% endfor %}
+            <li><a title="RSS" href="{{rss-uri}}">RSS</a></li>
+        </ul>
+    </div>
 
-  <div id="socialmedia" class="clearfix">
-      <ul>
-          <li><a title="GitHub" href="./" rel="external"><span class="fa fa-github"></span></a></li>
-          <li><a title="Stack Overflow" href="./" rel="external"><span class="fa fa-stack-overflow"></span></a></li>
-          <li><a title="Google+" href="./" rel="external"><span class="fa fa-google-plus"></span></a></li>
-          <li><a title="LinkedIn" href="./" rel="external"><span class="fa fa-linkedin"></span></a></li>
-          <li><a title="Last.fm" href="./" rel="external"><span class="fa fa-lastfm"></span></a></li>
-      </ul>
-  </div>
+    <div id="socialmedia" class="clearfix">
+        <ul>
+            <li><a title="GitHub" href="./" rel="external"><span class="fa fa-github"></span></a></li>
+            <li><a title="Stack Overflow" href="./" rel="external"><span class="fa fa-stack-overflow"></span></a></li>
+            <li><a title="Google+" href="./" rel="external"><span class="fa fa-google-plus"></span></a></li>
+            <li><a title="LinkedIn" href="./" rel="external"><span class="fa fa-linkedin"></span></a></li>
+            <li><a title="Last.fm" href="./" rel="external"><span class="fa fa-lastfm"></span></a></li>
+        </ul>
+    </div>
     
 </div>
 
