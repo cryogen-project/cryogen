@@ -1,8 +1,8 @@
 <div class="post-header">
     <div id="post-meta" class="row">
-        <strong>{{post.date|date:longDate}}</strong>
+        <div class="col-lg-6">{{post.date|date:longDate}}</div>
         {% if post.author %}
-        <strong class="right">By: {{post.author}}</strong>
+        <span class="col-lg-6 right">By: {{post.author}}</span>
         {% endif %}
     </div>
     <h2>{{post.title}}</h2>
