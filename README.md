@@ -187,7 +187,6 @@ A Clojure library to provide Markdown rendering to the cryogen-core compiler by 
 * [Clojurians](http://blog.clojurians.org)
 * [Gundee and Company](http://www.gundee.com/)
 * [Teamcool Rocks](http://www.teamcool.net/index.html)
-* [Teamcool Rocks](http://www.teamcool.net/index.html)
 
 ## License
 
