@@ -1,0 +1,279 @@
+/* ==================================================
+   CSS Imports
+================================================== */
+@import url("reset.css");
+@import url("typography.css");
+@import url("menu.css");
+@import url("buttons.css");
+/* ==================================================
+   Google Fonts
+================================================== */
+@import url("http://fonts.googleapis.com/css?family=Oxygen:300,400,700");
+@import url("http://fonts.googleapis.com/css?family=Montserrat:400,700");
+
+/* ==================================================
+   Global Styles
+================================================== */
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    overflow: auto;
+
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+body {
+    font-family: "Oxygen", Arial, Verdana, Helvetica, sans-serif;
+    font-size: 15px;
+    color: #555;
+    font-weight: 400;
+    line-height: 28px;
+    background: #FFF;
+
+    text-rendering: optimizeLegibility;
+    vertical-align: baseline;
+}
+
+::selection {
+    background: #A71E2E;
+    color: #FFF;
+}
+
+::-moz-selection {
+    background: #A71E2E;
+    color: #FFF;
+}
+
+a {
+    color: #A71E2E;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #222;
+}
+
+/* ==================================================
+   Images
+================================================== */
+
+img {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+}
+
+img.imgfull {
+    float: left;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 0 20px 0;
+    border-top: 5px solid #A71E2E;
+}
+
+/* ==================================================
+   Layout Styles
+================================================== */
+
+.container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 0 30px;
+    min-width: 280px;
+    line-height: 26px;
+}
+
+.container .bodycontainer {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+}
+
+/* ==================================================
+   Sections
+================================================== */
+
+#left {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 280px;
+    background: #A71E2E;
+    color: #FFF;
+    z-index: 3;
+    overflow-y: auto;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+#left p#logo {
+    margin: 0 0 20px 0;
+}
+
+#left p#logo a {
+    float: left;
+    display: block;
+    padding: 30px 20px;
+    width: 100%;
+    color: #FFF;
+    margin: 0 0 20px 0;
+}
+
+#left p#logo a span.fa {
+    float: left;
+    display: block;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.2);
+    font-size: 48px;
+    margin: 0 0 10px 0;
+
+    -webkit-border-radius: 80px;
+    -moz-border-radius: 80px;
+    border-radius: 80px;
+}
+
+#left p#logo a span.text {
+    float: left;
+    width: 100%;
+    font-size: 30px;
+    line-height: 30px;
+    font-weight: 700;
+    font-family: "Montserrat";
+    text-transform: uppercase;
+}
+
+#left #socialmedia ul {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    margin: 0;
+}
+
+#left #socialmedia ul li {
+    display: inline-block;
+    list-style-type: none;
+    margin: 0 12px 0 0;
+    padding: 0;
+}
+
+#left #socialmedia ul li a {
+    font-size: 23px;
+    color: #FFF;
+    opacity: 0.4;
+}
+
+#left #socialmedia ul li a:hover {
+    opacity: 1;
+}
+
+#right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 1240px;
+    z-index: 2;
+    padding: 40px 50px 40px 320px;
+}
+
+#right p {
+    margin: 0 0 20px 0;
+}
+
+#right p:last-child {
+    margin: 0;
+}
+
+#footercont {
+    color: rgba(0, 0, 0, 0.4);
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+#footercont p {
+    margin: 0;
+    text-align: left;
+    letter-spacing: 1.4px;
+}
+
+/* ==================================================
+   Responsive Media Queries - Tablets
+================================================== */
+
+@media screen and (max-width: 768px) {
+
+    #left {
+        max-width: 200px;
+    }
+
+    #left #socialmedia ul {
+        bottom: 20px;
+        left: 20px;
+    }
+
+    #left #socialmedia ul li {
+        margin: 0 8px 0 0;
+    }
+
+    #left #socialmedia ul li a {
+        font-size: 21px;
+    }
+
+    #right {
+        padding: 20px 20px 20px 230px;
+    }
+
+}
+
+/* ==================================================
+   Responsive Media Queries - Mobiles
+================================================== */
+
+@media screen and (max-width: 480px) {
+
+    #left {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    #left p#logo a {
+        padding: 0;
+    }
+
+    #left #socialmedia ul {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        margin: 5px 0 0 0;
+    }
+
+    #left #socialmedia ul li a {
+        font-size: 25px;
+    }
+
+    #right {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        max-width: 100%;
+        padding: 30px 20px;
+    }
+
+}
+

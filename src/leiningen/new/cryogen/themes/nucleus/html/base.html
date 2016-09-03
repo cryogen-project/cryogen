@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"><![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"><![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+<head>
+    <!-- Website Template designed by www.downloadwebsitetemplates.co.uk -->
+    <!-- Modified to fit Cryogen.-->
+    <meta charset="UTF-8">
+    <title>{{title}}{% block subtitle %}{% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57.png">
+    <link rel="shortcut icon" href="images/ico/favicon.png">
+    <!--[if IE]><![endif]-->
+    {% style "css/buttons.css" %}
+    {% style "css/menu.css" %}
+    {% style "css/reset.css" %}
+    {% style "css/style.css" %}
+    {% style "css/typography.css" %}
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/tomorrow-night-eighties.min.css">
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body>
+
+<div id="left">
+
+    <p id="logo">
+        <a title="{{title}}" href="{{index-uri}}">
+            <span class="fa fa-rocket"></span>
+            <span class="text">Nucleus</span>
+        </a>
+    </p>
+
+    <div id="menucont" class="bodycontainer clearfix">
+        <div class="menutitle">
+            <p><span class="fa fa-reorder"></span><strong>Menu</strong></p>
+        </div>
+        <ul class="menu">
+            <li {% if home %} class="active" {% endif %}><a title="Home" href="{{index-uri}}">Home</a></li>
+            <li {% if archives %} class="active" {% endif %}><a title="Archives" href="{{archives-uri}}">Archives</a></li>
+            {% if tags|not-empty %}
+            <li {%ifequal uri tags-uri %} class="active" {% endifequal %}><a title="Tags" href="{{tags-uri}}">Tags</a></li>
+            {% endif %}
+            {% for nav-page in navbar-pages %}
+            <li {%ifequal page.uri nav-page.uri %} class="active" {% endifequal %}>
+                <a href="{{nav-page.uri}}">{{nav-page.title}}</a>
+            </li>
+            {% endfor %}
+            <li><a title="RSS" href="{{rss-uri}}">RSS</a></li>
+        </ul>
+    </div>
+
+    <div id="socialmedia" class="clearfix">
+        <ul>
+            <li><a title="GitHub" href="./" rel="external"><span class="fa fa-github"></span></a></li>
+            <li><a title="Stack Overflow" href="./" rel="external"><span class="fa fa-stack-overflow"></span></a></li>
+            <li><a title="Google+" href="./" rel="external"><span class="fa fa-google-plus"></span></a></li>
+            <li><a title="LinkedIn" href="./" rel="external"><span class="fa fa-linkedin"></span></a></li>
+            <li><a title="Last.fm" href="./" rel="external"><span class="fa fa-lastfm"></span></a></li>
+        </ul>
+    </div>
+    
+</div>
+
+<div id="right" class="clearfix">
+    {% block content %}
+    {% endblock %}
+<hr/>
+<div id="footercont" class="clearfix">Copyright &copy; {{today|date:yyyy}} {{author}}
+    <p>Powered by <a href="http://cryogenweb.org">Cryogen</a> | Free Website Template by <a title="free website templates" href="http://www.downloadwebsitetemplates.co.uk" rel="external">Download Website Templates</a></p>
+
+</div>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+{% script "js/highlight.pack.js" %}
+<script>hljs.initHighlightingOnLoad();</script>
+{% script "js/scripts.js" %}
+</body>
+</html>
