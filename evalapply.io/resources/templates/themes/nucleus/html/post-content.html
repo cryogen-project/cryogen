@@ -1,0 +1,23 @@
+<div class="post-header">
+    <div id="post-meta" class="row">
+        <strong>{{post.date|date:longDate}}</strong>
+        {% if post.author %}
+        <span class="col-lg-6 right">By: {{post.author}}</span>
+        {% endif %}
+    </div>
+    <h1>{{post.title}}</h1>
+</div>
+<div>
+    {% if post.toc %}{{post.toc|safe}}{% endif %}
+    {{post.content|safe}}
+</div>
+{% if post.tags|not-empty %}
+<div id="post-tags">
+    <br/> 
+    <b>Tags: </b>
+    {% for tag in post.tags %}
+    <a href="{{tag.uri}}">{{tag.name}}</a>
+    {% endfor %}
+</div>
+{% endif %}
+<br/>

@@ -1,0 +1,27 @@
+{:site-title         "(eval apply)"
+ :author             "Erwin Rooijakkers"
+ :description        "Clojure, life and sometimes Scala"
+ :site-url           "http://evalapply.io"
+ :post-root          "posts"
+ :page-root          "pages"
+ :post-root-uri      "posts"
+ :page-root-uri      "pages"
+ :tag-root-uri       "tags"
+ :author-root-uri    "authors"
+ :blog-prefix        ""
+ :rss-name           "feed.xml"
+ :rss-filters        ["cryogen"]
+ :recent-posts       3
+ :post-date-format   "yyyy-MM-dd"
+ :sass-src           nil
+ :sass-dest          nil
+ :theme              "nucleus"
+ :resources          ["img"]
+ :keep-files         [".git"]
+ :disqus?            true
+ :disqus-shortname   "evalapply"
+ :ignored-files      [#"\.#.*" #".*\.swp$"]
+ :posts-per-page     5
+ :blocks-per-preview 4
+ :previews?          true
+ :clean-urls?        true}
