@@ -48,6 +48,12 @@ lein ring server
 
 The server will watch for changes in the `resources/templates` folder and recompile the content automatically.
 
+You can also generate the content without bringing up a server via:
+
+```
+lein run
+```
+
 ### Site Configuration
 
 The site configuration file is found at `templates/config.edn`, this file looks as follows:
