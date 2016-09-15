@@ -134,7 +134,8 @@ The ` initHighlightingOnLoad` function is called in `{theme}/html/base.html`.
 ## Deploying Your Site
 
 The generated static content will be found under the `resources/public` folder. Simply copy the content to a static
-folder for a server such as Nginx or Apache and your site is now ready for service.
+folder for a server such as Nginx or Apache and your site is now ready for
+service. You can re-generate the content by running `lein run`.
 
 A sample Nginx configuration that's placed in `/etc/nginx/sites-available/default` can be seen below:
 
