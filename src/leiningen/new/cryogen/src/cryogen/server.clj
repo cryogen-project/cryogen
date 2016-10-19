@@ -1,8 +1,10 @@
 (ns cryogen.server
-  (:require [compojure.core :refer [GET defroutes]]
+  (:require [clojure.java.io :refer [as-file resource]]
+            [compojure.core :refer [GET defroutes]]
             [compojure.route :as route]
-            [ring.util.response :refer [redirect resource-response]]
-            [ring.util.codec :refer [url-decode]]
+            [ring.util.response :refer [content-type]]
+            [ring.middleware.file :refer [wrap-file]]
+            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [cryogen-core.watcher :refer [start-watcher!]]
             [cryogen-core.plugins :refer [load-plugins]]
             [cryogen-core.compiler :refer [compile-assets-timed read-config]]
@@ -14,19 +16,18 @@
   (let [ignored-files (-> (read-config) :ignored-files)]
     (start-watcher! "resources/templates" ignored-files compile-assets-timed)))
 
-(defn wrap-subdirectories
-  [handler]
-  (fn [request]
-    (let [req-uri (.substring (url-decode (:uri request)) 1)
-          res-path (path req-uri (when (:clean-urls? (read-config)) "index.html"))]
-      (or (resource-response res-path {:root "public"})
-          (handler request)))))
-
 (defroutes routes
-  (GET "/" [] (redirect (let [config (read-config)]
-                          (path (:blog-prefix config) "/"
-                                (when-not (:clean-urls? config) "index.html")))))
   (route/resources "/")
   (route/not-found "Page not found"))
 
-(def handler (wrap-subdirectories routes))
+(defn wrap-default-content-type [handler]
+  (fn [request]
+    (-> (handler request)
+        (content-type "text/html"))))
+
+(def handler (-> routes
+                 (wrap-file
+                   (-> "public" resource as-file str)
+                   {:index-files? (:clean-urls? (read-config))})
+                 (wrap-default-content-type)
+                 (wrap-defaults site-defaults)))
