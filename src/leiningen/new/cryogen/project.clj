@@ -9,6 +9,7 @@
                            [cryogen-markdown "0.1.4"]
                            [cryogen-core "0.1.42"]]
             :plugins [[matsu911/lein-ring "0.9.8"]]
+            :prep-tasks [["prep-dirs"]]
             :main cryogen.core
             :ring {:init cryogen.server/init
                    :auto-refresh? true

@@ -80,7 +80,9 @@
       (apply ->files
              options
              [".gitignore" (render "gitignore")]
+             [".lein-classpath" (render ".lein-classpath")]
              ["project.clj" (render "project.clj")]
+             ["tasks/leiningen/prep_dirs.clj" (render "tasks/leiningen/prep_dirs.clj")]
              ;;static resources
              ["resources/templates/img/cryogen.png" (resource "img/cryogen.png")]
              ;;Markdown templates
