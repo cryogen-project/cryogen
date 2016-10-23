@@ -2,7 +2,7 @@
   (:require [clojure.java.io :refer [as-file resource]]
             [compojure.core :refer [GET defroutes]]
             [compojure.route :as route]
-            [ring.util.response :refer [content-type]]
+            [ring.util.response :refer [redirect content-type]]
             [ring.middleware.file :refer [wrap-file]]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [cryogen-core.watcher :refer [start-watcher!]]
@@ -17,6 +17,9 @@
     (start-watcher! "resources/templates" ignored-files compile-assets-timed)))
 
 (defroutes routes
+  (GET "/" [] (redirect (let [config (read-config)]
+                          (path (:blog-prefix config) "/"
+                            (when-not (:clean-urls? config) "index.html")))))
   (route/resources "/")
   (route/not-found "Page not found"))
 
