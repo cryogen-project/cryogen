@@ -13,5 +13,5 @@
             :main cryogen.core
             :ring {:init cryogen.server/init
                    :auto-refresh? true
-                   :refresh-paths ["src" "resources/public"]
+                   :refresh-paths ["tmp/compiler"]
                    :handler cryogen.server/handler})
