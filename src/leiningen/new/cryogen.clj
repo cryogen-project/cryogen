@@ -99,4 +99,5 @@
              ;;namespaces
              ["src/cryogen/core.clj" (render "src/cryogen/core.clj")]
              ["src/cryogen/server.clj" (render "src/cryogen/server.clj")]
+             ["tmp/compiler/.gitkeep" (render "tmp/compiler/.gitkeep")]
              themes))))
