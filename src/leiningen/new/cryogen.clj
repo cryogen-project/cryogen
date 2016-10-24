@@ -80,7 +80,9 @@
       (apply ->files
              options
              [".gitignore" (render "gitignore")]
+             [".lein-classpath" (render ".lein-classpath")]
              ["project.clj" (render "project.clj")]
+             ["tasks/leiningen/prep_dirs.clj" (render "tasks/leiningen/prep_dirs.clj")]
              ;;static resources
              ["resources/templates/img/cryogen.png" (resource "img/cryogen.png")]
              ;;Markdown templates
@@ -97,4 +99,5 @@
              ;;namespaces
              ["src/cryogen/core.clj" (render "src/cryogen/core.clj")]
              ["src/cryogen/server.clj" (render "src/cryogen/server.clj")]
+             ["tmp/compiler/.gitkeep" (render "tmp/compiler/.gitkeep")]
              themes))))
