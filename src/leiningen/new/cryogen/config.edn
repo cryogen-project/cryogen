@@ -27,4 +27,5 @@
  :blocks-per-preview 2
  :previews?          false
  :clean-urls?        true
- :hide-future-posts? true}
+ :hide-future-posts? true
+ :debug?             false}
