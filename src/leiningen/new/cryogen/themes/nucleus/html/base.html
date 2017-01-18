@@ -65,7 +65,7 @@
             <li><a title="Last.fm" href="./" rel="external"><span class="fa fa-lastfm"></span></a></li>
         </ul>
     </div>
-    
+
 </div>
 
 <div id="right" class="clearfix">
@@ -81,5 +81,6 @@
 {% script "js/highlight.pack.js" %}
 <script>hljs.initHighlightingOnLoad();</script>
 {% script "js/scripts.js" %}
+{% if post.klipse %} {{post.klipse|safe}} {% endif %}
 </body>
 </html>

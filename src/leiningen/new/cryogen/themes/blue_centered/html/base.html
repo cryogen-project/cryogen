@@ -90,6 +90,6 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 {% script "js/highlight.pack.js" %}
 <script>hljs.initHighlightingOnLoad();</script>
+{% if post.klipse %} {{post.klipse|safe}} {% endif %}
 </body>
 </html>
-
