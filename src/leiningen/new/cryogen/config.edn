@@ -28,4 +28,5 @@
  :previews?          false
  :clean-urls?        true
  :hide-future-posts? true
+ :klipse             {}
  :debug?             false}
