@@ -21,6 +21,7 @@ This ReadMe only documents a subset of Cryogen's features. For additional docume
 * Sitemap generation
 * RSS feed generation
 * Sass/SCSS compilation
+* Klipse Integration
 
 ## Prerequisites
 
@@ -76,6 +77,8 @@ The site configuration file is found at `templates/config.edn`, this file looks 
  :post-date-format   "yyyy-MM-dd"
  :sass-src           nil
  :sass-dest          nil
+ :sass-path          "sass"
+ :compass-path       "compass"
  :theme              "blue"
  :resources          ["img"]
  :keep-files         [".git"]
@@ -85,7 +88,10 @@ The site configuration file is found at `templates/config.edn`, this file looks 
  :posts-per-page     5
  :blocks-per-preview 2
  :previews?          false
- :clean-urls?        true}
+ :clean-urls?        true
+ :hide-future-posts? true
+ :klipse             {}
+ :debug?             false}
 ```
 
 For information about each key please see the ["Configuration"](http://cryogenweb.org/docs/configuration.html) portion of the Cryogen documentation site.
