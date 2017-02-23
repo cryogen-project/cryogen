@@ -1,0 +1,13 @@
+{% block content %}
+<div id="gist">
+    <div id="gist-header">
+        <a class="gist-uri" 
+	   href="https://gist.github.com{{id}}"
+	   title="{{language}}">
+	  <h2>{{name}}</h2></a>
+    </div>
+    <pre id="gist-content">
+      {{content}}
+    </pre>
+</div>
+{% endblock %}
