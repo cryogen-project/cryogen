@@ -14,11 +14,10 @@
  :recent-posts       3
  :post-date-format   "yyyy-MM-dd"
  :sass-src           nil
- :sass-dest          nil
  :sass-path          "sass"
  :compass-path       "compass"
  :theme              "blue"
- :resources          ["img"]
+ :resources          ["img" "css"]
  :keep-files         [".git"]
  :disqus?            false
  :disqus-shortname   ""

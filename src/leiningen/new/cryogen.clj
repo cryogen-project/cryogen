@@ -83,6 +83,8 @@
              ["project.clj" (render "project.clj")]
              ;;static resources
              ["resources/templates/img/cryogen.png" (resource "img/cryogen.png")]
+             ["resources/templates/css/example.css" (resource "css/example.css")]
+             ["resources/templates/css/sassexample.scss" (resource "css/sassexample.scss")]
              ;;Markdown templates
              ["resources/templates/md/pages/about.md" (render "md/pages/about.md")]
              ["resources/templates/md/pages/another-page.md" (render "md/pages/another-page.md")]
