@@ -76,7 +76,7 @@ The site configuration file is found at `templates/config.edn`, this file looks 
  :recent-posts         3
  :post-date-format     "yyyy-MM-dd"
  :archive-group-format "yyyy MMMM"
- :sass-src             ""
+ :sass-src             []
  :sass-path            "sass"
  :compass-path         "compass"
  :theme                "blue"
