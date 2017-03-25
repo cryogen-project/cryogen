@@ -15,7 +15,6 @@
  :post-date-format     "yyyy-MM-dd"
  :archive-group-format "yyyy MMMM"
  :sass-src             ""
- :sass-dest            ""
  :sass-path            "sass"
  :compass-path         "compass"
  :theme                "blue"
