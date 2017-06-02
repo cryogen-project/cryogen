@@ -1,0 +1,16 @@
+{% extends "/html/base.html" %}
+{%block subtitle %}: Posts Tagged &quot;{{name}}&quot;{% endblock %}
+{% block content %}
+<div id="posts-by-tag">
+    <div id="page-header">
+        <h2>Posts Tagged &quot;{{name}}&quot;</h2>
+    </div>
+    <ul>
+    {% for post in posts %}
+        <li>
+            <a href="{{post.uri}}">{{post.title}}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}
