@@ -21,7 +21,12 @@
             <div id="logo">
                 <a title="{{title}}" href="{{index-uri}}">
                     <img class="icon" src="img/white-lotus.svg">
-                    <div class="text desktop-and-tablet-only">{{title}}</div>
+                    <!-- <div class="text desktop-and-tablet-only">{{title}}</div> -->
+                    <div class="text desktop-and-tablet-only">
+                        {% comment %}This below is the *hackiest*, but Selmer lacks regexes or splitting, and themes don't have a good way to add custom filters...{% endcomment %}
+                        {% for c in title|str %}{{c}}{% ifequal c " " %}
+                        <br>{% endifequal %}{% endfor %}
+                    </div>
                     <div class="text mobile-only">{{title}}</div>
                 </a>
             </div>
