@@ -20,16 +20,16 @@
         <aside id="sidebar">
             <div id="logo">
                 <a title="{{title}}" href="{{index-uri}}">
-                    <img class="icon" src="/img/white-lotus.svg">
-                    <div class="text desktop-and-tablet-only">{% site-title %}</div>
-                    <div class="text mobile-only">{% site-title %}</div>
+                    <img class="icon" src="img/white-lotus.svg">
+                    <div class="text desktop-and-tablet-only">{{title}}</div>
+                    <div class="text mobile-only">{{title}}</div>
                 </a>
             </div>
 
             <nav id="sidebar-links">
                 <nav id="menucont">
                     <div class="menutitle">
-                        <svg class="icon icon-menu" aria-hidden="true"><use xlink:href="/img/icons.svg#icon-menu"></use></svg><span class="menu-text">Menu</span>
+                        <svg class="icon icon-menu" aria-hidden="true"><use xlink:href="img/icons.svg#icon-menu"></use></svg><span class="menu-text">Menu</span>
                     </div>
                     <ul class="menu">
                         <li {% if home %} class="active" {% endif %}><a title="Home" href="{{index-uri}}"><div class="menu-item-text">Home</div></a></li>
@@ -48,9 +48,9 @@
 
                 <nav id="socialmedia">
                     <ul>
-                        <li><a title="LinkedIn" href="https://www.linkedin.com/in/matthewdavidson1" rel="external"><svg class="icon icon-linkedin"><use xlink:href="/img/icons.svg#icon-linkedin"></use></svg></a></li>
-                        <li><a title="GitHub" href="https://github.com/KingMob" rel="external"><svg class="icon icon-github-circled"><use xlink:href="/img/icons.svg#icon-github-circled"></use></svg></a></li>
-                        <li><a title="RSS Feed" href="{{rss-uri}}"><svg class="icon icon-rss-squared"><use xlink:href="/img/icons.svg#icon-rss-squared"></use></svg></a></li>
+                        <li><a title="LinkedIn" href="https://www.linkedin.com/in/matthewdavidson1" rel="external"><svg class="icon icon-linkedin"><use xlink:href="img/icons.svg#icon-linkedin"></use></svg></a></li>
+                        <li><a title="GitHub" href="https://github.com/KingMob" rel="external"><svg class="icon icon-github-circled"><use xlink:href="img/icons.svg#icon-github-circled"></use></svg></a></li>
+                        <li><a title="RSS Feed" href="{{rss-uri}}"><svg class="icon icon-rss-squared"><use xlink:href="img/icons.svg#icon-rss-squared"></use></svg></a></li>
                     </ul>
                 </nav>
             </nav>
