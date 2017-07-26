@@ -1,0 +1,209 @@
+@import "variables";
+
+body {
+  font-family: $default-font-family;
+  font-size: $default-font-size;
+  font-weight: $default-font-weight;
+  line-height: $default-line-height;
+
+  text-rendering: optimizeLegibility;
+  vertical-align: baseline;
+}
+
+body, caption, th, td, input, textarea, select, option, legend, fieldset, h1, h2, h3, h4, h5, h6 {
+  font-size-adjust: 0.5;
+}
+
+#main {
+  font-size: $default-font-size;
+  /* equivalent to 16px */
+  line-height: 1.25;
+  /* equivalent to 20px */
+
+  @media (min-width: $tablet-breakpoint) {
+    font-size: 1em;
+    line-height: 1.375;
+  }
+}
+
+
+
+p {
+  padding-top: 0;
+  margin: 0 auto 1em auto;
+}
+
+strong, b {
+  font-weight: 600;
+}
+
+em, i {
+  font-style: italic;
+}
+
+h1 {
+  margin-top: 0.6875em;  /* (22px / 48px) * 1.5 */
+  margin-bottom: 0.22916667em; /* (22px / 48px) * .5 */
+  font-weight: $font-weight-header;
+  font-family: $wide-font-family;
+  font-size: 3em;
+  line-height: 1.05;
+  letter-spacing: -.01em;
+
+  @media (max-width: $tablet-breakpoint) {
+    font-size: 2.5em;
+    line-height: 1.05;
+    margin-top: 0.73333334em;  /* (22px / 45px) * 1.5 */
+    margin-bottom: 0.24444445em; /* (22px / 45px) * .5 */
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    font-size: 2em;
+    line-height: 1.125;
+    margin-top: 0.9375em; /* (20px / 32px) * 1.5 */
+    margin-bottom: 0.3125em; /* (20px / 32px) * .5 */
+  }
+}
+
+h1 + h2 {
+  margin-top: 0;
+}
+
+h2 {
+  margin-top: 1.03125em; /* (22px / 32px) * 1.5 */
+  margin-bottom: 0.34375em; /* (22px / 32px) * .5 */
+  font-weight: $font-weight-header;
+  font-family: $wide-font-family;
+
+  letter-spacing: -0.01em;
+
+  font-size: 2.25em;
+  line-height: 1.25;
+
+  @media (max-width: $tablet-breakpoint) {
+    font-size: 2em;
+    line-height: 1.25;
+    margin-top: 1.03125em; /* (22px / 32px) * 1.5 */
+    margin-bottom: 0.34375em; /* (22px / 32px) * .5 */
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    font-size: 1.625em;
+    line-height: 1.15384615;
+    margin-top: 1.15384616em; /* (20px / 26px) * 1.5 */
+    margin-bottom: 0.38461539em; /* (20px / 26px) * .5 */
+  }
+}
+
+h2 + h3 {
+  margin-top: 0;
+}
+
+h3 {
+  margin-top: 1.37500001em; /* (22px / 24px) * 1.5 */
+  margin-bottom: 0.45833334em; /* (22px / 24px) * .5 */
+  font-weight: $font-weight-header;
+  font-family: $wide-font-family;
+
+  font-size: 1.75em;
+  line-height: 1.25;
+
+  @media (max-width: $tablet-breakpoint) {
+    font-size: 1.5em;
+    line-height: 1.25;
+    margin-top: 1.37500001em; /* (22px / 24px) * 1.5 */
+    margin-bottom: 0.45833334em; /* (22px / 24px) * .5 */
+  }
+
+  @media (max-width: $mobile-breakpoint) {
+    font-size: 1.375em;
+    line-height: 1.13636364;
+    margin-top: 1.36363637em; /* (20px / 22px) * 1.5 */
+    margin-bottom: 0.45454546em; /* (20px / 22px) * .5 */
+  }
+}
+
+h4, h5, h6 {
+  font-size: 1.125em;
+  line-height: 1.11111111;
+  margin-top: 1.83333333em; /* (22px / 18px) * 1.5 */
+  margin-bottom: 0.61111111em; /* (22px / 18px) * .5 */
+
+
+  @media (max-width: $mobile-breakpoint) {
+    line-height: 1.22222222;
+    margin-top: 1.66666667em; /* (20px / 18px) * 1.5 */
+    margin-bottom: 0.55555556em; /* (20px / 18px) * .5 */
+  }
+}
+
+
+ul {
+  list-style-type: disc;
+}
+
+ul ul {
+  margin: 0 0 0 25px;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+ol ol {
+  margin: 0 0 0 25px;
+}
+
+hr {
+  clear: both;
+  width: 100%;
+  padding: 0;
+  margin: (2 * $default-line-height * $default-font-size) 0;
+  border: none;
+  border-top: 2px solid $base-color;
+  border-bottom: 2px solid $base-color;
+  border-radius: 2px;
+  text-align: center;
+}
+
+blockquote {
+  background: darken($body-bgcolor, 5%);
+  margin: 1em 0; /* (20px / 20px) */
+  color: #555;
+  border-left: 5px solid $base-color;
+  padding: .5em;
+  font-style: italic;
+
+  font-size: 1.25em;
+  line-height: 1.45833333;
+
+  @media (max-width: $tablet-breakpoint) {
+    line-height: 1.25;
+  }
+}
+
+blockquote p {
+  margin: 0;
+}
+
+blockquote .author {
+  text-align: right;
+  font-size: .875em;
+  letter-spacing: .125em;
+  color: $grey;
+}
+
+code {
+  @if(lightness($body-bgcolor) > 50) {
+    background-color: darken($body-bgcolor, 5%);
+  } @else {
+    background-color: lighten($body-bgcolor, 5%);
+  }
+
+  border-radius: $default-border-radius;
+  padding: 1px 3px;
+}
+
+code, kbd, samp {
+  font-family: $mono-font-family;
+}

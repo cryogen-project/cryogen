@@ -1,0 +1,29 @@
+{% extends "/html/base.html" %}
+{% block content %}
+<div id="post">
+    {% for post in posts %}
+    <div class="post-header">
+        <h1>{{post.title}}</h1>
+        <div id="post-meta">
+            {% if post.author %}
+            <div class="author">{{post.author}}</div>
+            {% endif %}
+            <strong>{{post.date|date:longDate}}</strong>
+        </div>
+    </div>
+    {{post.content|safe}}
+    <br/>
+    <a class="button" href="{{post.uri}}">Continue reading &#8594;</a>
+    <hr>
+    {% endfor %}
+
+    <div id="prev-next">
+        {% if prev-uri %}
+        <a class="prev" href="{{prev-uri}}">&laquo; Prev</a>
+        {% endif %}
+        {% if next-uri %}
+        <a class="next" href="{{next-uri}}">Next &raquo;</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

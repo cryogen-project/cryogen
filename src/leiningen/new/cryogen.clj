@@ -63,10 +63,37 @@
    ["resources/templates/themes/nucleus/css/style.css" (render "themes/nucleus/css/style.css")]
    ["resources/templates/themes/nucleus/css/typography.css" (render "themes/nucleus/css/typography.css")]])
 
+(def lotus-theme
+  [["resources/templates/themes/lotus/css/_buttons.scss" (render "themes/lotus/css/_buttons.scss")]
+   ["resources/templates/themes/lotus/css/_layout.scss" (render "themes/lotus/css/_layout.scss")]
+   ["resources/templates/themes/lotus/css/_menu.scss" (render "themes/lotus/css/_menu.scss")]
+   ["resources/templates/themes/lotus/css/_typography.scss" (render "themes/lotus/css/_typography.scss")]
+   ["resources/templates/themes/lotus/css/_variables.scss" (render "themes/lotus/css/_variables.scss")]
+   ["resources/templates/themes/lotus/css/blog.scss" (render "themes/lotus/css/blog.scss")]
+   ["resources/templates/themes/lotus/css/lotus-highlightjs.min.css" (render "themes/lotus/css/lotus-highlightjs.min.css")]
+   ["resources/templates/themes/lotus/css/normalize.css" (render "themes/lotus/css/normalize.css")]
+   ["resources/templates/themes/lotus/html/404.html" (render "themes/lotus/html/404.html")]
+   ["resources/templates/themes/lotus/html/archives.html" (render "themes/lotus/html/archives.html")]
+   ["resources/templates/themes/lotus/html/author.html" (render "themes/lotus/html/author.html")]
+   ["resources/templates/themes/lotus/html/base.html" (render "themes/lotus/html/base.html")]
+   ["resources/templates/themes/lotus/html/home.html" (render "themes/lotus/html/home.html")]
+   ["resources/templates/themes/lotus/html/page.html" (render "themes/lotus/html/page.html")]
+   ["resources/templates/themes/lotus/html/post.html" (render "themes/lotus/html/post.html")]
+   ["resources/templates/themes/lotus/html/post-content.html" (render "themes/lotus/html/post-content.html")]
+   ["resources/templates/themes/lotus/html/prev-next.html" (render "themes/lotus/html/prev-next.html")]
+   ["resources/templates/themes/lotus/html/previews.html" (render "themes/lotus/html/previews.html")]
+   ["resources/templates/themes/lotus/html/tag.html" (render "themes/lotus/html/tag.html")]
+   ["resources/templates/themes/lotus/html/tags.html" (render "themes/lotus/html/tags.html")]
+   ["resources/templates/themes/lotus/img/black-lotus.svg" (render "themes/lotus/img/black-lotus.svg")]
+   ["resources/templates/themes/lotus/img/icons.svg" (render "themes/lotus/img/icons.svg")]
+   ["resources/templates/themes/lotus/img/white-lotus.svg" (render "themes/lotus/img/white-lotus.svg")]
+   ["resources/templates/themes/lotus/js/highlight.pack.js" (render "themes/lotus/js/highlight.pack.js")]])
+
 (def themes
   (concat blue-theme
           blue-centered-theme
-          nucleus-theme))
+          nucleus-theme
+          lotus-theme))
 
 (defn cryogen
   "Create a new Cryogen project"

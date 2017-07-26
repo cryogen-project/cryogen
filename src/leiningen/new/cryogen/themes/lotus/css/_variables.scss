@@ -1,0 +1,53 @@
+// Colors
+
+$black: #000;
+$red: #A71E2E;
+$green: #00D400;
+$purple: #522158;
+$very-dark-grey: #111;
+$dark-grey: #444;
+$grey: #808080;
+$light-grey: #ccc;
+$very-light-grey: #fbfbfb;
+$white: #fff;
+
+$base-color: $purple;
+$base-font-color: $very-dark-grey;
+$body-bgcolor: $very-light-grey;
+
+// Fonts
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-heavy: 600;
+$font-weight-header: 700;
+$default-font-weight: $font-weight-normal;
+
+$default-font-size: 16px;
+$default-line-height: 1.25;
+$button-font-size: 14px;
+
+
+
+$default-font-family: Oxygen, Tahoma, Verdana, Helvetica, Arial, sans-serif;
+$wide-font-family: Montserrat, sans-serif;
+$mono-font-family: Inconsolata, Consolas, "Deja Vu Sans Mono", "Bitstream Vera Sans Mono", "Droid Sans Mono", "Andale Mono", Anonymous, "Monaco", monospaced;
+
+// Borders
+$default-border-color: $base-color;
+$default-border-width: 2px;
+$default-border-style: solid;
+$default-border: $default-border-width $default-border-style $default-border-color;
+$default-border-radius: 2px;
+
+// Spacing
+$default-gutter: 20px;
+$sidebar-width: 220px;
+
+// Media
+// $tablet-breakpoint: 768px;
+// $mobile-breakpoint: 480px;
+$tablet-breakpoint: 900px;
+$mobile-breakpoint: 700px;
+
+// Effects
+$default-opacity: 0.85;

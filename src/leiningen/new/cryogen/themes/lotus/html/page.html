@@ -1,0 +1,16 @@
+{% extends "/html/base.html" %}
+{% block subtitle %}: {{page.title}}{% endblock %}
+{% block content %}
+<div id="custom-page">
+    <div id="page-header">
+        <h1>{{page.title}}</h1>
+    </div>
+    {% if page.toc %}{{page.toc|safe}}{% endif %}
+    {{page.content|safe}}
+
+    {% with prev=page.prev next=page.next%}
+    {% include "/html/prev-next.html" %}
+    {% endwith %}
+
+</div>
+{% endblock %}
