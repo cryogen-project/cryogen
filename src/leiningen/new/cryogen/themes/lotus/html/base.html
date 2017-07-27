@@ -20,22 +20,18 @@
         <aside id="sidebar">
             <div id="logo">
                 <a title="{{title}}" href="{{index-uri}}">
-                    <img class="icon" src="img/white-lotus.svg">
-                    <!-- <div class="text desktop-and-tablet-only">{{title}}</div> -->
-                    <div class="text desktop-and-tablet-only">
-                        {% comment %}This below is the *hackiest*, but Selmer lacks regexes or splitting, and themes don't have a good way to add custom filters...{% endcomment %}
-                        {% for c in title|str %}{{c}}{% ifequal c " " %}
-                        <br>{% endifequal %}{% endfor %}
-                    </div>
+                    <img class="icon" src="{{blog-prefix}}/img/white-lotus.svg">
+                    <div class="text desktop-and-tablet-only">{{title}}</div>
                     <div class="text mobile-only">{{title}}</div>
                 </a>
             </div>
 
             <nav id="sidebar-links">
                 <nav id="menucont">
-                    <div class="menutitle">
-                        <svg class="icon icon-menu" aria-hidden="true"><use xlink:href="img/icons.svg#icon-menu"></use></svg><span class="menu-text">Menu</span>
-                    </div>
+                    <input type="checkbox" id="menu-checkbox" class="menu-checkbox">
+                    <label for="menu-checkbox" class="menutitle">
+                        <svg class="icon icon-menu" aria-hidden="true"><use xlink:href="{{blog-prefix}}/img/icons.svg#icon-menu"></use></svg><span class="menu-text">Menu</span>
+                    </label>
                     <ul class="menu">
                         <li {% if home %} class="active" {% endif %}><a title="Home" href="{{index-uri}}"><div class="menu-item-text">Home</div></a></li>
                         <li {% if archives %} class="active" {% endif %}><a title="Archives" href="{{archives-uri}}"><div class="menu-item-text">Archives</div></a></li>
@@ -53,9 +49,9 @@
 
                 <nav id="socialmedia">
                     <ul>
-                        <li><a title="LinkedIn" href="https://www.linkedin.com/in/matthewdavidson1" rel="external"><svg class="icon icon-linkedin"><use xlink:href="img/icons.svg#icon-linkedin"></use></svg></a></li>
-                        <li><a title="GitHub" href="https://github.com/KingMob" rel="external"><svg class="icon icon-github-circled"><use xlink:href="img/icons.svg#icon-github-circled"></use></svg></a></li>
-                        <li><a title="RSS Feed" href="{{rss-uri}}"><svg class="icon icon-rss-squared"><use xlink:href="img/icons.svg#icon-rss-squared"></use></svg></a></li>
+                        <li><a title="LinkedIn" href="https://www.linkedin.com/in/matthewdavidson1" rel="external"><svg class="icon icon-linkedin"><use xlink:href="{{blog-prefix}}/img/icons.svg#icon-linkedin"></use></svg></a></li>
+                        <li><a title="GitHub" href="https://github.com/KingMob" rel="external"><svg class="icon icon-github-circled"><use xlink:href="{{blog-prefix}}/img/icons.svg#icon-github-circled"></use></svg></a></li>
+                        <li><a title="RSS Feed" href="{{rss-uri}}"><svg class="icon icon-rss-squared"><use xlink:href="{{blog-prefix}}/img/icons.svg#icon-rss-squared"></use></svg></a></li>
                     </ul>
                 </nav>
             </nav>

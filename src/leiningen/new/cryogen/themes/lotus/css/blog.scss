@@ -112,6 +112,12 @@ img {
       text-align: center;
       text-transform: uppercase;
       text-shadow: 0px 0px 14px rgba(0, 0, 0, .5);
+
+      @media (min-width: $mobile-breakpoint) {
+        &.desktop-and-tablet-only {
+          display: table-caption; // minimizes line width
+        }
+      }
     }
 
     a {
@@ -121,6 +127,7 @@ img {
 }
 
 #socialmedia {
+  // See the icons.svg file for more icons than are used in the default template
   $icon-size: 34px;
   $mobile-icon-size: 30px;
 

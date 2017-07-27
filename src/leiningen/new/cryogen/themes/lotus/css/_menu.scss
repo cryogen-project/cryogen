@@ -1,7 +1,9 @@
 @import "variables";
 
 #menucont {
-  // flex: 1 1 auto;
+  #menu-checkbox {
+    display: none;
+  }
 
   .menutitle {
     display: none;
@@ -47,40 +49,24 @@
   }
 }
 
+// From the awesome animate.css
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 @media screen and (max-width: $mobile-breakpoint) {
 
   #menucont {
-    .menu {
-      display: none;
-
-      &.open {
+    #menu-checkbox {
+      &:checked ~ .menu {
         display: block;
         margin-bottom: .5em;
-      }
-
-      li {
-        &.active {
-          background: transparent;
-
-          a, a:hover {
-            font-weight: 600;
-            color: #FFF;
-          }
-        }
-
-        a {
-          width: 100%;
-          display: inline-block;
-          margin: 0;
-          line-height: 23px;
-          color: rgba(255, 255, 255, 0.6);
-          font-weight: 300;
-          text-transform: uppercase;
-        }
-
-        .menu-item-text {
-          padding: $default-gutter/4 $default-gutter;
-        }
       }
     }
 
@@ -109,6 +95,39 @@
         font-weight: $font-weight-heavy;
         letter-spacing: 2px;
         line-height: 1;
+      }
+    }
+
+    .menu {
+      animation-name: fadeIn;
+      animation-duration: 1s;
+      animation-fill-mode: both;
+
+      display: none;
+
+      li {
+        &.active {
+          background: transparent;
+
+          a, a:hover {
+            font-weight: 600;
+            color: #FFF;
+          }
+        }
+
+        a {
+          width: 100%;
+          display: inline-block;
+          margin: 0;
+          line-height: 23px;
+          color: rgba(255, 255, 255, 0.6);
+          font-weight: 300;
+          text-transform: uppercase;
+        }
+
+        .menu-item-text {
+          padding: $default-gutter/4 $default-gutter;
+        }
       }
     }
   }
