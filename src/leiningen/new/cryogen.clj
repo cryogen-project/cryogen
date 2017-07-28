@@ -64,7 +64,9 @@
    ["resources/templates/themes/nucleus/css/typography.css" (render "themes/nucleus/css/typography.css")]])
 
 (def lotus-theme
-  [["resources/templates/themes/lotus/css/_buttons.scss" (render "themes/lotus/css/_buttons.scss")]
+  [["resources/templates/themes/lotus/config.edn" (render "themes/lotus/config.edn")]
+   ["resources/templates/themes/lotus/README.md" (render "themes/lotus/README.md")]
+   ["resources/templates/themes/lotus/css/_buttons.scss" (render "themes/lotus/css/_buttons.scss")]
    ["resources/templates/themes/lotus/css/_layout.scss" (render "themes/lotus/css/_layout.scss")]
    ["resources/templates/themes/lotus/css/_menu.scss" (render "themes/lotus/css/_menu.scss")]
    ["resources/templates/themes/lotus/css/_typography.scss" (render "themes/lotus/css/_typography.scss")]
