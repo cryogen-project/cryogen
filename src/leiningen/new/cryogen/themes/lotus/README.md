@@ -4,5 +4,5 @@ An elegant and responsive theme for Cryogen by [Matthew Davidson](https://github
 # Install
 
 1. Change the `:theme` key in `resources/templates/config.edn` to "lotus".
-2. Replace the GitHub and LinkedIn links in `base.html` with links to your own profiles. (More social media icons can be found in `icons.svg`.
+2. Replace the GitHub and LinkedIn links in `base.html` with links to your own profiles. (More social media icons can be found in `icons.svg`.)
 3. Replace the white lotus logo with the logo of your choice in `base.html`.
