@@ -1,0 +1,12 @@
+<div id="prev-next">
+    {% if prev %}
+    <a class="prev" href="{{prev.uri}}"><svg class="icon icon-circle-left"><use xlink:href="{{blog-prefix}}/img/icons.svg#icon-circle-left"></use></svg><div class="nav-text">{{prev.title}}</div></a>
+    {% else %}
+    <div class="prev"></div>
+    {% endif %}
+    {% if next %}
+    <a class="next" href="{{next.uri}}"><div class="nav-text"">{{next.title}}</div><svg class="icon icon-circle-right"><use xlink:href="{{blog-prefix}}/img/icons.svg#icon-circle-right"></use></svg></a>
+    {% else %}
+    <div class="next"></div>
+    {% endif %}
+</div>

@@ -1,0 +1,134 @@
+@import "variables";
+
+#menucont {
+  #menu-checkbox {
+    display: none;
+  }
+
+  .menutitle {
+    display: none;
+  }
+
+  .menu {
+    margin: 0;
+    padding: 0;
+
+    li {
+      width: 100%;
+      list-style-type: none;
+      padding: 0;
+
+      a {
+        color: #FFF;
+        width: 100%;
+        margin: 0;
+        font-weight: 300;
+        text-transform: uppercase;
+        line-height: 22px;
+        text-decoration: none;
+        letter-spacing: 2px;
+      }
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      &.active {
+        background: rgba(0, 0, 0, 0.2);
+
+        a {
+          font-weight: 600;
+        }
+      }
+
+      .menu-item-text {
+        padding: $default-gutter/2 $default-gutter;
+        width: 100%;
+      }
+    }
+  }
+}
+
+// From the awesome animate.css
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: $mobile-breakpoint) {
+
+  #menucont {
+    #menu-checkbox {
+      &:checked ~ .menu {
+        display: block;
+        margin-bottom: .5em;
+      }
+    }
+
+    .menutitle {
+      display: flex;
+      align-items: center;
+
+      padding: $default-gutter/2 $default-gutter;
+      cursor: pointer;
+      text-transform: uppercase;
+      opacity: $default-opacity;
+
+      .icon-menu {
+        // color: currentColor;
+        fill: currentColor;
+
+        // margin: 0 0 0 2px;
+        // font-size: $default-font-size * 1.2;
+        height: $default-font-size;
+        width: $default-font-size;
+      }
+
+      .menu-text {
+        margin: 0 0 0 .8em;
+        font-size: $default-font-size;
+        font-weight: $font-weight-heavy;
+        letter-spacing: 2px;
+        line-height: 1;
+      }
+    }
+
+    .menu {
+      animation-name: fadeIn;
+      animation-duration: 1s;
+      animation-fill-mode: both;
+
+      display: none;
+
+      li {
+        &.active {
+          background: transparent;
+
+          a, a:hover {
+            font-weight: 600;
+            color: #FFF;
+          }
+        }
+
+        a {
+          width: 100%;
+          display: inline-block;
+          margin: 0;
+          line-height: 23px;
+          color: rgba(255, 255, 255, 0.6);
+          font-weight: 300;
+          text-transform: uppercase;
+        }
+
+        .menu-item-text {
+          padding: $default-gutter/4 $default-gutter;
+        }
+      }
+    }
+  }
+}

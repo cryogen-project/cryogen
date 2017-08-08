@@ -1,0 +1,28 @@
+@import "variables";
+
+.button {
+  background: none;
+  border: $default-border;
+  position: relative;
+  display: inline-block;
+  padding: 7px 12px;
+  margin: 0;
+  width: auto;
+  font-family: $wide-font-family;
+  font-size: $button-font-size;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+  letter-spacing: 2px;
+
+  &:hover {
+    background: $default-border-color;
+    color: $white;
+  }
+
+  &:active {
+    top: 1px;
+  }
+}

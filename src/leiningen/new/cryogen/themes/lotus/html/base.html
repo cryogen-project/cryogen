@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>{{title}}{% block subtitle %}{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72.png">
+        <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57.png">
+
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Oxygen:300,400,700|Inconsolata" rel="stylesheet">
+        {% style "css/normalize.css" %}
+        {% style "css/blog.css" %}
+        {% style "css/lotus-highlightjs.min.css" %}
+    </head>
+    <body>
+        <aside id="sidebar">
+            <div id="logo">
+                <a title="{{title}}" href="{{index-uri}}">
+                    <img class="icon" src="{{blog-prefix}}/img/white-lotus.svg">
+                    <div class="text desktop-and-tablet-only">{{title}}</div>
+                    <div class="text mobile-only">{{title}}</div>
+                </a>
+            </div>
+
+            <nav id="sidebar-links">
+                <nav id="menucont">
+                    <input type="checkbox" id="menu-checkbox" class="menu-checkbox">
+                    <label for="menu-checkbox" class="menutitle">
+                        <svg class="icon icon-menu" aria-hidden="true"><use xlink:href="{{blog-prefix}}/img/icons.svg#icon-menu"></use></svg><span class="menu-text">Menu</span>
+                    </label>
+                    <ul class="menu">
+                        <li {% if home %} class="active" {% endif %}><a title="Home" href="{{index-uri}}"><div class="menu-item-text">Home</div></a></li>
+                        <li {% if archives %} class="active" {% endif %}><a title="Archives" href="{{archives-uri}}"><div class="menu-item-text">Archives</div></a></li>
+                        {% if tags|not-empty %}
+                        <li {%ifequal uri tags-uri %} class="active" {% endifequal %}><a title="Tags" href="{{tags-uri}}"><div class="menu-item-text">Tags</div></a></li>
+                        {% endif %}
+                        {% for nav-page in navbar-pages %}
+                        <li {%ifequal page.uri nav-page.uri %} class="active" {% endifequal %}>
+                            <a href="{{nav-page.uri}}"><div class="menu-item-text">{{nav-page.title}}</div></a>
+                        </li>
+                        {% endfor %}
+                        <!-- <li><a title="RSS" href="{{rss-uri}}"><div class="menu-item-text">RSS</div></a></li> -->
+                    </ul>
+                </nav>
+
+                <nav id="socialmedia">
+                    <ul>
+                        <li><a title="LinkedIn" href="https://www.linkedin.com/in/matthewdavidson1" rel="external"><svg class="icon icon-linkedin"><use xlink:href="{{blog-prefix}}/img/icons.svg#icon-linkedin"></use></svg></a></li>
+                        <li><a title="GitHub" href="https://github.com/KingMob" rel="external"><svg class="icon icon-github-circled"><use xlink:href="{{blog-prefix}}/img/icons.svg#icon-github-circled"></use></svg></a></li>
+                        <li><a title="RSS Feed" href="{{rss-uri}}"><svg class="icon icon-rss-squared"><use xlink:href="{{blog-prefix}}/img/icons.svg#icon-rss-squared"></use></svg></a></li>
+                    </ul>
+                </nav>
+            </nav>
+        </aside>
+
+        <article id="main">
+            {% block content %}
+            {% endblock %}
+            <hr/>
+            <div id="footercont">
+                Copyright &copy; {{today|date:yyyy}} {{author}}
+                <br>Powered by <a href="http://cryogenweb.org">Cryogen</a>
+                <br>Theme by <a href="http://github.com/KingMob">KingMob</a>
+            </div>
+        </article>
+
+        {% script "js/highlight.pack.js" %}
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        {% if post.klipse %} {{post.klipse|safe}} {% endif %}
+        {% if page.klipse %} {{page.klipse|safe}} {% endif %}
+    </body>
+</html>

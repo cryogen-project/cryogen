@@ -1,0 +1,213 @@
+@import "variables";
+@import "typography";
+@import "buttons";
+@import "menu";
+@import "layout";
+
+/* ==================================================
+   Global Styles
+================================================== */
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+:root {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  background: $body-bgcolor;
+  color: $base-font-color;
+}
+
+::selection, ::-moz-selection {
+    background: $base-color;
+    color: $body-bgcolor;
+}
+
+a {
+  $anchor-color: lighten(scale_color($base-color, $saturation: 20%), 20%);
+
+  color: $anchor-color;
+  text-decoration: none; //fallback
+  text-decoration: underline solid currentColor;
+
+  &:hover {
+    color: lighten($anchor-color, 20%);
+  }
+}
+
+.mobile-only {
+  @media screen and (min-width: $mobile-breakpoint) {
+    display: none;
+  }
+}
+
+.desktop-and-tablet-only {
+  @media screen and (max-width: $mobile-breakpoint) {
+    display: none;
+  }
+}
+
+/* ==================================================
+   Images
+================================================== */
+
+img {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+}
+
+/* ==================================================
+   Sections
+================================================== */
+
+#sidebar {
+  background: $base-color;
+  color: $white;
+
+  -webkit-overflow-scrolling: touch;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+
+  @media (max-width: $mobile-breakpoint) {
+    padding-bottom: $default-gutter / 2;
+  }
+
+  #logo {
+    padding: $default-gutter;
+    width: 100%;
+    color: $white;
+
+    .icon {
+      box-shadow: 0px 0px 14px 2px rgba(255, 255, 255, 0.05);
+      display: block;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.2);
+      height: 100px;
+      width: 100px;
+      margin: 0 auto 10px;
+
+      border-radius: 80px;
+    }
+
+    .text {
+      color: $white;
+      width: 100%;
+      font-size: 30px;
+      line-height: .8;
+      font-weight: 600;
+      font-family: $wide-font-family;
+      text-align: center;
+      text-transform: uppercase;
+      text-shadow: 0px 0px 14px rgba(0, 0, 0, .5);
+
+      @media (min-width: $mobile-breakpoint) {
+        &.desktop-and-tablet-only {
+          display: table-caption; // minimizes line width
+        }
+      }
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
+
+#socialmedia {
+  // See the icons.svg file for more icons than are used in the default template
+  $icon-size: 34px;
+  $mobile-icon-size: 30px;
+
+  @media (min-width: $mobile-breakpoint) {
+    flex: 0 1 auto;
+    padding: $default-gutter;
+  }
+  @media (max-width: $mobile-breakpoint) {
+    padding: 0 $default-gutter 0 0;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    li {
+      list-style-type: none;
+
+      margin: 0;
+      padding: 0;
+
+      @media (min-width: $mobile-breakpoint) {
+        height: $icon-size;
+        width: $icon-size;
+      }
+
+      @media (max-width: $mobile-breakpoint) {
+        height: $mobile-icon-size;
+        width: $mobile-icon-size;
+        margin-left: $mobile-icon-size/3;
+      }
+    }
+
+
+    .icon {
+      fill: $white;
+      max-height: 100%;
+      max-width: 100%;
+
+      opacity: $default-opacity;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+#main {
+  @media (min-width: $mobile-breakpoint) {
+    padding: 2rem;
+  }
+  @media (max-width: $mobile-breakpoint) {
+    padding: 1rem;
+  }
+}
+
+#main p:last-child {
+    margin: 0;
+}
+
+.post-header {
+  .byline {
+    .date {
+      font-variant-caps: small-caps;
+    }
+  }
+}
+
+#post {
+  margin: 0 auto;
+  max-width: 700px;
+}
+
+#footercont {
+  color: rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+  font-size: 11px;
+}
