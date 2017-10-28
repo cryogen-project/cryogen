@@ -200,6 +200,7 @@ A Clojure library to provide Markdown rendering to the cryogen-core compiler by 
 * [Gundee and Company](http://www.gundee.com/)
 * [Teamcool Rocks](http://www.teamcool.net/index.html)
 * [ISvit blog](https://blog.isvit.info)
+* [Lambda Funk](http://lambdafunk.com)
 
 ## License
 
