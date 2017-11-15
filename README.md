@@ -185,17 +185,13 @@ A Clojure library to provide Markdown rendering to the cryogen-core compiler by 
 * [My personal blog](http://carmenla.me/blog/archives)
 * [Cryogen Documentation Site](http://cryogenweb.org)
 * [Yogthos' blog](http://yogthos.net/)
-* [Clojure :in Tunisia](http://www.clojure.tn)
-* [dl1ely.github.io](http://dl1ely.github.io)
 * [nil/recur](http://jonase.github.io/nil-recur)
 * [on the clojure move](http://tangrammer.github.io/)
 * [AGYNAMIX Site & Blog](http://www.agynamix.de)
 * [e-Resident Me](http://eresident.me)
 * [Chad Stovern's blog](http://www.chadstovern.com)
-* [Greative](https://greative.jp/)
 * [LambdaX](http://lambdax.io/blog/)
 * [szcz](http://www.szcz.org/)
-* [himmAllRight's blog](http://ryan.himmelwright.net)
 * [Clojurians](http://blog.clojurians.org)
 * [Gundee and Company](http://www.gundee.com/)
 * [Teamcool Rocks](http://www.teamcool.net/index.html)
@@ -205,6 +201,6 @@ A Clojure library to provide Markdown rendering to the cryogen-core compiler by 
 
 ## License
 
-Copyright © 2014-2016 Carmen La
+Copyright © 2014-2017 Carmen La
 
 Distributed under the Eclipse Public License, the same as Clojure.
