@@ -104,7 +104,7 @@ Instead of looking for files ending in `.md` in the `resources/templates/md` dir
 ### Selecting a Theme
 
 The Cryogen template comes with three themes in the `resources/templates/themes` folder. To change your blog's theme, change the value of the `:theme` key in `config.edn`.
-Note that the Nuclues theme is obtained from [downloadwebsitetemplates.co.uk](http://www.downloadwebsitetemplates.co.uk/template/nucleus/) that requires you to keep the footer, unless you make a donation on their website.
+Note that the Nucleus theme is obtained from [downloadwebsitetemplates.co.uk](http://www.downloadwebsitetemplates.co.uk/template/nucleus/) that requires you to keep the footer, unless you make a donation on their website.
 
 ### Customizing Layouts
 
