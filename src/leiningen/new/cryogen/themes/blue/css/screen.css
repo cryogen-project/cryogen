@@ -82,6 +82,12 @@ footer {
     padding-bottom: 30px;
 }
 
+blockquote footer {
+    text-align: left;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
 #post-tags {
     margin-top: 30px;
 }
