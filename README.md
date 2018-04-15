@@ -182,7 +182,7 @@ A Clojure library to provide Markdown rendering to the cryogen-core compiler by 
 
 ## Some Sites Made With Cryogen
 
-* [My personal blog](http://carmenla.me/blog/archives)
+* [My personal blog](http://carmen.la/blog/archives)
 * [Cryogen Documentation Site](http://cryogenweb.org)
 * [Yogthos' blog](http://yogthos.net/)
 * [AGYNAMIX Site & Blog](http://www.agynamix.de)
