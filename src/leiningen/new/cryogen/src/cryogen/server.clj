@@ -18,7 +18,9 @@
   [handler]
   (fn [request]
     (let [req-uri (.substring (url-decode (:uri request)) 1)
-          res-path (path req-uri (when (:clean-urls? (read-config)) "index.html"))]
+          res-path (if (or (= req-uri "") (= req-uri "/"))
+                     (path "/index.html")
+                     (path (str req-uri ".html")))]
       (or (resource-response res-path {:root "public"})
           (handler request)))))
 
