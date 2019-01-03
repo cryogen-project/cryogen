@@ -18,13 +18,15 @@
   [handler]
   (fn [request]
     (let [req-uri (.substring (url-decode (:uri request)) 1)
-          res-path (path req-uri (when (:clean-urls? (read-config)) "index.html"))]
+          res-path (if (or (= req-uri "") (= req-uri "/"))
+                     (path "/index.html")
+                     (path (str req-uri ".html")))]
       (or (resource-response res-path {:root "public"})
           (handler request)))))
 
 (defroutes routes
   (GET "/" [] (redirect (let [config (read-config)]
-                          (path (:blog-prefix config) "/"
+                          (path (:blog-prefix config)
                                 (when-not (:clean-urls? config) "index.html")))))
   (route/resources "/")
   (route/not-found "Page not found"))
