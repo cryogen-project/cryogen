@@ -48,6 +48,9 @@ a {
   @media screen and (min-width: $mobile-breakpoint) {
     display: none;
   }
+  @media print {
+    display: none !important;
+  }
 }
 
 .desktop-and-tablet-only {

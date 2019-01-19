@@ -132,3 +132,10 @@
     }
   }
 }
+
+// hides menu in printed pages
+@media print {
+  #menucont {
+    display: none !important;
+  }
+}
