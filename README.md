@@ -47,7 +47,7 @@ The web server can be started from the `my-blog` directory using the `lein-ring`
 lein ring server
 ```
 
-The server will watch for changes in the `resources/templates` folder and recompile the content automatically.
+The server will watch for changes in the `content` and `themes` folders and recompile the content automatically.
 
 You can also generate the content without bringing up a server via:
 
@@ -57,7 +57,7 @@ lein run
 
 ### Site Configuration
 
-The site configuration file is found at `templates/config.edn`, this file looks as follows:
+The site configuration file is found at `content/config.edn`, this file looks as follows:
 
 ```clojure
 {:site-title           "My Awesome Blog"
@@ -88,7 +88,7 @@ The site configuration file is found at `templates/config.edn`, this file looks 
  :posts-per-page       5
  :blocks-per-preview   2
  :previews?            false
- :clean-urls?          true
+ :clean-urls           :trailing-slash
  :hide-future-posts?   true
  :klipse               {}
  :debug?               false}
@@ -99,26 +99,23 @@ For information about each key please see the ["Configuration"](http://cryogenwe
 ### Switching between Markdown and AsciiDoc
 
 Cryogen comes with Markdown support as default. If you want to use AsciiDoc instead, open the `project.clj` in your created blog (e.g. `my-blog`), and change the line in `:dependencies` that says `cryogen-markdown` to `cryogen-asciidoc`.
-Instead of looking for files ending in `.md` in the `resources/templates/md` directory, the compiler will now look for files ending in `.asc` in the `resources/templates/asc` directory.
+Instead of looking for files ending in `.md` in the `content/md` directory, the compiler will now look for files ending in `.asc` in the `content/asc` directory.
 
 ### Selecting a Theme
 
-The Cryogen template comes with three themes in the `resources/templates/themes` folder. To change your blog's theme, change the value of the `:theme` key in `config.edn`.
-Note that the Nucleus theme is obtained from [downloadwebsitetemplates.co.uk](http://www.downloadwebsitetemplates.co.uk/template/nucleus/) that requires you to keep the footer, unless you make a donation on their website.
+The Cryogen template comes with three themes in the `themes` folder. To change your blog's theme, change the value of the `:theme` key in `config.edn`. Note that the Nucleus theme is obtained from [downloadwebsitetemplates.co.uk](http://www.downloadwebsitetemplates.co.uk/template/nucleus/) that requires you to keep the footer, unless you make a donation on their website.
 
 ### Customizing Layouts
 
-Cryogen uses [Selmer](https://github.com/yogthos/Selmer) templating engine for layouts. Please refer to its documentation
-to see the supported tags and filters for the layouts.
+Cryogen uses [Selmer](https://github.com/yogthos/Selmer) templating engine for layouts. Please refer to its documentation to see the supported tags and filters for the layouts.
 
-The layouts are contained in the `resources/templates/themes/{theme}/html` folder of the project. By default, the `base.html` layout is used to provide the general layout for the site. This is where you would add static resources such as CSS and JavaScript
-assets as well as define headers and footers for your site.
+The layouts are contained in the `themes/{theme}/html` folder of the project. By default, the `base.html` layout is used to provide the general layout for the site. This is where you would add static resources such as CSS and JavaScript assets as well as define headers and footers for your site.
 
 Each page layout should have a name that matches the `:layout` key in the page metadata and end with `.html`. Page layouts extend the base layout and should only contain the content relaveant to the page inside the `content` block.
 For example, the `tag` layout is located in `tag.html` and looks as follows:
 
 ```xml
-{% extends "templates/html/layouts/base.html" %}
+{% extends "/html/base.html" %}
 {% block content %}
 <div id="posts-by-tag">
     <h2>Posts tagged {{name}}</h2>
@@ -135,9 +132,9 @@ For example, the `tag` layout is located in `tag.html` and looks as follows:
 
 ### Code Syntax Highlighting
 
-Cryogen uses [Highlight.js](https://highlightjs.org/) for code syntax highlighting. You can add more languages by replacing `templates/js/highlight.pack.js` with a customized package from [here](https://highlightjs.org/download/).
+Cryogen uses [Highlight.js](https://highlightjs.org/) for code syntax highlighting. You can add more languages by replacing `themes/{theme}/js/highlight.pack.js` with a customized package from [here](https://highlightjs.org/download/).
 
-The ` initHighlightingOnLoad` function is called in `{theme}/html/base.html`.
+The ` initHighlightingOnLoad` function is called in `themes/{theme}/html/base.html`.
 
 ```xml
 <script>hljs.initHighlightingOnLoad();</script>
@@ -145,7 +142,7 @@ The ` initHighlightingOnLoad` function is called in `{theme}/html/base.html`.
 
 ## Deploying Your Site
 
-The generated static content will be found under the `resources/public` folder. Simply copy the content to a static
+The generated static content will be found under the `public` folder. Simply copy the content to a static
 folder for a server such as Nginx or Apache and your site is now ready for service.
 
 A sample Nginx configuration that's placed in `/etc/nginx/sites-available/default` can be seen below:
