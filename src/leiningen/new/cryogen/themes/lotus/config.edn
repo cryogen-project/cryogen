@@ -1,2 +1,2 @@
-{:sass-src             ["themes/lotus/css"]
- :resources            ["themes/lotus/img"]}
+{:sass-src             ["css"]
+ :resources            ["img"]}
