@@ -70,6 +70,7 @@ The site configuration file is found at `content/config.edn`, this file looks as
  :page-root-uri        "pages-output"
  :tag-root-uri         "tags-output"
  :author-root-uri      "authors-output"
+ :public-dest          "public"
  :blog-prefix          "/blog"
  :rss-name             "feed.xml"
  :rss-filters          ["cryogen"]
@@ -85,10 +86,11 @@ The site configuration file is found at `content/config.edn`, this file looks as
  :disqus?              false
  :disqus-shortname     ""
  :ignored-files        [#"\.#.*" #".*\.swp$"]
+ :previews?            false
  :posts-per-page       5
  :blocks-per-preview   2
- :previews?            false
  :clean-urls           :trailing-slash
+ :collapse-subdirs?    false
  :hide-future-posts?   true
  :klipse               {}
  :debug?               false}
@@ -182,9 +184,7 @@ A Clojure library to provide Markdown rendering to the cryogen-core compiler by 
 * [My personal blog](http://carmen.la/blog/archives)
 * [Cryogen Documentation Site](http://cryogenweb.org)
 * [Yogthos' blog](http://yogthos.net/)
-* [AGYNAMIX Site & Blog](http://www.agynamix.de)
 * [Chad Stovern's blog](http://www.chadstovern.com)
-* [LambdaX](http://lambdax.io/blog/)
 * [szcz](http://www.szcz.org/)
 * [ISvit blog](https://blog.isvit.info)
 * [Lambda Funk](http://lambdafunk.com)
