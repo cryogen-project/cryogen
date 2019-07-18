@@ -82,8 +82,9 @@ You will need to supply the following custom `keyword`s on `content/` files to m
                                              ;  [default]: "Archives of posts according to date."
                  :tags-description    ""     ; (optional): meta-description of tags.html
                                              ;  [default]: "List of tags used on posts"
-                 :tag-html            ""}}   ; (optional): heading of tag.html
+                 :tag-html            ""}    ; (optional): heading of tag.html
                                              ;  [default]: "Posts tagged with"
+         :gtag ""}                           ; (optional): Google Analytics Tracking ID
  ...
 }
 ```

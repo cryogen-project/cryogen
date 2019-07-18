@@ -14,7 +14,7 @@
         <meta name="author"
               content="{% block author %}{{ author }}{% endblock %}" />
         <meta name="viewport"
-              content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+              content="width=device-width, initial-scale=1" />
 
         {% if wooji.favicon.href %}
         <link rel="{{ wooji.favicon.rel|default-if-empty:"shortcut icon" }}"
@@ -32,6 +32,17 @@
               href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css" />
 
         {% style "css/styles.css" %}
+
+        {% if wooji.gtag %}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ wooji.gtag }}"></script>
+        <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag("js", new Date());
+         gtag("config", "{{ wooji.gtag }}");
+        </script>
+        {% endif %}
 
     </head>
     <body class="{% block active-page %}{{ active-page }}{% endblock %}">
