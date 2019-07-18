@@ -1,0 +1,21 @@
+{% extends "/html/base.html" %}
+
+{% block title %}{{ wooji.label.tag|default-if-empty:"Posts tagged with" }} {{ name }}{% endblock %}
+{% block subtitle %}{{ site-title }}{% endblock %}
+{% block description %}{{ wooji.label.tag|default-if-empty:"Posts tagged with" }} {{ name }}{% endblock %}
+
+{% block active-page %}tag{% endblock %}
+
+{% block content %}
+<h1>{{ wooji.label.tag|default-if-empty:"Posts tagged with" }} {{ name }}</h1>
+<ul>
+    {% for post in posts %}
+    <li>
+        <i class="fas fa-pen"></i>
+        <time class="published">{{ post.date|date:"MMMM d, YYYY" }}</time>
+        <span class="separator-comma">:</span>
+        <a href="{{ post.uri }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

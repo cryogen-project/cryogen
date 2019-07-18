@@ -1,0 +1,10 @@
+<div class="post-summary jumbotron">
+    <h2>{{ wooji.label.post-summary|default-if-empty:"Summary" }}</h2>
+
+    {% if post.summary %}
+    <p>{{ post.summary }}</p>
+    {% else %}
+    {% include "/html/components/alert.html" with type="danger" label="Error" context=":summary" message="not found" %}
+    {% endif %}
+</div>
+<hr />

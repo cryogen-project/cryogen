@@ -1,0 +1,19 @@
+{% if any prev-uri next-uri %}
+<div class="pagination">
+    <a class="btn btn-outline-secondary {% if not prev-uri %}invisible{% endif %}"
+       href="{% if prev-uri %}{{ prev-uri }}{% else %}#{% endif %}">
+        <i class="fas fa-angle-left"></i> Previous
+    </a>
+
+    {% if all prev-uri next-uri %}
+    <div class="separator">
+        <i class="fas fa-yin-yang"></i>
+    </div>
+    {% endif %}
+
+    <a class="btn btn-outline-secondary {% if not next-uri %}invisible{% endif %}"
+       href="{% if next-uri %}{{ next-uri }}{% else %}#{% endif %}">Next
+        <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+{% endif %}

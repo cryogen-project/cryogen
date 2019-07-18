@@ -1,0 +1,48 @@
+<div class="post-meta">
+    {% if post.author %}
+    <span class="author">
+        <i class="fas fa-user"></i>
+        <a href="{{ index-uri }}{{ author-root-uri }}/{{ author }}"
+           data-toggle="tooltip"
+           data-placement="top"
+           title="Posts published by {{ author }}">{{ post.author }}</a>
+    </span>
+    {% endif %}
+
+    {% if post.author %}
+    <span class="separator">/</span>
+    {% endif %}
+
+    {% if post.date %}
+    <span class="published">
+        <i class="far fa-clock"></i>
+        <time data-toggle="tooltip"
+              data-placement="top"
+              title="Published Date">{{ post.date|date:"MMMM d, YYYY" }}</span>
+        </time>
+    </span>
+    {% endif %}
+
+    {% if post.tags|not-empty %}
+    <span class="separator">/</span>
+    {% endif %}
+
+    {% if post.tags|not-empty %}
+    <span class="tags">
+        <i class="fas fa-tags"></i>
+
+        {% for tag in post.tags %}
+        <a class="tag"
+           href="{{ tag.uri }}"
+           data-toggle="tooltip"
+           data-placement="top"
+           title="Posts tagged with {{ tag.name }}">{{ tag.name }}</a>
+
+        {% if not forloop.last %}
+        <span class="separator">&#9642;</span>
+        {% endif %}
+
+        {% endfor %}
+    </span>
+    {% endif %}
+</div>

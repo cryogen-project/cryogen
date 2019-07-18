@@ -1,0 +1,17 @@
+{% extends "/html/base.html" %}
+
+{% block title %}{{ active-page|capitalize }}{% endblock %}
+{% block subtitle %}{{ site-title }}{% endblock %}
+{% block description %}{{ wooji.label.tags-description|default-if-empty:"List of tags used on posts." }}{% endblock %}
+
+{% block content %}
+<h1>Tags</h1>
+<ul>
+    {% for tag in tags %}
+    <li>
+        <i class="fas fa-tag"></i>
+        <a href="{{ tag.uri }}">{{ tag.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "/html/base.html" %}
+
+{% block title %}{{ active-page|capitalize }}{% endblock %}
+{% block subtitle %}{{ site-title }}{% endblock %}
+{% block description %}{{ wooji.label.archives-description|default-if-empty:"Archives of posts according to date." }}{% endblock %}
+
+{% block content %}
+<h1>Archives</h1>
+{% include "/html/groups.html" %}
+{% endblock %}

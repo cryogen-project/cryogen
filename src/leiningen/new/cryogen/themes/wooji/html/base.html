@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            {% block title %}{{ site-title }}{% endblock %}
+            &mdash;
+            {% block subtitle %}{{ description }}{% endblock %}
+        </title>
+        <meta name="title"
+              content="{% block title %}{{ site-title }}{% endblock %}" />
+        <meta name="description"
+              content="{% block description %}{{ description }}{% endblock %}" />
+        <meta name="author"
+              content="{% block author %}{{ author }}{% endblock %}" />
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        {% if wooji.favicon.href %}
+        <link rel="{{ wooji.favicon.rel|default-if-empty:"shortcut icon" }}"
+              type="{{ wooji.favicon.type|default-if-empty:"image/x-icon" }}"
+              href="{{ wooji.favicon.href }}" />
+        {% endif %}
+
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+        <link rel="stylesheet"
+              href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css" />
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css?family=Lobster|Cinzel:400,700,900|Source+Sans+Pro:300,400,600,700,900&display=swap" />
+        <link rel="stylesheet"
+              href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css" />
+
+        {% style "css/styles.css" %}
+
+    </head>
+    <body class="{% block active-page %}{{ active-page }}{% endblock %}">
+        <div class="wrapper">
+            <div class="header">
+                {% if wooji.logo.src %}
+                <a class="navbar-brand"
+                   href="{{ index-uri }}">
+                    <img class="site-logo"
+                         src="{{ wooji.logo.src }}"
+                         alt="{% if wooji.logo.alt %}{{ wooji.logo.alt }}{% else %}{{ site-title }}{% endif %}"
+                         width="{{ wooji.logo.width|default:64 }}"
+                         height="{{ wooji.logo.height|default:64 }}" />
+                </a>
+                {% else %}
+                {% include "/html/components/alert.html" with type="danger" label="Error" context=":wooji.logo.src" message="not found" %}
+                {% endif %}
+                <div class="site-info">
+                    <a class="site-title"
+                       href="{{ index-uri }}">{{ site-title }}</a>
+                    <p class="site-tagline">{{ description }}</p>
+                </div>
+
+                {% if wooji.social-medias|not-empty %}
+                <ul class="social-media">
+                    {% for social-media in wooji.social-medias %}
+                        {% if social-media.icon %}
+                        <li class="{{ social-media.icon }}">
+                            <a class="btn"
+                               href="{{ social-media.href }}"
+                               data-toggle="tooltip"
+                               data-placement="top"
+                               title="{{ social-media.title }}">
+                                <i class="fab fa-{{ social-media.icon }} fa-2x"></i>
+                            </a>
+                        </li>
+                        {% else %}
+                        {% include "/html/components/alert.html" with type="danger" label="Error" context=":wooji.social-medias[].icon" message="not found" %}
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+            </div>
+            <div class="nav">
+                <ul class="list-inline">
+                    <li class="list-inline-item{% if home %} active{% endif %}">
+                        {% if home %}
+                        <strong>Home</strong>
+                        {% else %}
+                        <a href="{{ index-uri }}">Home</a>
+                        {% endif %}
+                    </li>
+
+                    {% for page in navbar-pages %}
+                    <li class="list-inline-item{% ifequal uri page.uri %} active{% endifequal %}">
+                        {% ifequal uri page.uri %}
+                        <strong>{{ page.title }}</strong>
+                        {% else %}
+                        <a href="{{ page.uri }}">{{ page.title }}</a>
+                        {% endifequal %}
+                    </li>
+                    {% endfor %}
+
+                    <li class="list-inline-item{% if archives %} active{% endif %}">
+                        {% if archives %}
+                        <strong>Archives</strong>
+                        {% else %}
+                        <a href="{{ archives-uri }}">Archives</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+            <div class="siri-container"></div>
+            <div class="main">
+                <div class="sidebar">
+                    {% block sidebar %}{% endblock %}
+                </div>
+                <div class="content">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>Copyright &copy; {{ today|date:"YYYY" }}
+                <a href="{{ index-uri }}">{{ site-title }}</a>. Some rights reserved.
+            </p>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+        <script src="https://kit.fontawesome.com/98dccab853.js"></script>
+        <script src="https://unpkg.com/siriwave/dist/siriwave.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        {% script "js/scripts.js" %}
+    </body>
+</html>

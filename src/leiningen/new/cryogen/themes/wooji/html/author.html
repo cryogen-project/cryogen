@@ -1,0 +1,12 @@
+{% extends "/html/base.html" %}
+
+{% block title %}{{ wooji.label.author-html|default-if-empty:"Posts published by" }} {{ author }}{% endblock %}
+{% block subtitle %}{{ site-title }}{% endblock %}
+{% block description %}{{ wooji.label.author-html|default-if-empty:"Posts published by" }} {{ author }}{% endblock %}
+
+{% block active-page %}author{% endblock %}
+
+{% block content %}
+<h1>{{ wooji.label.author-html|default-if-empty:"Posts published by" }} {{ author }}</h1>
+{% include "/html/groups.html" %}
+{% endblock %}

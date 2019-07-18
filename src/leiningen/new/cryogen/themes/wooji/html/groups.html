@@ -1,0 +1,14 @@
+{% for group in groups %}
+<h2>{{ group.group }}</h2>
+
+<ul>
+    {% for post in group.posts %}
+    <li>
+        <i class="fas fa-archive"></i>
+        <time class="published">{{ post.date|date:"MMMM d, YYYY" }}</time>
+        <span class="separator-comma">:</span>
+        <a href="{{ post.uri }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endfor %}

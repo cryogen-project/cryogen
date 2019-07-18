@@ -1,0 +1,7 @@
+<div class="post-excerpt">
+    {% if post.excerpt %}
+    <p>{{ post.excerpt|abbreviate:150 }}</p>
+    {% else %}
+    {% include "/html/components/alert.html" with type="danger" label="Error" context=":excerpt" message="not found" %}
+    {% endif %}
+</div>

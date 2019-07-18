@@ -1,0 +1,17 @@
+{% extends "/html/base.html" %}
+
+{% block content %}
+<h1>Home</h1>
+
+<div class="recent-posts">
+    <h2>{{ wooji.label.recent-posts|default-if-empty:"Recent posts" }}</h2>
+    <ul>
+        {% for post in latest-posts %}
+        <li>
+            <i class="fas fa-pen"></i>
+            <a href="{{ post.uri }}">{{ post.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

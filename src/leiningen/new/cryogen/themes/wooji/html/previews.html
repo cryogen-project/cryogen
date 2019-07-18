@@ -1,0 +1,25 @@
+{% extends "/html/base.html" %}
+
+{% block content %}
+
+<h1>{{ site-title }}</h1>
+
+{% for post in posts %}
+    {% if post.featured? %}
+        {% include "/html/featured-post.html" %}
+    {% endif %}
+{% endfor %}
+
+<div class="recent-posts">
+    <h2>{{ wooji.label.recent-posts|default-if-empty:"Recent posts" }}</h2>
+
+    {% for post in posts %}
+        {% if not post.featured? %}
+            {% include "/html/post-preview.html" %}
+        {% endif %}
+    {% endfor %}
+</div>
+
+{% include "/html/components/preview/pagination.html" %}
+
+{% endblock %}
