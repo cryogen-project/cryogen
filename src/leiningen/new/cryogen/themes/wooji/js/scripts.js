@@ -8,9 +8,6 @@ const rotate = (element, rotation, interval) => {
 };
 
 $(document).ready(function () {
-  /* Smooth transition (onload page): */
-  $("body").hide().fadeIn("slow");
-
   /* Enable tooltip plugin: */
   $("[data-toggle=\"tooltip\"]").tooltip();
 
