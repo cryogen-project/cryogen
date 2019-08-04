@@ -5,6 +5,6 @@
 {% block description %}{{ wooji.label.archives-description|default-if-empty:"Archives of posts according to date." }}{% endblock %}
 
 {% block content %}
-<h1>Archives</h1>
+<h1>{{ active-page|capitalize }}</h1>
 {% include "/html/groups.html" %}
 {% endblock %}

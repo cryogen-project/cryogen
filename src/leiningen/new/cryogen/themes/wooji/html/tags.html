@@ -5,7 +5,7 @@
 {% block description %}{{ wooji.label.tags-description|default-if-empty:"List of tags used on posts." }}{% endblock %}
 
 {% block content %}
-<h1>Tags</h1>
+<h1>{{ active-page|capitalize }}</h1>
 <ul>
     {% for tag in tags %}
     <li>

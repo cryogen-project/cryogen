@@ -7,6 +7,12 @@ const rotate = (element, rotation, interval) => {
   }, interval);
 };
 
+const encode = function (s) {
+  return s.replace(/[\u00A0-\u9999<>\&]/gim, function (i) {
+    return `&#${i.charCodeAt(0)};`;
+  });
+};
+
 $(document).ready(function () {
   /* Enable tooltip plugin: */
   $("[data-toggle=\"tooltip\"]").tooltip();
@@ -17,8 +23,8 @@ $(document).ready(function () {
   /* Remove empty tags: */
   $("p:empty").remove();
 
-  /* Convert empty h2 with hr: */
-  $("h2:empty").replaceWith("<hr />");
+  /* Remove empty h2s */
+  $("h2:empty").remove();
 
   /* Table of Contents: */
   $(function () {
@@ -38,18 +44,8 @@ $(document).ready(function () {
           .map(s => (!regex.test(s)) ? `\\${s}` : s)
           .join("");
 
-      $(escapedId).each(function () {
-        $(this).prepend(
-          `<a class="post-anchor btn-light"
-              href="${id}">
-               <i class="fas fa-link"></i>
-           </a>`
-        );
-      });
-
       /* Move .active to a clicked link: */
       $(this).click(function () {
-        $(".toc a").removeClass("active");
         document.querySelector(escapedId).scrollIntoView({
           behavior: "smooth"
         });
@@ -57,18 +53,17 @@ $(document).ready(function () {
     });
   });
 
-  /* Highlight TOC on scroll: */
-  $(function () {
-    $(window).scroll(function () {
-      $(":header").each(function () {
-        if ($(window).scrollTop() >= $(this).offset().top) {
-          let id = $(this).attr("id");
-          $(".toc a").removeClass("active");
-          $(`.toc a[href="#${id}"]`).addClass("active");
-        }
-      });
+  /* Prepend anchor links to non-TOC headings: */
+  $(".content-block")
+    .find("h4,h5,h6")
+    .each(function () {
+      $(this).prepend(
+        `<a class="post-anchor btn"
+          href="#${$(this).attr("id")}">
+           <i class="fas fa-link fa-xs"></i>
+       </a>`
+      );
     });
-  });
 
   /* Include Apple Siri wave: */
   let siriContainer = document.querySelector(".siri-container");
@@ -84,7 +79,7 @@ $(document).ready(function () {
     pixelDepth: 0.1,
     lerpSpeed: 0.1,
     width: siriParentWidth,
-    height: 50,
+    height: 25,
     autostart: true,
   });
 
@@ -93,10 +88,51 @@ $(document).ready(function () {
   $(siriCanvas).prop("width", siriParentWidth - 30);
 
   /* Rotate Yin Yang: */
-  rotate(".pagination .separator", 10, 100);
+  rotate(".pagination .separator i", 10, 100);
 
   /* Smooth transition (leaving page): */
   $(window).on("beforeunload", function () {
     $("body").show().fadeOut("slow");
   });
+
+
+  /*
+   * Change the previous and next texts
+   * when orientation is portrait:
+   */
+  let PORTRAIT = "portrait-primary";
+  let LANDSCAPE = "landscape-primary";
+  let minWidth = 768;
+
+  if (screen.orientation.type === PORTRAIT
+      || $(window).width() <= minWidth) {
+    let prevText = $(".pagination .previous")
+        .text()
+        .trim();
+    let nextText = $(".pagination .next")
+        .text()
+        .trim();
+
+    if (prevText) {
+      $(".pagination .previous")
+        .html("<i class=\"fas fa-angle-left\"></i> Newer")
+        .attr({
+          title: prevText,
+          "data-toggle": "tooltip",
+          "data-placement": "top"
+        })
+        .tooltip();
+    }
+
+    if (prevText) {
+      $(".pagination .next")
+        .html("Older <i class=\"fas fa-angle-right\"></i>")
+        .attr({
+          title: prevText,
+          "data-toggle": "tooltip",
+          "data-placement": "top"
+        })
+        .tooltip();
+    }
+  }
 });

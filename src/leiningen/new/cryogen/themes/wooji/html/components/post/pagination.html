@@ -1,6 +1,6 @@
 {% if any post.prev.uri post.next.uri %}
 <div class="pagination">
-    <a class="btn btn-outline-secondary {% if not post.prev.uri %}invisible{% endif %}"
+    <a class="previous btn btn-outline-secondary {% if not post.prev.uri %}invisible{% endif %}"
        href="{% if post.prev.uri %}{{ post.prev.uri }}{% else %}#{% endif %}">
         <i class="fas fa-angle-left"></i> {{ post.prev.title }}
     </a>
@@ -11,7 +11,7 @@
     </div>
     {% endif %}
 
-    <a class="btn btn-outline-secondary {% if not post.next.uri %}invisible{% endif %}"
+    <a class="next btn btn-outline-secondary {% if not post.next.uri %}invisible{% endif %}"
        href="{% if post.next.uri %}{{ post.next.uri }}{% else %}#{% endif %}">{{ post.next.title }}
         <i class="fas fa-angle-right"></i>
     </a>

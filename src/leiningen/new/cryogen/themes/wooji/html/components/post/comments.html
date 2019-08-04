@@ -1,6 +1,10 @@
 {% if not debug? %}
     {% if disqus-shortname %}
+
+    {% if any post.prev.uri post.next.uri %}
     <hr />
+    {% endif %}
+
     <div class="post-comments">
         <h2>Comments</h2>
         <div id="disqus_thread"></div>
@@ -17,7 +21,7 @@
          })();
         </script>
         <noscript>Please enable JavaScript to view the
-            <a href="https://disqus.com/?ref_noscript"
+            <a href="//disqus.com/?ref_noscript"
                rel="nofollow">comments powered by Disqus.</a>
         </noscript>
     </div>

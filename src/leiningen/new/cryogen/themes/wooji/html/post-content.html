@@ -1,5 +1,7 @@
 <div class="post-content">
     {% include "/html/components/post/meta.html" %}
     {% include "/html/components/post/summary.html" %}
-    {{ post.content|safe }}
+    <div class="content-block">
+        {{ post.content|safe }}
+    </div>
 </div>

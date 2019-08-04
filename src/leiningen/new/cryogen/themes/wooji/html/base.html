@@ -23,19 +23,35 @@
         {% endif %}
 
         <link rel="stylesheet"
-              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+              href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
         <link rel="stylesheet"
-              href="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css" />
+              href="//cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.css" />
         <link rel="stylesheet"
-              href="https://fonts.googleapis.com/css?family=Lobster|Cinzel:400,700,900|Source+Sans+Pro:300,400,600,700,900&display=swap" />
+              href="//fonts.googleapis.com/css?family=Lobster|Cinzel:400,700,900|Source+Sans+Pro:300,400,600,700,900&display=swap" />
         <link rel="stylesheet"
               href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/default.min.css" />
 
         {% style "css/styles.css" %}
 
+        <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+
+        <!-- Add rel-nofollow for non-internal (absolute) links on .content-block: -->
+        <script>
+         $(function () {
+             $(".content-block a[href]").each(function () {
+                 let regex = /^(\/\w+|\#.*)/i;
+                 let href = $(this).attr("href");
+
+                 if (!regex.test(href)) {
+                     $(this).prop("rel", "nofollow");
+                 }
+             });
+         });
+        </script>
+
         {% if wooji.gtag %}
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ wooji.gtag }}"></script>
+        <script async src="//googletagmanager.com/gtag/js?id={{ wooji.gtag }}"></script>
         <script>
          window.dataLayer = window.dataLayer || [];
          function gtag(){dataLayer.push(arguments);}
@@ -43,7 +59,6 @@
          gtag("config", "{{ wooji.gtag }}");
         </script>
         {% endif %}
-
     </head>
     <body class="{% block active-page %}{{ active-page }}{% endblock %}">
         <div class="wrapper">
@@ -54,8 +69,8 @@
                     <img class="site-logo"
                          src="{{ wooji.logo.src }}"
                          alt="{% if wooji.logo.alt %}{{ wooji.logo.alt }}{% else %}{{ site-title }}{% endif %}"
-                         width="{{ wooji.logo.width|default:64 }}"
-                         height="{{ wooji.logo.height|default:64 }}" />
+                         width="{{ wooji.logo.width|default:96 }}"
+                         height="{{ wooji.logo.height|default:96 }}" />
                 </a>
                 {% else %}
                 {% include "/html/components/alert.html" with type="danger" label="Error" context=":wooji.logo.src" message="not found" %}
@@ -75,8 +90,9 @@
                                href="{{ social-media.href }}"
                                data-toggle="tooltip"
                                data-placement="top"
-                               title="{{ social-media.title }}">
-                                <i class="fab fa-{{ social-media.icon }} fa-2x"></i>
+                               title="{{ social-media.title }}"
+                               rel="nofollow">
+                                <i class="fab fa-{{ social-media.icon }} fa-3x"></i>
                             </a>
                         </li>
                         {% else %}
@@ -87,7 +103,10 @@
                 {% endif %}
 
             </div>
-            <div class="nav">
+
+            <div class="siri-container"></div>
+
+            <div class="nav site-nav">
                 <ul class="list-inline">
                     <li class="list-inline-item{% if home %} active{% endif %}">
                         {% if home %}
@@ -116,7 +135,11 @@
                     </li>
                 </ul>
             </div>
-            <div class="siri-container"></div>
+
+            <div class="breadcrumb breadcrumbs">
+            {% include "/html/components/breadcrumbs.html" %}
+            </div>
+
             <div class="main">
                 <div class="sidebar">
                     {% block sidebar %}{% endblock %}
@@ -133,12 +156,11 @@
             </p>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
-        <script src="https://kit.fontawesome.com/98dccab853.js"></script>
-        <script src="https://unpkg.com/siriwave/dist/siriwave.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="//cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script>
+        <script src="//kit.fontawesome.com/98dccab853.js"></script>
+        <script src="//unpkg.com/siriwave/dist/siriwave.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script>
 

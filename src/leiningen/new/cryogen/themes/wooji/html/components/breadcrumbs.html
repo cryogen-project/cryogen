@@ -1,0 +1,57 @@
+<!-- Home or Preview -->
+{% if home %}
+<strong class="active">Home</strong>
+{% else %}
+<a href="{{ index-uri }}">Home</a>
+<span class="separator">
+    <i class="separator fas fa-caret-right"></i>
+</span>
+{% endif %}
+
+<!-- Pages -->
+{% ifequal active-page "pages" %}
+<strong class="active">{{ page.title }}</strong>
+{% endifequal %}
+
+<!-- Posts -->
+{% ifequal active-page "posts" %}
+<a href="/{{ post-root-uri }}">{{ post-root-uri|capitalize }}</a>
+<span class="separator">
+    <i class="separator fas fa-caret-right"></i>
+</span>
+<strong class="active">{{ post.title }}</strong>
+{% endifequal %}
+
+<!-- Archives -->
+{% if archives %}
+<strong class="active">{{ active-page|capitalize }}</strong>
+{% endif  %}
+
+<!-- Tags -->
+{% ifequal active-page "tags" %}
+
+<!-- Tag -->
+{% if name %}
+<a href="/{{ tag-root-uri }}">{{ active-page|capitalize }}</a>
+<span class="separator">
+    <i class="separator fas fa-caret-right"></i>
+</span>
+<strong class="active">{{ name }}</strong>
+{% else %}
+<strong class="active">{{ active-page|capitalize }}</strong>
+{% endif  %}
+
+{% endifequal %}
+
+<!-- Author (hack): -->
+{% if not home %}
+    {% ifequal active-page "home" %}
+        {% ifunequal index-uri uri %}
+        <a href="/{{ author-root-uri }}">{{ author-root-uri|capitalize }}</a>
+        <span class="separator">
+            <i class="separator fas fa-caret-right"></i>
+        </span>
+        <strong class="active">{{ author }}</strong>
+        {% endifunequal %}
+    {% endifequal %}
+{% endif %}
