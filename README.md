@@ -190,6 +190,7 @@ A Clojure library to provide Markdown rendering to the cryogen-core compiler by 
 * [Lambda Funk](http://lambdafunk.com)
 * [DDFT.wiki](https://ddft.wiki)
 * [Ampersanda's blog](https://ampersanda.dev)
+* [irrelevancy universe](https://irrelevancy.neocities.org)
 
 ## License
 
