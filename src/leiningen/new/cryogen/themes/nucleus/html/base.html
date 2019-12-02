@@ -8,8 +8,10 @@
     <!-- Modified to fit Cryogen.-->
     <meta charset="UTF-8">
     <title>{{title}}{% block subtitle %}{% endblock %}</title>
-    <meta name="description" content="">
+    {% block meta %}
+    <meta name="description" content="{{description}}">
     <meta name="keywords" content="">
+    {% endblock %}
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114.png">
