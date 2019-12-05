@@ -1,5 +1,14 @@
 {% extends "/html/base.html" %}
 {%block subtitle %}: {{page.title}}{% endblock %}
+{% if page.description %}
+<meta name="description" content="{{page.description}}">
+{% comment %} OpenGraph tags {% endcomment %}
+<meta property="og:description" content="{{page.description}}">
+{% endif %}
+<meta property="og:url" content="{{site-url}}{{uri}}" />
+<meta property="og:title" content="{{page.title}}" />
+<meta property="og:type" content="article" />
+{% endblock %}
 {% block content %}
 <div id="custom-page">
     <div id="page-header">
