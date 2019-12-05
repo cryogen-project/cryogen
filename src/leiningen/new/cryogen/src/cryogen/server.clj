@@ -21,15 +21,18 @@
   (fn [request]
     (let [{:keys [clean-urls blog-prefix public-dest]} (resolve-config)
           req-uri (.substring (url-decode (:uri request)) 1)
-          res-path (condp = clean-urls
-                     :trailing-slash (path req-uri "index.html")
-                     :no-trailing-slash (if (or (= req-uri "")
-                                                (= req-uri "/")
-                                                (= req-uri
-                                                   (.substring blog-prefix 1)))
-                                          (path req-uri "index.html")
-                                          (path (str req-uri ".html")))
-                     :dirty (path (str req-uri ".html")))]
+          res-path (if (or (.endsWith req-uri "/")
+                           (.endsWith req-uri ".html"))
+                     (condp = clean-urls
+                       :trailing-slash (path req-uri "index.html")
+                       :no-trailing-slash (if (or (= req-uri "")
+                                                  (= req-uri "/")
+                                                  (= req-uri
+                                                     (.substring blog-prefix 1)))
+                                            (path req-uri "index.html")
+                                            (path (str req-uri ".html")))
+                       :dirty (path (str req-uri ".html")))
+                     req-uri)]
       (or (file-response res-path {:root public-dest})
           (handler request)))))
 
