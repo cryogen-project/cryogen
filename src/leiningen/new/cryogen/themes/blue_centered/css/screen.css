@@ -37,7 +37,8 @@ body {
     color: #fff;
 }
 
-.navbar-default .navbar-nav li a {
+.navbar-default .navbar-nav li a,
+.navbar-default .navbar-nav .open .dropdown-menu > li > a{
     color: #fff;
 }
 
