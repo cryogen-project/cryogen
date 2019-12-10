@@ -22,7 +22,11 @@
     (let [{:keys [clean-urls blog-prefix public-dest]} (resolve-config)
           req-uri (.substring (url-decode (:uri request)) 1)
           res-path (if (or (.endsWith req-uri "/")
-                           (.endsWith req-uri ".html"))
+                           (.endsWith req-uri ".html")
+                           (-> (string/split req-uri #"/")
+                               last
+                               (string/includes? ".")
+                               not))
                      (condp = clean-urls
                        :trailing-slash (path req-uri "index.html")
                        :no-trailing-slash (if (or (= req-uri "")
