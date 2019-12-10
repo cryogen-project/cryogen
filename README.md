@@ -60,40 +60,40 @@ lein run
 The site configuration file is found at `content/config.edn`, this file looks as follows:
 
 ```clojure
-{:site-title           "My Awesome Blog"
- :author               "Bob Bobbert"
- :description          "This blog is awesome"
- :site-url             "http://blogawesome.com/"
- :post-root            "posts"
- :page-root            "pages"
- :post-root-uri        "posts-output"
- :page-root-uri        "pages-output"
- :tag-root-uri         "tags-output"
- :author-root-uri      "authors-output"
- :public-dest          "public"
- :blog-prefix          "/blog"
- :rss-name             "feed.xml"
- :rss-filters          ["cryogen"]
- :recent-posts         3
- :post-date-format     "yyyy-MM-dd"
- :archive-group-format "yyyy MMMM"
- :sass-src             []
- :sass-path            "sass"
- :compass-path         "compass"
- :theme                "blue"
- :resources            ["img"]
- :keep-files           [".git"]
- :disqus?              false
- :disqus-shortname     ""
- :ignored-files        [#"\.#.*" #".*\.swp$"]
- :previews?            false
- :posts-per-page       5
- :blocks-per-preview   2
- :clean-urls           :trailing-slash
- :collapse-subdirs?    false
- :hide-future-posts?   true
- :klipse               {}
- :debug?               false}
+{:site-title                   "My Awesome Blog"
+ :author                       "Bob Bobbert"
+ :description                  "This blog is awesome"
+ :site-url                     "http://blogawesome.com/"
+ :post-root                    "posts"
+ :page-root                    "pages"
+ :post-root-uri                "posts-output"
+ :page-root-uri                "pages-output"
+ :tag-root-uri                 "tags-output"
+ :author-root-uri              "authors-output"
+ :public-dest                  "public"
+ :blog-prefix                  "/blog"
+ :rss-name                     "feed.xml"
+ :rss-filters                  ["cryogen"]
+ :recent-posts                 3
+ :post-date-format             "yyyy-MM-dd"
+ :archive-group-format         "yyyy MMMM"
+ :sass-src                     []
+ :sass-path                    "sass"
+ :theme                        "blue"
+ :resources                    ["img"]
+ :keep-files                   [".git"]
+ :disqus?                      false
+ :disqus-shortname             ""
+ :ignored-files                [#"\.#.*" #".*\.swp$"]
+ :previews?                    false
+ :posts-per-page               5
+ :blocks-per-preview           2
+ :clean-urls                   :trailing-slash
+ :collapse-subdirs?            false
+ :hide-future-posts?           true
+ :klipse                       {}
+ :description-include-elements #{:p :h1 :h2 :h3 :h4 :h5 :h6}
+ :debug?                       false}
 ```
 
 For information about each key please see the ["Configuration"](http://cryogenweb.org/docs/configuration.html) portion of the Cryogen documentation site.
