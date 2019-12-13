@@ -1,13 +1,15 @@
 (ns cryogen.server
-  (:require [compojure.core :refer [GET defroutes]]
-            [compojure.route :as route]
-            [ring.util.response :refer [redirect file-response]]
-            [ring.util.codec :refer [url-decode]]
-            [cryogen-core.watcher :refer [start-watcher!]]
-            [cryogen-core.plugins :refer [load-plugins]]
-            [cryogen-core.compiler :refer [compile-assets-timed]]
-            [cryogen-core.config :refer [resolve-config]]
-            [cryogen-core.io :refer [path]]))
+  (:require 
+   [clojure.string :as string]
+   [compojure.core :refer [GET defroutes]]
+   [compojure.route :as route]
+   [ring.util.response :refer [redirect file-response]]
+   [ring.util.codec :refer [url-decode]]
+   [cryogen-core.watcher :refer [start-watcher!]]
+   [cryogen-core.plugins :refer [load-plugins]]
+   [cryogen-core.compiler :refer [compile-assets-timed]]
+   [cryogen-core.config :refer [resolve-config]]
+   [cryogen-core.io :refer [path]]))
 
 (defn init []
   (load-plugins)
