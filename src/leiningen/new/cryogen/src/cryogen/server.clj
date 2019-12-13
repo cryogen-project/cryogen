@@ -1,6 +1,7 @@
 (ns cryogen.server
   (:require [compojure.core :refer [GET defroutes]]
             [compojure.route :as route]
+            [clojure.string :as str]
             [ring.util.response :refer [redirect file-response]]
             [ring.util.codec :refer [url-decode]]
             [cryogen-core.watcher :refer [start-watcher!]]
@@ -23,9 +24,9 @@
           req-uri (.substring (url-decode (:uri request)) 1)
           res-path (if (or (.endsWith req-uri "/")
                            (.endsWith req-uri ".html")
-                           (-> (string/split req-uri #"/")
+                           (-> (str/split req-uri #"/")
                                last
-                               (string/includes? ".")
+                               (str/includes? ".")
                                not))
                      (condp = clean-urls
                        :trailing-slash (path req-uri "index.html")
