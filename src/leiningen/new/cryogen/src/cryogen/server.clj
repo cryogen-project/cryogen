@@ -34,7 +34,9 @@
                        :no-trailing-slash (if (or (= req-uri "")
                                                   (= req-uri "/")
                                                   (= req-uri
-                                                     (.substring blog-prefix 1)))
+                                                     (if (string/blank? blog-prefix)
+                                                       blog-prefix
+                                                       (.substring blog-prefix 1))))
                                             (path req-uri "index.html")
                                             (path (str req-uri ".html")))
                        :dirty (path (str req-uri ".html")))
