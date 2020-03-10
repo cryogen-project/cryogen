@@ -100,7 +100,7 @@ For information about each key please see the ["Configuration"](http://cryogenwe
 
 ### Switching between Markdown and AsciiDoc
 
-Cryogen comes with Markdown support as default. If you want to use AsciiDoc instead, open the `project.clj` in your created blog (e.g. `my-blog`), and change the line in `:dependencies` that says `cryogen-markdown` to `cryogen-asciidoc`.
+Cryogen comes with Markdown support as default. If you want to use AsciiDoc instead, open the `project.clj` in your created blog (e.g. `my-blog`), and change the line in `:dependencies` that says `cryogen-flexmark` to `cryogen-asciidoc`.
 Instead of looking for files ending in `.md` in the `content/md` directory, the compiler will now look for files ending in `.asc` in the `content/asc` directory.
 
 ### Selecting a Theme
