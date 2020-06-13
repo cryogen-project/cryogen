@@ -194,6 +194,6 @@ A Clojure library to provide Markdown rendering to the cryogen-core compiler by 
 
 ## License
 
-Copyright © 2014-2017 Carmen La
+Copyright © 2014-2020 Carmen La
 
 Distributed under the Eclipse Public License, the same as Clojure.
