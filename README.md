@@ -42,24 +42,24 @@ lein new cryogen my-blog
 or, alternatively, using [`clj-new`](https://github.com/seancorfield/clj-new/) (and having defined the `new` profile, as it suggests):
 
 ```
-clojure -X:new create :template cryogen :name me/my-blog
+clojure -X:new create :template cryogen :name me.my-blog
 ```
 
 ### Running the Server
 
-The web server can be started from the `my-blog` directory using either the `lein-ring` plugin:
+The web server can be started from the `my-blog` directory using either Leiningen:
 
-```
-lein ring server
+```bash
+lein serve # or lein serve-fast
 ```
 
 or tools-deps:
 
-```
-clojure -X:serve
+```bash
+clojure -X:serve # or clojure -X:serve-fast
 ```
 
-The server will watch for changes in the `content` and `themes` folders and recompile the content automatically.
+The server will watch for changes in the `content` and `themes` folders and recompile the content automatically. The `*-fast` variants perform [fast but partial compilation](https://cryogenweb.org/docs/fast-compilation.html) of only the changed page/post.
 
 You can also generate the content without bringing up a server either via:
 
@@ -118,7 +118,7 @@ For information about each key please see the ["Configuration"](http://cryogenwe
 
 ### Switching between Markdown and AsciiDoc
 
-Cryogen comes with Markdown support as default. If you want to use AsciiDoc instead, open the `project.clj` in your created blog (e.g. `my-blog`), and change the line in `:dependencies` that says `cryogen-flexmark` to `cryogen-asciidoc`.
+Cryogen comes with Markdown support as default. If you want to use AsciiDoc instead, open the `project.clj` in your created blog (e.g. `my-blog`), and change the line in `:dependencies` that says `cryogen-flexmark` to `cryogen-asciidoc` (and ensure the right version).
 Instead of looking for files ending in `.md` in the `content/md` directory, the compiler will now look for files ending in `.asc` in the `content/asc` directory.
 
 ### Selecting a Theme
