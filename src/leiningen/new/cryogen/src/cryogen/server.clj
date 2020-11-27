@@ -5,6 +5,7 @@
    [compojure.route :as route]
    [ring.util.response :refer [redirect file-response]]
    [ring.util.codec :refer [url-decode]]
+   [ring.server.standalone :as ring-server]
    [cryogen-core.watcher :refer [start-watcher!]]
    [cryogen-core.plugins :refer [load-plugins]]
    [cryogen-core.compiler :refer [compile-assets-timed]]
@@ -53,3 +54,10 @@
   (route/not-found "Page not found"))
 
 (def handler (wrap-subdirectories routes))
+
+(defn serve
+  "Entrypoint for running via tools-deps (`clojure -X:serve`)"
+  [opts]
+  (ring-server/serve
+    handler
+    (merge {:init init} opts)))

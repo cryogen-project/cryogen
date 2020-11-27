@@ -110,6 +110,7 @@
              options
              [".gitignore" (render "gitignore")]
              ["project.clj" (render "project.clj")]
+             ["deps.edn" (render "deps.edn")]
              ;;static resources
              ["content/img/cryogen.png" (resource "img/cryogen.png")]
              ["content/css/example.css" (resource "css/example.css")]

@@ -39,20 +39,38 @@ A new site can be created using the Cryogen template as follows:
 lein new cryogen my-blog
 ```
 
+or, alternatively, using [`clj-new`](https://github.com/seancorfield/clj-new/) (and having defined the `new` profile, as it suggests):
+
+```
+clojure -X:new create :template cryogen :name me/my-blog
+```
+
 ### Running the Server
 
-The web server can be started from the `my-blog` directory using the `lein-ring` plugin:
+The web server can be started from the `my-blog` directory using either the `lein-ring` plugin:
 
 ```
 lein ring server
 ```
 
+or tools-deps:
+
+```
+clojure -X:serve
+```
+
 The server will watch for changes in the `content` and `themes` folders and recompile the content automatically.
 
-You can also generate the content without bringing up a server via:
+You can also generate the content without bringing up a server either via:
 
 ```
 lein run
+```
+
+or via:
+
+```
+clojure -M:build
 ```
 
 ### Site Configuration
