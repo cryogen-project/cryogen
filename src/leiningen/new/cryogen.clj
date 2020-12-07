@@ -120,7 +120,7 @@
              ["content/md/pages/another-page.md" (render "md/pages/another-page.md")]
              ["content/md/posts/2014-03-10-first-post.md" (render "md/posts/2014-03-10-first-post.md")]
              ["content/md/posts/2014-11-04-second-post.md" (render "md/posts/2014-11-04-second-post.md")]
-             ["content/md/posts/2016-01-07-docs.md" (render "md/posts/2016-01-07-docs.md")]
+             ["content/md/posts/2020-12-03-docs.md" (render "md/posts/2020-12-03-docs.md")]
              ;;Asciidoc templates
              ["content/asc/pages/adoc-page.asc" (render "asc/pages/adoc-page.asc")]
              ["content/asc/posts/2014-10-10-adoc-post.asc" (render "asc/posts/2014-10-10-adoc-post.asc")]

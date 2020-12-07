@@ -12,4 +12,6 @@
             :plugins [[lein-ring "0.12.5"]]
             :main cryogen.core
             :ring {:init cryogen.server/init
-                   :handler cryogen.server/handler})
+                   :handler cryogen.server/handler}
+            :aliases {"serve"      ["run" "-m" "cryogen.server"]
+                      "serve-fast" ["run" "-m" "cryogen.server" "fast"]})
