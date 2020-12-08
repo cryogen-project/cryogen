@@ -15,6 +15,7 @@ sections for `Highlights`, `Breaking` and `Changes since x.y.z`.
 - Support the use of `tools.deps` (aka clojure CLI) in addition to `lein`.
 
 ### Changes since 0.6.2
+- [#226](https://github.com/cryogen-project/cryogen/pull/226) Prepare for release 0.6.3 (bombaywalla)
 - [#225](https://github.com/cryogen-project/cryogen/pull/225) git-ignore lotus' sass-generated files (devurandom)
 - [#221](https://github.com/cryogen-project/cryogen/pull/221) Support for deps tools instead of lein (holyjak)
 - [#220](https://github.com/cryogen-project/cryogen/pull/220) Support for incremental compilation (holyjak)
