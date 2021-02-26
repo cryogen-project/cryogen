@@ -42,7 +42,7 @@ lein new cryogen my-blog
 or, alternatively, using [`clj-new`](https://github.com/seancorfield/clj-new/) (and having defined the `new` profile, as it suggests):
 
 ```
-clojure -X:new create :template cryogen :name me.my-blog
+clojure -X:new :template cryogen :name me.my-blog
 ```
 
 ### Running the Server
