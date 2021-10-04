@@ -7,6 +7,10 @@ sections for `Highlights`, `Breaking` and `Changes since x.y.z`.
 
 ## [Unreleased]
 
+## [0.6.4] - 2021-10-04
+
+### Highlights
+- Update docs to the latest clj-new
 ### Breaking
 - Fast compilation command line changed from `*-fast` to `*:fast`.
 
