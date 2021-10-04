@@ -39,10 +39,12 @@ A new site can be created using the Cryogen template as follows:
 lein new cryogen my-blog
 ```
 
-or, alternatively, using [`clj-new`](https://github.com/seancorfield/clj-new/) (and having defined the `new` profile, as it suggests):
+or, alternatively, using [`clj-new as a tool`](https://github.com/seancorfield/clj-new#installation-as-a-tool):
 
 ```
-clojure -X:new :template cryogen :name me.my-blog
+clojure -Ttools install com.github.seancorfield/clj-new '{:git/tag "v1.2.362"}' :as clj-new # update to latest!
+clojure -Tclj-new create :template cryogen :name myname/myblog :force true
+cd myname/myblog/
 ```
 
 ### Running the Server
