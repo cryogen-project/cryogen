@@ -7,6 +7,9 @@ sections for `Highlights`, `Breaking` and `Changes since x.y.z`.
 
 ## [Unreleased]
 
+### Breaking
+- Fast compilation command line changed from `*-fast` to `*:fast`.
+
 ## [0.6.3] - 2020-12-07
 
 ### Highlights
@@ -24,7 +27,7 @@ sections for `Highlights`, `Breaking` and `Changes since x.y.z`.
 
 ### Highlights
 - Update to new version of the Markup protocol that allows for
-  multiple file extensions for a particular markup. 
+  multiple file extensions for a particular markup.
 
 ### Breaking
 - Requires latest versions of `cryogen-asciidoc` (at least 0.3.2),
@@ -56,4 +59,3 @@ sections for `Highlights`, `Breaking` and `Changes since x.y.z`.
 [0.6.2]: https://github.com/cryogen-project/cryogen/compare/0.6.1...0.6.2
 [0.6.1]: https://github.com/cryogen-project/cryogen/compare/0.6.0...0.6.1
 [0.6.0]: https://github.com/cryogen-project/cryogen/compare/0.1.0...0.6.0
-

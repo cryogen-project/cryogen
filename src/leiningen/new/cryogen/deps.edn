@@ -10,5 +10,4 @@
            ;; Requires tools.deps.alpha 0.9.810+
            :serve {:exec-fn   cryogen.server/serve
                    :exec-args {:port 3000}}
-           :serve-fast {:exec-fn   cryogen.server/serve
-                        :exec-args {:port 3000, :fast true}}}}
+           :fast {:exec-args {:fast true}}}}

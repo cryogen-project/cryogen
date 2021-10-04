@@ -14,4 +14,4 @@
             :ring {:init cryogen.server/init
                    :handler cryogen.server/handler}
             :aliases {"serve"      ["run" "-m" "cryogen.server"]
-                      "serve-fast" ["run" "-m" "cryogen.server" "fast"]})
+                      "serve:fast" ["run" "-m" "cryogen.server" "fast"]})
