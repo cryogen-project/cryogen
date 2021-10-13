@@ -7,6 +7,9 @@ sections for `Highlights`, `Breaking` and `Changes since x.y.z`.
 
 ## [Unreleased]
 
+### Highlights
+- Support a `deps-new` template.
+
 ## [0.6.4] - 2021-10-04
 
 ### Highlights
@@ -57,8 +60,9 @@ sections for `Highlights`, `Breaking` and `Changes since x.y.z`.
 - Switch to `cryogen-flexmark`.
 - Handle case where `blog-prefix` is blank.
 
-[Unreleased]: https://github.com/cryogen-project/cryogen/compare/0.6.3...HEAD
+[Unreleased]: https://github.com/cryogen-project/cryogen/compare/0.6.4...HEAD
 
+[0.6.4]: https://github.com/cryogen-project/cryogen/compare/0.6.3...0.6.4
 [0.6.3]: https://github.com/cryogen-project/cryogen/compare/0.6.2...0.6.3
 [0.6.2]: https://github.com/cryogen-project/cryogen/compare/0.6.1...0.6.2
 [0.6.1]: https://github.com/cryogen-project/cryogen/compare/0.6.0...0.6.1

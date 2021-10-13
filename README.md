@@ -23,27 +23,41 @@ This ReadMe only documents a subset of Cryogen's features. For additional docume
 * Sass/SCSS compilation
 * Klipse Integration
 
-## Prerequisites
+## Usage
+
+### Creating a New Site
+
+You can create a new website using either one of `leiningen` or `clj-new` or `deps-new`.
+
+#### Creating a New Site With Leiningen
 
 You will need [Leiningen][1] 2.5.0 or above installed.
 
 [1]: https://github.com/technomancy/leiningen
 
-## Usage
-
-### Creating a New Site
-
-A new site can be created using the Cryogen template as follows:
+A new site can be created using the Cryogen leiningen template as follows:
 
 ```
 lein new cryogen my-blog
 ```
 
-or, alternatively, using [`clj-new as a tool`](https://github.com/seancorfield/clj-new#installation-as-a-tool):
+#### Creating a New Site With clj-new as a Tool
+
+Alternatively, use [`clj-new as a tool`](https://github.com/seancorfield/clj-new#installation-as-a-tool):
 
 ```
 clojure -Ttools install com.github.seancorfield/clj-new '{:git/tag "v1.2.362"}' :as clj-new # update to latest!
 clojure -Tclj-new create :template cryogen :name myname/myblog :force true
+cd myname/myblog/
+```
+
+#### Creating a New Site With deps-new as a Tool
+
+Alternatively, use [`deps-new as a tool`](https://github.com/seancorfield/deps-new#deps-new-):
+
+```
+clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.4.0"}' :as new
+clojure -Sdeps '{:deps {org.cryogen/deps-new-template {:mvn/version "1.2.3"}}}' -Tnew :template org.cryogenweb/new :name myname/myblog
 cd myname/myblog/
 ```
 
