@@ -108,24 +108,24 @@
     (with-redefs [leiningen.new.templates/render-text (fn [text _] text)]
       (apply ->files
              options
-             [".gitignore" (render "gitignore")]
-             ["project.clj" (render "project.clj")]
-             ["deps.edn" (render "deps.edn")]
+             [".gitignore" (render "root/gitignore")]
+             ["project.clj" (render "root/project.clj")]
+             ["deps.edn" (render "root/deps.edn")]
              ;;static resources
-             ["content/img/cryogen.png" (resource "img/cryogen.png")]
-             ["content/css/example.css" (resource "css/example.css")]
-             ["content/css/sassexample.scss" (resource "css/sassexample.scss")]
+             ["content/img/cryogen.png" (resource "content/img/cryogen.png")]
+             ["content/css/example.css" (resource "content/css/example.css")]
+             ["content/css/sassexample.scss" (resource "content/css/sassexample.scss")]
              ;;Markdown templates
-             ["content/md/pages/about.md" (render "md/pages/about.md")]
-             ["content/md/pages/another-page.md" (render "md/pages/another-page.md")]
-             ["content/md/posts/2014-03-10-first-post.md" (render "md/posts/2014-03-10-first-post.md")]
-             ["content/md/posts/2014-11-04-second-post.md" (render "md/posts/2014-11-04-second-post.md")]
-             ["content/md/posts/2020-12-03-docs.md" (render "md/posts/2020-12-03-docs.md")]
+             ["content/md/pages/about.md" (render "content/md/pages/about.md")]
+             ["content/md/pages/another-page.md" (render "content/md/pages/another-page.md")]
+             ["content/md/posts/2014-03-10-first-post.md" (render "content/md/posts/2014-03-10-first-post.md")]
+             ["content/md/posts/2014-11-04-second-post.md" (render "content/md/posts/2014-11-04-second-post.md")]
+             ["content/md/posts/2020-12-03-docs.md" (render "content/md/posts/2020-12-03-docs.md")]
              ;;Asciidoc templates
-             ["content/asc/pages/adoc-page.asc" (render "asc/pages/adoc-page.asc")]
-             ["content/asc/posts/2014-10-10-adoc-post.asc" (render "asc/posts/2014-10-10-adoc-post.asc")]
+             ["content/asc/pages/adoc-page.asc" (render "content/asc/pages/adoc-page.asc")]
+             ["content/asc/posts/2014-10-10-adoc-post.asc" (render "content/asc/posts/2014-10-10-adoc-post.asc")]
              ;;config
-             ["content/config.edn" (render "config.edn")]
+             ["content/config.edn" (render "content/config.edn")]
              ;;namespaces
              ["src/cryogen/core.clj" (render "src/cryogen/core.clj")]
              ["src/cryogen/server.clj" (render "src/cryogen/server.clj")]
