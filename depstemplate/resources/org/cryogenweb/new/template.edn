@@ -1,0 +1,8 @@
+{:transform
+ [
+  ["../../../../../src/leiningen/new/cryogen/root" "" {"gitignore" ".gitignore"} :raw]
+  ["../../../../../src/leiningen/new/cryogen/themes" "themes" :raw]
+  ["../../../../../src/leiningen/new/cryogen/content" "content" :raw]
+  ["../../../../../src/leiningen/new/cryogen/src" "src" :raw]
+  ]
+ }
