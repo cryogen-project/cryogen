@@ -37,7 +37,7 @@ You will need [Leiningen][1] 2.5.0 or above installed.
 
 A new site can be created using the Cryogen leiningen template as follows:
 
-```
+```sh
 lein new cryogen my-blog
 ```
 
@@ -45,7 +45,7 @@ lein new cryogen my-blog
 
 Alternatively, use [`clj-new as a tool`](https://github.com/seancorfield/clj-new#installation-as-a-tool):
 
-```
+```sh
 clojure -Ttools install com.github.seancorfield/clj-new '{:git/tag "v1.2.362"}' :as clj-new # update to latest!
 clojure -Tclj-new create :template cryogen :name myname/myblog :force true
 cd myname/myblog/
@@ -55,7 +55,7 @@ cd myname/myblog/
 
 Alternatively, use [`deps-new as a tool`](https://github.com/seancorfield/deps-new#deps-new-):
 
-```
+```sh
 clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.4.0"}' :as new
 clojure -Sdeps '{:deps {org.cryogen/deps-new-template {:mvn/version "1.2.3"}}}' -Tnew :template org.cryogenweb/new :name myname/myblog
 cd myname/myblog/
@@ -65,13 +65,13 @@ cd myname/myblog/
 
 The web server can be started from the `my-blog` directory using either Leiningen:
 
-```bash
+```sh
 lein serve # or lein serve:fast
 ```
 
 or tools-deps:
 
-```bash
+```sh
 clojure -X:serve # or clojure -X:serve:fast
 ```
 
@@ -79,13 +79,13 @@ The server will watch for changes in the `content` and `themes` folders and reco
 
 You can also generate the content without bringing up a server either via:
 
-```
+```sh
 lein run
 ```
 
 or via:
 
-```
+```sh
 clojure -M:build
 ```
 
