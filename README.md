@@ -4,7 +4,7 @@
 <!-- Non-breaking space -->
 &nbsp;
 
-This ReadMe only documents a subset of Cryogen's features. For additional documentation please see the [cryogen site](http://cryogenweb.org).
+This README only documents a subset of Cryogen's features. For additional documentation please see the [cryogen site](http://cryogenweb.org).
 
 <!-- Non-breaking space -->
 &nbsp;
@@ -57,9 +57,12 @@ Alternatively, use [`deps-new as a tool`](https://github.com/seancorfield/deps-n
 
 ```sh
 clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.4.0"}' :as new
-clojure -Sdeps '{:deps {org.cryogen/deps-new-template {:mvn/version "1.2.3"}}}' -Tnew :template org.cryogenweb/new :name myname/myblog
+clojure -Sdeps '{:deps {cryogen/lein-template {:mvn/version "RELEASE"}}}' -Tnew :template org.cryogenweb/new :name myname/myblog
 cd myname/myblog/
 ```
+
+The artifact `cryogen/lein-template` contains both a leiningen
+template and a deps-new template.
 
 ### Running the Server
 
