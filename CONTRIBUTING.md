@@ -8,10 +8,10 @@ Testing
 
 Clone the repo locally and switch to the branch you want to try. Then
 (if using `clj-new`):
-
-    clojure -Sdeps '{:deps {c/c {:local/root "/path/to/cryogen"}}}' -Tclj-new create :template cryogen :name myname/myblog :force true
-
+```sh
+clojure -Sdeps '{:deps {c/c {:local/root "/path/to/cryogen"}}}' -Tclj-new create :template cryogen :name myname/myblog :force true
+```
 Or, if using `deps-new`:
-
-    clojure -Sdeps '{:deps {c/c {:local/root "/path/to/cryogen"}}}' -Tnew :template cryogen :name myname/myblog
-
+```sh
+clojure -Sdeps '{:deps {c/c {:local/root "/path/to/cryogen"}}}' -Tnew :template cryogen :name myname/myblog
+```
