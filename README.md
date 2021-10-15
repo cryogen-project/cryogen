@@ -57,7 +57,7 @@ Alternatively, use [`deps-new as a tool`](https://github.com/seancorfield/deps-n
 
 ```sh
 clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.4.0"}' :as new
-clojure -Sdeps '{:deps {cryogen/lein-template {:mvn/version "RELEASE"}}}' -Tnew :template org.cryogenweb/new :name myname/myblog
+clojure -Sdeps '{:deps {io.github.cryogen-project/cryogen {:git/tag "0.6.6" :git/sha "FILLIN"}}}' -Tnew :template org.cryogenweb/new :name myname/myblog
 cd myname/myblog/
 ```
 
