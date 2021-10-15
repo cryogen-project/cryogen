@@ -4,7 +4,7 @@
 <!-- Non-breaking space -->
 &nbsp;
 
-This ReadMe only documents a subset of Cryogen's features. For additional documentation please see the [cryogen site](http://cryogenweb.org).
+This README only documents a subset of Cryogen's features. For additional documentation please see the [cryogen site](http://cryogenweb.org).
 
 <!-- Non-breaking space -->
 &nbsp;
@@ -23,41 +23,58 @@ This ReadMe only documents a subset of Cryogen's features. For additional docume
 * Sass/SCSS compilation
 * Klipse Integration
 
-## Prerequisites
+## Usage
+
+### Creating a New Site
+
+You can create a new website using either one of `leiningen` or `clj-new` or `deps-new`.
+
+#### Creating a New Site With Leiningen
 
 You will need [Leiningen][1] 2.5.0 or above installed.
 
 [1]: https://github.com/technomancy/leiningen
 
-## Usage
+A new site can be created using the Cryogen leiningen template as follows:
 
-### Creating a New Site
-
-A new site can be created using the Cryogen template as follows:
-
-```
+```sh
 lein new cryogen my-blog
 ```
 
-or, alternatively, using [`clj-new as a tool`](https://github.com/seancorfield/clj-new#installation-as-a-tool):
+#### Creating a New Site With clj-new as a Tool
 
-```
+Alternatively, use [`clj-new as a tool`](https://github.com/seancorfield/clj-new#installation-as-a-tool):
+
+```sh
 clojure -Ttools install com.github.seancorfield/clj-new '{:git/tag "v1.2.362"}' :as clj-new # update to latest!
 clojure -Tclj-new create :template cryogen :name myname/myblog :force true
 cd myname/myblog/
 ```
 
+#### Creating a New Site With deps-new as a Tool
+
+Alternatively, use [`deps-new as a tool`](https://github.com/seancorfield/deps-new#deps-new-):
+
+```sh
+clojure -Ttools install io.github.seancorfield/deps-new '{:git/tag "v0.4.0"}' :as new
+clojure -Sdeps '{:deps {io.github.cryogen-project/cryogen {:git/tag "0.6.6" :git/sha "FILLIN"}}}' -Tnew :template org.cryogenweb/new :name myname/myblog
+cd myname/myblog/
+```
+
+The artifact `cryogen/lein-template` contains both a leiningen
+template and a deps-new template.
+
 ### Running the Server
 
 The web server can be started from the `my-blog` directory using either Leiningen:
 
-```bash
+```sh
 lein serve # or lein serve:fast
 ```
 
 or tools-deps:
 
-```bash
+```sh
 clojure -X:serve # or clojure -X:serve:fast
 ```
 
@@ -65,13 +82,13 @@ The server will watch for changes in the `content` and `themes` folders and reco
 
 You can also generate the content without bringing up a server either via:
 
-```
+```sh
 lein run
 ```
 
 or via:
 
-```
+```sh
 clojure -M:build
 ```
 
@@ -214,6 +231,6 @@ A Clojure library to provide Markdown rendering to the cryogen-core compiler by 
 
 ## License
 
-Copyright © 2014-2020 Carmen La
+Copyright © 2014-2021 Carmen La
 
 Distributed under the Eclipse Public License, the same as Clojure.
