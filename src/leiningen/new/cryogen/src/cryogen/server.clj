@@ -19,7 +19,7 @@
   "Add dev-time configuration overrides here, such as `:hide-future-posts? false`"
   {})
 
-(defn init [fast?]
+(defn init [& fast?]
   (load-plugins)
   (compile-assets-timed extra-config-dev)
   (let [ignored-files (-> @resolved-config :ignored-files)]
