@@ -5,11 +5,34 @@
 {% if post.description %}
 <meta name="description" content="{{post.description}}">
 {% comment %} OpenGraph tags {% endcomment %}
-<meta property="og:description" content="{{post.description}}">
+<meta property="og:description" content="{{post.description}}" />
+{% endif %}
+{% if post.image %}
+{% if post.image.path %}
+<meta property="og:image" content="{{site-url}}{{blog-prefix}}{{post.image.path}}" />
+{% if post.image.type %}
+<meta property="og:image:type" content="{{post.image.type}}" />{% endif %}
+{% if post.image.width %}
+<meta property="og:image:width" content="{{post.image.width}}" />{% endif %}
+{% if post.image.height %}
+<meta property="og:image:height" content="{{post.image.height}}" />{% endif %}
+{% if post.image.alt %}
+<meta property="og:image:alt" content="{{post.image.alt}}" />{% endif %}
+{% else %}
+<meta property="og:image" content="{{site-url}}{{blog-prefix}}{{post.image}}" />{% endif %}
 {% endif %}
 <meta property="og:url" content="{{site-url}}{{uri}}" />
 <meta property="og:title" content="{{post.title}}" />
 <meta property="og:type" content="article" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="{{site-url}}{{uri}}" />
+<meta name="twitter:title" content="{{post.title}}" />
+<meta name="twitter:description" content="{{post.description}}" />
+{% if post.image %}
+<meta name="twitter:image"
+    content="{{site-url}}{{blog-prefix}}{% if post.image.path %}{{post.image.path}}{% else %}{{post.image}}{% endif %}" />
+{% endif %}
+<meta name="twitter:creator" content="{{twitter-acct}}" />
 {% endblock %}
 {% block content %}
 <div id="post">

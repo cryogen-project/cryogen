@@ -6,9 +6,32 @@
 {% comment %} OpenGraph tags {% endcomment %}
 <meta property="og:description" content="{{page.description}}">
 {% endif %}
+{% if page.image %}
+{% if page.image.path %}
+<meta property="og:image" content="{{site-url}}{{blog-prefix}}{{page.image.path}}" />
+{% if page.image.type %}
+<meta property="og:image:type" content="{{page.image.type}}" />{% endif %}
+{% if page.image.width %}
+<meta property="og:image:width" content="{{page.image.width}}" />{% endif %}
+{% if page.image.height %}
+<meta property="og:image:height" content="{{page.image.height}}" />{% endif %}
+{% if page.image.alt %}
+<meta property="og:image:alt" content="{{page.image.alt}}" />{% endif %}
+{% else %}
+<meta property="og:image" content="{{site-url}}{{blog-prefix}}{{page.image}}" />{% endif %}
+{% endif %}
 <meta property="og:url" content="{{site-url}}{{uri}}" />
 <meta property="og:title" content="{{page.title}}" />
 <meta property="og:type" content="article" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content="{{site-url}}{{uri}}" />
+<meta name="twitter:title" content="{{page.title}}" />
+<meta name="twitter:description" content="{{page.description}}" />
+{% if page.image %}
+<meta name="twitter:image"
+    content="{{site-url}}{{blog-prefix}}{% if page.image.path %}{{page.image.path}}{% else %}{{page.image}}{% endif %}" />
+{% endif %}
+<meta name="twitter:creator" content="{{twitter-acct}}" />
 {% endblock %}
 {% block content %}
 <div id="custom-page">

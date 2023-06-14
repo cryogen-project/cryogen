@@ -2,6 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
+    {% if mastodon.host %}
+    <a rel="me" href="https://{{mastodon.host}}/@{{mastodon.acct}}"></a>
+    {% endif %}
     <title>{{title}}{% block subtitle %}{% endblock %}</title>
     {% block meta %}
     <meta name="description" content="{{description}}">

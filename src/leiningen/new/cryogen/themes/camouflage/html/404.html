@@ -1,0 +1,92 @@
+<html>
+
+<head>
+    <link href="/blog/css/screen.css" rel="stylesheet" type="text/css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous">
+        </script>
+    <style>
+        a {
+            color: #588157;
+        }
+
+        a:visited {
+            color: #3a5a40;
+        }
+
+        body {
+            color: #344e41;
+            background-color: #dad7cd;
+        }
+
+        #message {
+            display: block;
+            width: 100%;
+            padding: 150px 0;
+            line-height: 1.6em;
+            text-align: center;
+        }
+
+        h1,
+        h2 {
+            float: left;
+            margin: 0 0 0 40px;
+            padding: 0;
+            float: left;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-weight: normal;
+            line-height: normal;
+            text-transform: uppercase;
+        }
+
+        #message .aside {
+            display: block;
+            width: 80%;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        #message .aside h2 span {
+            display: block;
+            font-size: 30px;
+        }
+
+        #message p:first-child {
+            margin-top: 0;
+        }
+
+        h1 {
+            margin-top: -90px;
+            font-size: 200px;
+        }
+
+        h2 {
+            font-size: 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <section id="message">
+            <div class="aside">
+                <h1>404</h1>
+                <h2>Error ! <span>Page Not Found</span></h2>
+            </div>
+        </section>
+    </div>
+    <form action="https://www.google.com/search">
+        <div class="widget"><label for="q">Text to search for</label>
+            <input id="q" name="q" type="search" size="64">
+        </div>
+        <div class="widget"><label for="submit">Search with Google</label>
+            <input type="submit" id="submit" class="action">
+        </div>
+    </form>
+</body>
+<script type="application/javascript">
+    $('#q').val(URL(window.location.href).hostname + " " +
+        window.location.href.split("/").slice(-2)[0].split("-").join(" "))
+</script>
+
+</html>

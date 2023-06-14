@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!-- does NOT extend base, because this is for phone screens and should 
+     be minimal-->
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{title}}{% block subtitle %}{% endblock %}</title>
+    {% block meta %}
+    <meta name="description" content="{{description}}">
+    <meta name="keywords" content="">
+    {% endblock %}
+    <link rel="icon" href="favicon.png">
+    <link rel="canonical" href="{{site-url}}{{uri}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% style "css/colour.css" %}
+    {% style "css/structure.css" %}
+</head>
+
+<body>
+    <header>
+        <!-- navbar -->
+        <div id="nav">
+            <img id="nav-icon" src="/blog/img/threelines.png" alt="Menu" />
+            <menu id="nav-menu">
+                <li {% if home %} class="active" {% endif %}><a href="{{index-uri}}">Home</a></li>
+                <li {% if archives %} class="active" {% endif %}><a href="{{archives-uri}}">Archives</a></li>
+                {% for nav-page in navbar-pages %}
+                <li {%ifequal page.uri nav-page.uri %} class="active" {% endifequal %}>
+                    <a href="{{nav-page.uri}}">{{nav-page.title}}</a>
+                </li>
+                {% endfor %}
+                <li><a href="{{rss-uri}}">RSS</a></li>
+            </menu>
+        </div>
+        <h2><a class="navbar-brand" href="{{index-uri}}">{{title}}</a></h2>
+        <div id="header">
+            {{header|safe}}
+        </div>
+        {% if message %}
+        <div id="message">
+            <p class="message">{{message}}</p>
+        </div>
+        {% endif %}
+        {% if error %}
+        <div id="error">
+            <p class="error">{{error}}</p>
+        </div>
+        {% endif %}
+    </header>
+
+    <div id="main-container" class="container">
+        {% block content %}
+        <div id="custom-page">
+            <div id="page-header">
+                <h2>{{page.title}}</h2>
+            </div>
+            {% if page.toc %}{{page.toc|safe}}{% endif %}
+            {{page.content|safe}}
+        </div>
+                {% endblock %}
+    </div>
+</body>
