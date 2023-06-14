@@ -7,6 +7,9 @@
     <!-- Website Template designed by www.downloadwebsitetemplates.co.uk -->
     <!-- Modified to fit Cryogen.-->
     <meta charset="UTF-8">
+    {% if mastodon.host %}
+    <a rel="me" href="https://{{mastodon.host}}/@{{mastodon.acct}}"></a>
+    {% endif %}
     <title>{{title}}{% block subtitle %}{% endblock %}</title>
     {% block meta %}
     <meta name="description" content="{{description}}">

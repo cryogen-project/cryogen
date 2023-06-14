@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="https://ogp.me/ns#" lang="en" xml:lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    {% if mastodon.host %}
+    <a rel="me" href="https://{{mastodon.host}}/@{{mastodon.acct}}"></a>
+    {% endif %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{{title}}{% block subtitle %}{% endblock %}</title>
+    <meta property="og:site_name" content="{{title}}" />
+    <link href="{{rss-uri}}" rel="alternate" type="application/rss+xml" title="RSS 2.0" />
+    {% block meta %}
+    <meta property="og:title" content="Home" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/blog/img/home.png" />
+    <meta name="description" content="{{description}}" />
+    <meta name="keywords"
+        content="{% for tag in tags|sort-by:name %}{{tag.name}}{% if not forloop.last %},{% endif %}{% endfor %}" />
+    {% endblock %}
+    {%if twitter-acct %}
+    <meta name="twitter:site" content="{{twitter-acct}}" />
+    {% endif %}
+    <link rel="icon" href="/blog/img/home.png" />
+    <link rel="canonical" href="{{site-url}}{{uri}}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {% style "css/colour.css" %}
+    {% style "css/structure.css" %}
+</head>
+
+<body>
+    <!-- navbar -->
+    <div id="nav">
+        <img id="nav-icon" src="/blog/img/threelines.png" alt="Menu" />
+        <menu id="nav-menu">
+            <li {% if home %} class="active" {% endif %}>
+                <a href="{{index-uri}}">
+                    <img src="/blog/img/home.png" alt="" style="width: 1em; height: 1em;"> Home
+                </a>
+            </li>
+            <li {% if archives %} class="active" {% endif %}><a href="{{archives-uri}}">Archives</a></li>
+            {% for nav-page in navbar-pages %}
+            <li {%ifequal page.uri nav-page.uri %} class="active" {% endifequal %}>
+                <a href="{{nav-page.uri}}">{{nav-page.title}}</a>
+            </li>
+            {% endfor %}
+            <li><a href="{{rss-uri}}">RSS</a></li>
+        </menu>
+    </div>
+    <div id="side-bar">
+        {% block side-bar %}
+        <div id="sidebar">
+            <h3>Key posts</h3>
+            <ul id="links">
+                <li><a href="/blog/posts-output/2022-02-17-manifesto-for-a-good-society/">Manifesto for a good
+                        society</a></li>
+                <li><a href="/blog/posts-output/2023-02-08-on-money/">On Money</a></li>
+                <li><a href="/blog/posts-output/2022-07-19-levellers-rant-updated/">The Levellers' Rant</a></li>
+                {% for page in sidebar-pages %}
+                <li><a href="{{page.uri}}">{{page.title}}</a></li>
+                {% endfor %}
+            </ul>
+            {% if latest-posts|not-empty %}
+            <div id="recent">
+                <h3>Recent Posts</h3>
+                <ul>
+                    {% for post in latest-posts %}
+                    <li><a href="{{post.uri}}">{{post.title}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            {% if tags|not-empty %}
+            <div id="tags">
+                <h3>Tags</h3>
+                <ul>
+                    {% for tag in tags|sort-by:name %}
+                    <li><a href="{{tag.uri}}">{{tag.name}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+        {% endblock %}
+    </div>
+
+    <header>
+        <h1><a class="navbar-brand" href="{{index-uri}}">{{title}}</a>{% block page-title %}{% endblock %}</h1>
+        {% if header %}
+        <div id="header">
+            {{header|safe}}
+        </div>
+        {% endif %}
+        {% if message %}
+        <div id="message">
+            <p class="message">{{message}}</p>
+        </div>
+        {% endif %}
+        {% if error %}
+        <div id="error">
+            <p class="error">{{error}}</p>
+        </div>
+        {% endif %}
+    </header>
+
+    <div id="main-container" class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <div id="cookies">
+        <div id="more-about-cookies">
+            <p>This site does not track you; it puts no cookies on your browser.
+                Consequently you don't have to click through any annoying click-throughs,
+                and your privacy rights are not affected.</p>
+
+            <p>Wouldn't it be nice if more sites were like this?</p>
+        </div>
+        <div id="about-cookies">
+            About Cookies
+        </div>
+    </div>
+
+
+    <footer id="footer">
+        Copyright &copy; {{today|date:yyyy}} {{author}} ||
+        Published under
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/">
+            Creative Commons Attribution/Share Alike licence
+            <img src="/blog/img/by-sa.png" alt="Attribution; Share Alike" style="height: 1em; width: 4em;" />
+        </a> ||
+        Powered by <a href="http://cryogenweb.org"><img src="/blog/img/cryogen.png" alt=""
+                style="height: 1em; width: 3em;" /> Cryogen</a>
+    </footer>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    {% script "js/highlight.pack.js" %}
+    <script>hljs.initHighlightingOnLoad();</script>
+    {% if post.klipse %} {{post.klipse|safe}} {% endif %}
+    {% if page.klipse %} {{page.klipse|safe}} {% endif %}
+</body>
+
+</html>
