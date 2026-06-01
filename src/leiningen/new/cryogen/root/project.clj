@@ -12,7 +12,8 @@
              :plugins [[lein-ring "0.12.5"]]
              :managed-dependencies [[org.bouncycastle/bcpkix-jdk18on "1.81.1"]
                                     [org.bouncycastle/bcutil-jdk18on "1.81.1"]
-                                    [org.bouncycastle/bcprov-jdk18on "1.81.1"]]
+                                    [org.bouncycastle/bcprov-jdk18on "1.81.1"]
+                                    [commons-io/commons-io "2.18.0"]]
              :main cryogen.core
              :ring {:init cryogen.server/init
                     :handler cryogen.server/handler}
