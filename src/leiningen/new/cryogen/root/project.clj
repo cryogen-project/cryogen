@@ -8,7 +8,7 @@
                             [compojure "1.7.1"]
                             [ring-server "0.5.0"]
                             [cryogen-flexmark "0.1.5"]
-                            [cryogen-core "0.4.9"]]
+                            [cryogen-core "0.5.0"]]
              :plugins [[lein-ring "0.12.5"]]
              :managed-dependencies [[org.bouncycastle/bcpkix-jdk18on "1.81.1"]
                                     [org.bouncycastle/bcutil-jdk18on "1.81.1"]
